@@ -1,55 +1,29 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-// ✅ Make sure all images are in src/assets/CertificateImage/
+// ✅ Import all certificate images from src/assets/CertificateImage/
 import udemyImage from "../assets/CertificateImage/Udemy.jpg";
 import codexpImage from "../assets/CertificateImage/Codexp.jpg";
 import wayspire1 from "../assets/CertificateImage/Wayspire1.png";
 import wayspire2 from "../assets/CertificateImage/Wayspire2.png";
 import workshopImage from "../assets/CertificateImage/Workshop.png";
 import greatLearningImage from "../assets/CertificateImage/GreatLearning.png";
-
-
+import genAIImage from "../assets/CertificateImage/GenerativeAIForBeginners.png";
+import geminiImage from "../assets/CertificateImage/GeminiForGoogleWorkspace.png";
+import introGenAIImage from "../assets/CertificateImage/IntroductionToGenerativeAI.png";
+import promptEngImage from "../assets/CertificateImage/IntroductionToPromptEngineering.png";
 
 // Certificate Data
 const certificates = [
-  {
-    id: 1,
-    title: "JavaScript",
-    platform: "Udemy",
-    category: "Course",
-    image: udemyImage,
-  },
-  {
-    id: 2,
-    title: "Full Stack Web Developer",
-    platform: "CodeXp",
-    category: "Internship",
-    image: codexpImage,
-  },
-  {
-    id: 3,
-    title: "Full Stack Web Developer",
-    platform: "WaySpire",
-    category: "Internship",
-    image: wayspire1,
-    extraImages: [wayspire2],
-  },
-  {
-    id: 4,
-    title: "IIIT Workshop",
-    platform: "Others",
-    category: "Workshop",
-    image: workshopImage,
-  },
-  {
-    id: 5,
-    title: "React.js",
-    platform: "Great Learning",
-    category: "Course",
-    image: greatLearningImage,
-  },
- 
+  { id: 1, title: "JavaScript", platform: "Udemy", category: "Course", image: udemyImage },
+  { id: 2, title: "Full Stack Web Developer", platform: "CodeXp", category: "Internship", image: codexpImage },
+  { id: 3, title: "Full Stack Web Developer", platform: "WaySpire", category: "Internship", image: wayspire1, extraImages: [wayspire2] },
+  { id: 4, title: "IIIT Workshop", platform: "Others", category: "Workshop", image: workshopImage },
+  { id: 5, title: "React.js", platform: "Great Learning", category: "Course", image: greatLearningImage },
+  { id: 6, title: "Generative AI For Beginner", platform: "Great Learning", category: "Course", image: genAIImage },
+  { id: 7, title: "Gemini For Google Workspace", platform: "Simplilearn|SkillUP", category: "Course", image: geminiImage },
+  { id: 8, title: "Introduction to Generative AI", platform: "Simplilearn|SkillUP", category: "Course", image: introGenAIImage },
+  { id: 9, title: "Introduction to Prompt Engineering with GitHub Copilot", platform: "Simplilearn|SkillUP", category: "Course", image: promptEngImage },
 ];
 
 // Filters

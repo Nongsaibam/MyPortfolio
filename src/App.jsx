@@ -1,4 +1,5 @@
 import React from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Importing Components
@@ -28,9 +29,8 @@ const App = () => {
             }
           />
 
-        <Route path="/certificates" element={<CertificatesWithDetail />} />
-<Route path="/certificates/:id" element={<CertificatesWithDetail />} />
-
+          <Route path="/certificates" element={<CertificatesWithDetail />} />
+          <Route path="/certificates/:id" element={<CertificatesWithDetail />} />
         </Routes>
       </div>
     </Router>
