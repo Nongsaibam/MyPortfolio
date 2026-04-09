@@ -1,1 +1,15 @@
 @import "tailwindcss";
+/* Custom global styles */
+body {
+  @apply bg-black dark:bg-black text-white dark:text-white;
+}
+
+/* Remove scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom animations if needed */
+.animate-spin-slow {
+  animation: spin 8s linear infinite;
+}

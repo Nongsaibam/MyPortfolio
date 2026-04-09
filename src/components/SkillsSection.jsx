@@ -1,69 +1,117 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { FaPython, FaReact, FaDatabase, FaTools } from "react-icons/fa";
 
 const skills = [
   {
     category: "Python Full Stack + AI Developer",
+    icon: <FaPython className="text-cyan-400 w-6 h-6" />,
     items: [
       "Python",
-      "Html","Css",
-      "Rreact.js","Django",
-      "NumPy","Pandas",
-      "Matplotlip","Learn",
-      "PyTprch", "Node.js",
-      "AWS EC2","Javascript",
+      "HTML",
+      "CSS",
+      "React.js",
+      "Django",
+      "NumPy",
+      "Pandas",
+      "Matplotlib",
+      "PyTorch",
+      "Node.js",
+      "AWS EC2",
+      "JavaScript",
     ],
   },
   {
-    category: "Full Stack Web Developer In MERN",
+    category: "Full Stack Web Developer (MERN)",
+    icon: <FaReact className="text-cyan-400 w-6 h-6" />,
     items: [
       "JavaScript ES6",
-      "React.js","Node.js",
-      "Redux", "Express.js",
-      "Tailwind Css","Bootstrap",
-      "HTML","Css","Mongo DB"
+      "React.js",
+      "Node.js",
+      "Redux",
+      "Express.js",
+      "Tailwind CSS",
+      "Bootstrap",
+      "HTML",
+      "CSS",
+      "MongoDB",
     ],
   },
   {
     category: "Backend & Databases",
-    items: ["RestAPI", "FastAPI", "MongoDB", "MYSQL"],
+    icon: <FaDatabase className="text-purple-400 w-6 h-6" />,
+    items: ["REST API", "FastAPI", "MongoDB", "MySQL"],
   },
   {
-    category: "Tools & Version Control ",
-    items: ["Git", "GitHub",],
+    category: "Tools & Version Control",
+    icon: <FaTools className="text-cyan-400 w-6 h-6" />,
+    items: ["Git", "GitHub"],
   },
 ];
 
 const SkillsSection = () => {
   return (
-    <section className="bg-gray-100 py-20 px-4" id="skills">
-      <div className="max-w-6xl mx-auto text-center">
-        <div className="flex items-center justify-center gap-4 mb-12">
-          <h2 className="text-5xl font-bold text-gray-400">03</h2>
-          <h3 className="text-3xl font-semibold border-b-4 border-blue-600 pb-1 ">
+    <section
+      className="relative bg-black py-24 px-6 text-white overflow-hidden"
+      id="skills"
+    >
+      {/* 🌌 Background Glow */}
+      <div className="absolute top-[-150px] left-[-100px] w-[500px] h-[500px] bg-purple-500/20 blur-[150px]" />
+      <div className="absolute bottom-[-150px] right-[-100px] w-[500px] h-[500px] bg-cyan-500/20 blur-[150px]" />
+
+      {/* ✨ Noise Texture */}
+      <div className="absolute inset-0 opacity-[0.03] bg-[url('/noise.png')]" />
+
+      <div className="max-w-6xl mx-auto text-center relative z-10">
+        {/* 🔥 Title */}
+        <div className="flex items-center justify-center gap-4 mb-16">
+          <h2 className="text-6xl font-bold text-white/10">05</h2>
+          <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
             Skills & Tools
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
+        {/* 💎 Skill Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {skills.map((skill, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-white shadow-md rounded-xl p-10 text-left hover:shadow-lg transition "
->
-              <h4 className="text-lg font-semibold text-blue-600 mb-4 ">
-                {skill.category}
-              </h4>
-              <ul className="space-y-2 text-gray-700 ">
+              initial={{ opacity: 0, y: 80 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              whileHover={{ scale: 1.07, rotateX: 5, rotateY: 5 }}
+              className="relative group backdrop-blur-2xl bg-white/5 border border-white/10 rounded-2xl p-6 text-left shadow-[0_0_60px_rgba(34,211,238,0.15)] overflow-hidden cursor-pointer"
+            >
+              {/* Glow Border */}
+              <div className="absolute inset-0 rounded-2xl border border-cyan-400/20 opacity-0 group-hover:opacity-100 transition duration-500" />
+              {/* Light Sweep */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 blur-xl transition duration-700" />
+
+              <div className="flex items-center gap-3 mb-4">
+                {/* Icon */}
+                {skill.icon}
+                <h4 className="text-lg font-semibold text-cyan-400">
+                  {skill.category}
+                </h4>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
                 {skill.items.map((item, idx) => (
-              <li
-              key={idx}
-              className="inline-block px-2 py-0.5 rounded-full hover:bg-blue-600 hover:text-white transition duration-200">
-               {item}
-            </li>
-            
+                  <motion.span
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.4, delay: idx * 0.05 }}
+                    whileHover={{ scale: 1.1, rotateZ: 2 }}
+                    className="px-3 py-1 text-sm rounded-full bg-white/5 border border-white/10 text-gray-300 hover:bg-cyan-500/20 hover:text-white transition shadow-[0_0_15px_rgba(34,211,238,0.2)] cursor-pointer"
+                  >
+                    {item}
+                  </motion.span>
                 ))}
-              </ul>
-            </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

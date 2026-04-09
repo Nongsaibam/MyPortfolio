@@ -1,116 +1,122 @@
-// import React from "react";
-// import {
-//   FaCodeBranch,
-//   FaMicrophone,
-//   FaRegCalendarAlt,
-//   FaTrophy,
-//   FaExternalLinkAlt,
-// } from "react-icons/fa";
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  FaCodeBranch,
+  FaMicrophone,
+  FaRegCalendarAlt
+} from "react-icons/fa";
 
-// const activities = [
-//   {
-//     title: "SWOC 2025 Project Maintainer",
-//     description:
-//       "Serving as a Project maintainer for Social Winter of Code 2025",
-//     date: "January 1, 2025 - March 1, 2025",
-//     tags: ["Project", "SWOC 2025"],
-//     icon: <FaCodeBranch />,
-//   },
-//   {
-//     title: "IWOC 3.0 Project Maintainer",
-//     description:
-//       "Serving as a Project maintainer for Innogeeks Winter of Code 2025",
-//     date: "January 22, 2025 - Feb 27, 2025",
-//     tags: ["Project", "IWOC 3.0"],
-//     icon: <FaCodeBranch />,
-//   },
-//   {
-//     title: "Speaker",
-//     description:
-//       "Delivering a speech on Open Source Contribution, Importance and Opportunities at Cyberlla 2025 held at Nielit, Imphal",
-//     date: "March 1, 2025",
-//     tags: ["Cyberlla 2025"],
-//     icon: <FaMicrophone />,
-//   },
-//   {
-//     title: "Hacktoberfest Participant",
-//     description:
-//       "Successfully participated in and completed the 2023 Hacktoberfest challenge",
-//     date: "October 2023",
-//     tags: ["View Contributions"],
-//     icon: <FaRegCalendarAlt />,
-//   },
-//   {
-//     title: "Dennis Ivy Hackathon",
-//     description:
-//       "Participated in the Dennis Ivy Hackathon, developing innovative solutions under time constraints",
-//     date: "2022",
-//     tags: ["Project"],
-//     icon: <FaTrophy />,
-//     button: {
-//       label: "Watch Review",
-//       link: "#",
-//     },
-//   },
-//   {
-//     title: "PowerToFly Student Hackathon",
-//     description:
-//       "Participated in a 24-hour online hackathon organized by PowerToFly, developing solutions within a challenging time constraint",
-//     date: "April 23, 2022 - April 24, 2022",
-//     tags: ["Project", "Devpost"],
-//     icon: <FaTrophy />,
-//   },
-// ];
+const activities = [
+  {
+    title: "Manipur Tourism Website",
+    description:
+      "Developed a responsive tourism platform highlighting destinations and culture of Manipur.",
+    date: "June 2025",
+    tags: ["React", "Tailwind", "Frontend"],
+    icon: <FaCodeBranch />,
+  },
+  {
+    title: "To-Do List Web App",
+    description:
+      "Built a full-stack task management system using React.js, Node.js and MongoDB.",
+    date: "April 2024",
+    tags: ["React", "Node.js", "MongoDB"],
+    icon: <FaCodeBranch />,
+  },
+  {
+    title: "AI Voice Assistant",
+    description:
+      "Multilingual AI assistant supporting English and Meitei Mayek with speech recognition.",
+    date: "2025",
+    tags: ["AI", "Speech"],
+    icon: <FaMicrophone />,
+  },
+  {
+    title: "Web Development Projects",
+    description:
+      "Created multiple responsive websites while learning full-stack development.",
+    date: "2023-2025",
+    tags: ["Projects", "Development"],
+    icon: <FaRegCalendarAlt />,
+  },
+];
 
-// const ActivitiesSection = () => {
-//   return (
-//     <section className="bg-gray-100 py-20 px-4" id="activities">
-//       <div className="max-w-6xl mx-auto text-center">
-//         <div className="flex items-center justify-center gap-4 mb-12">
-//           <h2 className="text-5xl font-bold text-gray-400">05</h2>
-//           <h3 className="text-3xl font-semibold border-b-4 border-blue-600 pb-1 text-left">
-//             Activities & Engagements
-//           </h3>
-//         </div>
+const ActivitiesSection = () => {
+  return (
+    <section
+      id="activities"
+      className="relative bg-black text-white py-24 px-6 overflow-hidden"
+    >
+      {/* 🌌 Background Glow */}
+      <div className="absolute top-[-150px] left-[-100px] w-[500px] h-[500px] bg-purple-500/20 blur-[140px]" />
+      <div className="absolute bottom-[-150px] right-[-100px] w-[500px] h-[500px] bg-cyan-500/20 blur-[140px]" />
 
-//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-//           {activities.map((activity, index) => (
-//             <div
-//               key={index}
-//               className="bg-white shadow-md rounded-xl p-10 text-left hover:shadow-lg transition"
-//             >
-//               <div className="flex items-center text-blue-600 text-xl mb-4">
-//                 {activity.icon}
-//                 <h4 className="ml-2 font-semibold text-base">
-//                   {activity.title}
-//                 </h4>
-//               </div>
+      <div className="max-w-6xl mx-auto relative z-10">
 
-//               <p className="text-gray-700 mb-2">{activity.description}</p>
-//               <p className="text-sm text-blue-500 mb-2">{activity.date}</p>
+        {/* 🔥 Title */}
+        <div className="flex justify-center items-center gap-4 mb-16">
+          <h2 className="text-6xl font-bold text-white/10">04</h2>
+          <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+            Activities & Engagements
+          </h3>
+        </div>
 
-//               <div className="flex flex-wrap gap-2 text-sm text-gray-600">
-//                 {activity.tags.map((tag, i) => (
-//                   <span key={i} className="flex items-center gap-1">
-//                     <FaExternalLinkAlt className="text-xs" /> {tag}
-//                   </span>
-//                 ))}
-//               </div>
+        {/* 💎 Cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-//               {activity.button && (
-//                 <a
-//                   href={activity.button.link}
-//                   className="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded text-sm hover:bg-blue-700"
-//                 >
-//                   {activity.button.label}
-//                 </a>
-//               )}
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
+          {activities.map((activity, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              whileHover={{ scale: 1.06 }}
+              className="group backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition"
+            >
 
-// export default ActivitiesSection;
+              {/* Icon + Title */}
+              <div className="flex items-center mb-4">
+
+                <div className="text-cyan-400 text-2xl group-hover:scale-110 transition">
+                  {activity.icon}
+                </div>
+
+                <h4 className="ml-3 text-lg font-semibold text-white">
+                  {activity.title}
+                </h4>
+
+              </div>
+
+              <p className="text-gray-300 mb-4">
+                {activity.description}
+              </p>
+
+              <p className="text-sm text-purple-400 mb-4">
+                {activity.date}
+              </p>
+
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2">
+
+                {activity.tags.map((tag, i) => (
+                  <span
+                    key={i}
+                    className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:bg-cyan-500/20 hover:text-white transition"
+                  >
+                    {tag}
+                  </span>
+                ))}
+
+              </div>
+
+            </motion.div>
+          ))}
+
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default ActivitiesSection;
