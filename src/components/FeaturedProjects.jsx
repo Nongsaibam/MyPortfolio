@@ -13,6 +13,7 @@ void motion;
 import miniCrmImg from "../assets/ProjectIMG/crm.png";
 import coffeeShopImg from "../assets/ProjectIMG/business.png";
 import multiAppImg from "../assets/ProjectIMG/Multi.png";
+import Edu from "../assets/ProjectIMG/Edu.png";
 
 const projects = [
   {
@@ -80,6 +81,24 @@ const projects = [
     category: "Full Stack",
     featured: true,
   },
+  {
+  title: "EduLearn - Student Portal",
+  description:
+    "A full-stack learning platform with AI features, gamification, and dashboards.",
+
+  features: [
+    "Frontend: React + Vite + Tailwind",
+    "Backend: Express.js API",
+    "AI chatbot & recommendations",
+    "Gamification & leaderboard",
+    "Student & Admin dashboards"
+  ],
+
+  tags: ["React", "Tailwind CSS", "Node.js", "AI"],
+  image: Edu,
+  gitLink: "https://github.com/Nongsaibam/EduLearn.git",
+  category: "Full Stack",
+},
 ];
 
 const allFilters = ["All", "Featured", "AI/ML", "Computer Vision", "Full Stack", "Frontend"];
@@ -163,7 +182,7 @@ export default function FeaturedProjects() {
   }, [search, activeFilter]);
   return (
     <section
-      className="relative overflow-hidden bg-slate-50 px-6 py-20 text-slate-900 transition-colors duration-500 dark:bg-[#040816] dark:text-white"
+      className="relative overflow-hidden bg-slate-50 px-6 py-20 text-slate-900 transition-colors duration-500 dark:bg-slate-950 dark:text-white"
       id="projects"
     >
       {/* Premium Background */}
@@ -237,7 +256,7 @@ export default function FeaturedProjects() {
                       </div>
                     )}
 
-                    <div className="absolute right-4 top-4 rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-white/80 backdrop-blur-xl">
+                    <div className="absolute right-4 top-4 rounded-full border border-white/10 bg-slate-950/30 px-3 py-1 text-xs text-white/80 backdrop-blur-xl">
                       {project.category}
                     </div>
                   </div>
@@ -321,7 +340,7 @@ export default function FeaturedProjects() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[999] flex items-center justify-center bg-black/75 p-4 backdrop-blur-md"
+            className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-md"
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
@@ -329,12 +348,12 @@ export default function FeaturedProjects() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.92 }}
               transition={{ duration: 0.28 }}
-              className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/95 shadow-[0_20px_80px_rgba(15,23,42,0.2)] backdrop-blur-3xl dark:border-white/10 dark:bg-[#0a1020]/90 dark:shadow-[0_20px_80px_rgba(0,0,0,0.5)]"
+              className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/95 shadow-[0_20px_80px_rgba(15,23,42,0.2)] backdrop-blur-3xl dark:border-white/10 dark:bg-slate-900/90 dark:shadow-[0_20px_80px_rgba(0,0,0,0.5)]"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/40 text-white transition hover:bg-black/60"
+                className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white transition hover:bg-slate-950/60"
               >
                 <HiOutlineXMark className="text-2xl" />
               </button>

@@ -47,7 +47,7 @@ const ActivitiesSection = () => {
   return (
     <section
       id="activities"
-      className="relative overflow-hidden bg-slate-50 px-6 py-24 text-slate-900 transition-colors duration-500 dark:bg-[#030712] dark:text-white"
+      className="relative overflow-hidden bg-slate-50 px-6 py-24 text-slate-900 transition-colors duration-500 dark:bg-slate-950 dark:text-white"
     >
       {/* 🌌 Background Glow */}
       <div className="absolute top-[-150px] left-[-100px] w-[500px] h-[500px] bg-purple-500/20 blur-[140px]" />

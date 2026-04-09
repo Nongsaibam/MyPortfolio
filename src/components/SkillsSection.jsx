@@ -54,7 +54,7 @@ const skills = [
 const SkillsSection = () => {
   return (
     <section
-      className="relative overflow-hidden bg-slate-100 px-6 py-24 text-slate-900 transition-colors duration-500 dark:bg-[#020617] dark:text-white"
+      className="relative overflow-hidden bg-slate-100 px-6 py-24 text-slate-900 transition-colors duration-500 dark:bg-slate-950 dark:text-white"
       id="skills"
     >
       {/* 🌌 Background Glow */}

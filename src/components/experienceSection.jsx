@@ -4,18 +4,8 @@ import { motion } from "framer-motion";
 void motion;
 
 const experiences = [
-  {
-    title: "Full Stack Web Developer Intern",
-    date: "Jan 2025 - Jun 2025",
-    location: "Manipur CodeXP",
-    points: [
-      "Developed a Tourism Website using MERN stack.",
-      "Built responsive UI with React and Tailwind.",
-      "Implemented REST APIs and backend services.",
-    ],
-  },
-  {
-    title: "Full Stack Web Developer Intern",
+   {
+    title: "Full Stack Web Development Intern",
     date: "Apr 2024 - Jun 2024",
     location: "Wayspire Ed-Tech Private Limited",
     points: [
@@ -24,13 +14,40 @@ const experiences = [
       "Worked in an agile development team.",
     ],
   },
+  {
+    title: "Full Stack Web Development Intern",
+    date: "Jan 2025 - Jun 2025",
+    location: "Manipur CodeXP",
+    points: [
+      "Developed a Tourism Website using MERN stack.",
+      "Built responsive UI with React and Tailwind.",
+      "Implemented REST APIs and backend services.",
+    ],
+  },
+   {
+  title: "Full Stack Web Development Intern",
+  date: "Mar 2026 - Apr 2026",
+  location: "Future Interns",
+  points: [
+    "Completed Task 1, Task 2, and Task 3 in a structured full-stack development program.",
+    "Developed responsive and modern web interfaces using React.js, Vite, and Tailwind CSS.",
+    "Built scalable backend services using Node.js and Express.js.",
+    "Integrated REST APIs and implemented full CRUD functionality.",
+    "Worked with MySQL and MongoDB for efficient data management.",
+    "Applied real-world problem-solving skills through task-based assignments.",
+    "Improved UI/UX, performance, and overall project structure.",
+    "Maintained clean, modular, and scalable code practices.",
+    "Strengthened frontend and backend integration skills.",
+    "Collaborated in an industry-oriented development environment."
+  ],
+}
 ];
 
 export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="relative overflow-hidden bg-slate-100 px-6 py-24 text-slate-900 transition-colors duration-500 md:px-16 dark:bg-[#020617] dark:text-white"
+      className="relative overflow-hidden bg-slate-100 px-6 py-24 text-slate-900 transition-colors duration-500 md:px-16 dark:bg-slate-950 dark:text-white"
     >
       {/* 🌌 Background Glow */}
       <div className="absolute top-[-200px] left-[-150px] w-[600px] h-[600px] bg-purple-500/20 blur-[180px]" />

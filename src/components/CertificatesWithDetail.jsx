@@ -98,7 +98,7 @@ const CertificatesWithDetail = () => {
 
     if (!certificate) {
       return (
-        <div className="flex min-h-screen items-center justify-center bg-slate-50 px-6 text-center text-slate-900 dark:bg-[#030712] dark:text-white">
+        <div className="flex min-h-screen items-center justify-center bg-slate-50 px-6 text-center text-slate-900 dark:bg-slate-950 dark:text-white">
           <div className="rounded-3xl border border-slate-200/80 bg-white/85 px-8 py-10 backdrop-blur-2xl dark:border-white/10 dark:bg-white/5">
             <h2 className="text-2xl font-bold">Certificate not found</h2>
             <Link
@@ -118,7 +118,7 @@ const CertificatesWithDetail = () => {
     ].filter(Boolean);
 
     return (
-      <section className="relative min-h-screen overflow-hidden bg-slate-50 px-6 py-10 text-slate-900 dark:bg-[#030712] dark:text-white md:px-10">
+      <section className="relative min-h-screen overflow-hidden bg-slate-50 px-6 py-10 text-slate-900 dark:bg-slate-950 dark:text-white md:px-10">
         {/* Background */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute left-[-8rem] top-[-8rem] h-[26rem] w-[26rem] rounded-full bg-cyan-500/15 blur-[140px]" />
@@ -145,7 +145,7 @@ const CertificatesWithDetail = () => {
             {/* Left big preview */}
             <div className="relative rounded-[2rem] border border-slate-200/80 bg-white/90 p-4 shadow-[0_20px_80px_rgba(15,23,42,0.18)] backdrop-blur-3xl dark:border-white/10 dark:bg-white/8 dark:shadow-[0_20px_80px_rgba(0,0,0,0.45)]">
               <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-white/10 via-transparent to-cyan-400/5" />
-              <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/30">
+              <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/30">
                 <img
                   src={getImage(certificate.image)}
                   alt={certificate.title}
@@ -155,7 +155,7 @@ const CertificatesWithDetail = () => {
 
               <button
                 onClick={() => setZoomImage(getImage(certificate.image))}
-                className="absolute right-8 top-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-sm text-white/90 backdrop-blur-xl transition hover:bg-black/60"
+                className="absolute right-8 top-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/40 px-4 py-2 text-sm text-white/90 backdrop-blur-xl transition hover:bg-slate-950/60"
               >
                 <HiOutlineMagnifyingGlassPlus className="text-lg" />
                 Preview
@@ -227,7 +227,7 @@ const CertificatesWithDetail = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 p-4 backdrop-blur-md"
+              className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md"
               onClick={() => setZoomImage(null)}
             >
               <motion.div
@@ -240,7 +240,7 @@ const CertificatesWithDetail = () => {
               >
                 <button
                   onClick={() => setZoomImage(null)}
-                  className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/40 text-white backdrop-blur-xl transition hover:bg-black/60"
+                  className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white backdrop-blur-xl transition hover:bg-slate-950/60"
                 >
                   <HiOutlineXMark className="text-2xl" />
                 </button>
@@ -260,7 +260,7 @@ const CertificatesWithDetail = () => {
   /* ---------------- LIST PAGE ---------------- */
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-slate-50 px-6 py-10 text-slate-900 dark:bg-[#030712] dark:text-white md:px-10">
+    <section className="relative min-h-screen overflow-hidden bg-slate-50 px-6 py-10 text-slate-900 dark:bg-slate-950 dark:text-white md:px-10">
       {/* Premium Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute left-[-10rem] top-[-10rem] h-[34rem] w-[34rem] rounded-full bg-cyan-500/12 blur-[170px]" />
@@ -341,7 +341,7 @@ const CertificatesWithDetail = () => {
 
                 <div className="relative">
                   {/* image box */}
-                  <div className="relative overflow-hidden rounded-[1.4rem] border border-white/10 bg-black/25">
+                  <div className="relative overflow-hidden rounded-[1.4rem] border border-white/10 bg-slate-950/25">
                     <img
                       src={getImage(cert.image)}
                       alt={cert.title}
@@ -352,7 +352,7 @@ const CertificatesWithDetail = () => {
 
                     <button
                       onClick={() => setZoomImage(getImage(cert.image))}
-                      className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/40 text-white/90 backdrop-blur-xl transition hover:scale-105 hover:bg-black/60"
+                      className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white/90 backdrop-blur-xl transition hover:scale-105 hover:bg-slate-950/60"
                     >
                       <HiOutlineMagnifyingGlassPlus className="text-xl" />
                     </button>
@@ -395,7 +395,7 @@ const CertificatesWithDetail = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 p-4 backdrop-blur-md"
+            className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md"
             onClick={() => setZoomImage(null)}
           >
             <motion.div
@@ -408,7 +408,7 @@ const CertificatesWithDetail = () => {
             >
               <button
                 onClick={() => setZoomImage(null)}
-                className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/40 text-white backdrop-blur-xl transition hover:bg-black/60"
+                className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white backdrop-blur-xl transition hover:bg-slate-950/60"
               >
                 <HiOutlineXMark className="text-2xl" />
               </button>

@@ -25,7 +25,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-50 text-slate-900 transition-colors duration-500 dark:bg-[#030712] dark:text-white">
+    <div className="relative min-h-screen overflow-hidden bg-slate-50 text-slate-900 transition-colors duration-500 dark:bg-slate-950 dark:text-white">
       {/* Background Glows */}
       <div className="absolute top-[-200px] left-[-150px] w-[600px] h-[600px] bg-purple-500/20 blur-[180px]" />
       <div className="absolute bottom-[-150px] right-[-120px] w-[500px] h-[500px] bg-cyan-500/20 blur-[160px]" />
@@ -37,7 +37,7 @@ const ProfilePage = () => {
       </div>
 
       {/* Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-30 flex items-center justify-between border-b border-slate-900/10 bg-white/55 px-6 py-4 shadow-lg backdrop-blur-xl transition-colors duration-500 md:px-16 dark:border-white/10 dark:bg-black/15">
+      <header className="fixed top-0 left-0 right-0 z-30 flex items-center justify-between border-b border-slate-900/10 bg-white/55 px-6 py-4 shadow-lg backdrop-blur-xl transition-colors duration-500 md:px-16 dark:border-white/10 dark:bg-slate-900/15">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -88,7 +88,7 @@ const ProfilePage = () => {
             </span>
           </h1>
           <p className="mb-8 text-lg text-slate-700 md:text-xl dark:text-slate-200">
-            MERN Stack Developer building modern web apps with React, Node.js, and AI-powered technologies.
+            Full Stack Developer | MERN Stack | Building Scalable & Modern Web Apps
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center md:justify-start">
