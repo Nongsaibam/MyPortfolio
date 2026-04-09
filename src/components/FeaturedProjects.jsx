@@ -11,7 +11,7 @@ void motion;
 
 // Import your local images
 import miniCrmImg from "../assets/ProjectIMG/crm.png";
-import coffeeShopImg from "../assets/ProjectIMG/business.png";
+import coffeeShopImg from "../assets/ProjectIMG/Business.png";
 import multiAppImg from "../assets/ProjectIMG/Multi.png";
 import Edu from "../assets/ProjectIMG/Edu.png";
 
