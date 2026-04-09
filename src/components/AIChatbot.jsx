@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { FaRobot, FaPaperPlane, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
+void motion;
+
 const BOT_NAME = "Tazkhan AI Assistant";
 
 const QUICK_PROMPTS = [

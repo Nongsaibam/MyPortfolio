@@ -58,7 +58,7 @@ const AboutMe = () => {
       {/* 🔥 Background Glow */}
       <div className="pointer-events-none absolute top-[-200px] left-[-150px] h-[600px] w-[600px] bg-purple-500/20 blur-[180px]" />
       <div className="pointer-events-none absolute bottom-[-150px] right-[-120px] h-[500px] w-[500px] bg-cyan-500/20 blur-[160px]" />
-      <div className="pointer-events-none absolute inset-0 opacity-[0.03] bg-[url('/noise.png')]" />
+      <div className="surface-noise pointer-events-none absolute inset-0 opacity-[0.35]" />
 
       <div className="relative z-10 mx-auto max-w-5xl">
         {/* 🔹 Title */}

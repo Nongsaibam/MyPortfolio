@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import ProfilePage from "./components/ProfilePage";
 import AboutMe from "./components/AboutMe";
-import ExperienceSection from "./components/ExperienceSection";
+import ExperienceSection from "./components/experienceSection";
 import SkillsSection from "./components/SkillsSection";
 import ActivitiesSection from "./components/ActivitiesSection";
 import GetInTouch from "./components/GetInTouch";

@@ -14,7 +14,7 @@ const GetInTouch = () => {
       <div className="pointer-events-none absolute bottom-[-120px] right-[-80px] h-[400px] w-[400px] bg-cyan-500/20 blur-[120px]" />
 
       {/* Noise Texture */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.03] bg-[url('/noise.png')]" />
+      <div className="surface-noise pointer-events-none absolute inset-0 opacity-[0.35]" />
 
       <div className="relative z-10 mx-auto max-w-3xl">
         {/* Title */}

@@ -62,7 +62,7 @@ const SkillsSection = () => {
       <div className="absolute bottom-[-150px] right-[-100px] w-[500px] h-[500px] bg-cyan-500/20 blur-[150px]" />
 
       {/* ✨ Noise Texture */}
-      <div className="absolute inset-0 opacity-[0.03] bg-[url('/noise.png')]" />
+      <div className="surface-noise absolute inset-0 opacity-[0.35]" />
 
       <div className="max-w-6xl mx-auto text-center relative z-10">
         {/* 🔥 Title */}

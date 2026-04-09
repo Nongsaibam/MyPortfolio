@@ -33,7 +33,7 @@ const ProfilePage = () => {
         <div className="absolute w-[600px] h-[600px] bg-purple-500/20 rounded-full blur-[180px] top-[-150px] left-[-150px] animate-pulse" />
         <div className="absolute w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[160px] bottom-[-120px] right-[-120px] animate-pulse" />
         <div className="absolute top-[40%] left-[40%] h-[400px] w-[400px] rounded-full bg-slate-950/5 blur-[140px] animate-pulse dark:bg-white/5" />
-        <div className="absolute inset-0 opacity-[0.03] bg-[url('/noise.png')]" />
+        <div className="surface-noise absolute inset-0 opacity-[0.35]" />
       </div>
 
       {/* Navbar */}

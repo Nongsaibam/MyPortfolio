@@ -54,7 +54,7 @@ export default function ExperienceSection() {
       <div className="absolute bottom-[-150px] right-[-120px] w-[500px] h-[500px] bg-cyan-500/20 blur-[160px]" />
 
       {/* ✨ Noise Texture */}
-      <div className="absolute inset-0 opacity-[0.03] bg-[url('/noise.png')]" />
+      <div className="surface-noise absolute inset-0 opacity-[0.35]" />
 
       <div className="relative max-w-5xl mx-auto z-10">
         

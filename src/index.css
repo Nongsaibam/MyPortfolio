@@ -18,6 +18,15 @@ body {
   @apply min-h-screen;
 }
 
+.surface-noise {
+  background-image: radial-gradient(rgba(15, 23, 42, 0.08) 0.75px, transparent 0.75px);
+  background-size: 18px 18px;
+}
+
+.dark .surface-noise {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 0.75px, transparent 0.75px);
+}
+
 /* Remove scrollbar */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
