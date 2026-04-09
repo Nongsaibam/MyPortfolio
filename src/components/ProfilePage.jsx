@@ -63,10 +63,13 @@ const ProfilePage = () => {
 
           <div className="flex items-center gap-2">
             <button
+              type="button"
               onClick={toggleTheme}
-              className="rounded-xl px-3 py-2 transition hover:bg-slate-900/10 dark:hover:bg-white/20"
+              aria-label={`Switch to ${isDarkMode ? "light" : "dark"} mode`}
+              className="inline-flex items-center gap-2 rounded-full border border-slate-300/70 bg-white/85 px-3 py-2 text-sm font-medium text-slate-700 shadow-lg backdrop-blur-xl transition hover:bg-white dark:border-white/10 dark:bg-slate-900/75 dark:text-slate-100 dark:hover:bg-slate-900"
             >
-              {isDarkMode ? "☀️" : "🌙"}
+              <span className="text-base">{isDarkMode ? "☀" : "☾"}</span>
+              <span className="hidden sm:inline">{isDarkMode ? "Light" : "Dark"}</span>
             </button>
 
             <button
