@@ -22,7 +22,7 @@ const certificates = [
   { id: 1, title: "JavaScript Course", platform: "Udemy", category: "Course", image: "Udemy.jpg" },
   { id: 2, title: "Full Stack Web Development", platform: "CodeXp", category: "Internship", image: "Codexp.jpg" },
   { id: 3, title: "Full Stack Web Development", platform: "WaySpire", category: "Internship", image: "Wayspire1.png", extraImages: ["wayspire2.png"] },
-  { id: 4, title: "IIIT Workshop", platform: "Others", category: "Workshop", image: "Workshop.png" },
+  { id: 4, title: "Mti Hub Workshop", platform: "Others", category: "Workshop", image: "Workshop.png" },
   { id: 5, title: "React.js", platform: "Great Learning", category: "Course", image: "GreatLearning.png" },
   { id: 6, title: "Generative AI For Beginners", platform: "Great Learning", category: "Course", image: "GenerativeAIForBeginners.png" },
   { id: 7, title: "Gemini For Google Workspace", platform: "Simplilearn", category: "Course", image: "GeminiForGoogleWorkspace.png" },
