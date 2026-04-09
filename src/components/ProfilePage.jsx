@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope } from "react-icons/fa6";
 import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
-import { useTheme } from "../context/ThemeContext";
 import tkImage from "../assets/1736923031405.jpg";
 
 const socialLinks = [
@@ -13,7 +12,6 @@ const socialLinks = [
 ];
 
 const ProfilePage = () => {
-  const { isDarkMode, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const navItems = ["About", "Experience", "Projects", "Skills"];
 
@@ -62,16 +60,6 @@ const ProfilePage = () => {
         </nav>
 
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={toggleTheme}
-              aria-label={`Switch to ${isDarkMode ? "light" : "dark"} mode`}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-300/70 bg-white/85 px-3 py-2 text-sm font-medium text-slate-700 shadow-lg backdrop-blur-xl transition hover:bg-white dark:border-white/10 dark:bg-slate-900/75 dark:text-slate-100 dark:hover:bg-slate-900"
-            >
-              <span className="text-base">{isDarkMode ? "☀" : "☾"}</span>
-              <span className="hidden sm:inline">{isDarkMode ? "Light" : "Dark"}</span>
-            </button>
-
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
@@ -173,7 +161,7 @@ const ProfilePage = () => {
       </main>
 
       {/* Scroll Indicator */}
-      <div className="flex flex-col items-center pb-10">
+      <div className="scroll-indicator flex flex-col items-center pb-10">
         <div className="flex h-10 w-6 items-start justify-center rounded-full border border-slate-500 dark:border-white">
           <div className="mt-2 h-2 w-1 rounded-full bg-slate-700 dark:bg-white"></div>
         </div>

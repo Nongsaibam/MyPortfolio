@@ -32,7 +32,21 @@ body {
   display: none;
 }
 
-/* Custom animations if needed */
-.animate-spin-slow {
-  animation: spin 8s linear infinite;
+@keyframes scroll-indicator-down {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(12px);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.scroll-indicator {
+  animation: scroll-indicator-down 1.4s ease-in-out infinite;
 }
