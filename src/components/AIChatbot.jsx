@@ -1,8 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FaRobot, FaPaperPlane, FaTimes } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
-
-void motion;
 
 const BOT_NAME = "Tazkhan AI Assistant";
 
@@ -129,9 +126,9 @@ function getResponse(text) {
 function TypingIndicator() {
   return (
     <div className="flex items-center gap-2 px-1 text-xs text-slate-500 dark:text-slate-300">
-      <span className="h-2 w-2 animate-bounce rounded-full bg-slate-500 dark:bg-white" />
-      <span className="h-2 w-2 animate-bounce rounded-full bg-slate-500 [animation-delay:120ms] dark:bg-white" />
-      <span className="h-2 w-2 animate-bounce rounded-full bg-slate-500 [animation-delay:240ms] dark:bg-white" />
+      <span className="h-2 w-2 rounded-full bg-slate-500 dark:bg-white" />
+      <span className="h-2 w-2 rounded-full bg-slate-500 dark:bg-white" />
+      <span className="h-2 w-2 rounded-full bg-slate-500 dark:bg-white" />
       <span>AI is typing...</span>
     </div>
   );
@@ -177,28 +174,17 @@ export default function AIChatbot() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 font-sans">
-      <motion.button
+      <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.92 }}
-        animate={{ y: [0, -5, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
         className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-tr from-cyan-400 to-purple-500 text-2xl text-white shadow-[0_12px_40px_rgba(34,211,238,0.35)] backdrop-blur-xl"
         aria-label={open ? "Close chatbot" : "Open chatbot"}
       >
         {open ? <FaTimes /> : <FaRobot />}
-      </motion.button>
+      </button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 40, scale: 0.9 }}
-            transition={{ duration: 0.25 }}
-            className="mt-4 flex h-[520px] w-[360px] flex-col overflow-hidden rounded-[28px] border border-slate-200/80 bg-white/90 shadow-2xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/80"
-          >
+      {open && (
+        <div className="mt-4 flex h-[520px] w-[360px] flex-col overflow-hidden rounded-[28px] border border-slate-200/80 bg-white/90 shadow-2xl backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/80">
             <div className="border-b border-white/10 bg-gradient-to-r from-cyan-400/30 via-purple-400/30 to-pink-400/30 px-5 py-4 text-white backdrop-blur-xl">
               <div className="flex items-center justify-between">
                 <div>
@@ -221,25 +207,17 @@ export default function AIChatbot() {
                 <div key={index}>
                   {item.user && (
                     <div className="flex justify-end">
-                      <motion.div
-                        initial={{ opacity: 0, x: 18 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="max-w-[80%] rounded-2xl rounded-br-md bg-slate-200/90 px-4 py-2.5 text-slate-800 shadow-md dark:bg-slate-800 dark:text-white"
-                      >
+                      <div className="max-w-[80%] rounded-2xl rounded-br-md bg-slate-200/90 px-4 py-2.5 text-slate-800 shadow-md dark:bg-slate-800 dark:text-white">
                         {item.user}
-                      </motion.div>
+                      </div>
                     </div>
                   )}
 
                   {item.bot && (
                     <div className="flex justify-start">
-                      <motion.div
-                        initial={{ opacity: 0, x: -18 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="max-w-[82%] rounded-2xl rounded-bl-md bg-gradient-to-r from-cyan-400/15 via-purple-400/15 to-pink-400/15 px-4 py-2.5 text-slate-800 shadow-md backdrop-blur-md dark:text-white"
-                      >
+                      <div className="max-w-[82%] rounded-2xl rounded-bl-md bg-gradient-to-r from-cyan-400/15 via-purple-400/15 to-pink-400/15 px-4 py-2.5 text-slate-800 shadow-md backdrop-blur-md dark:text-white">
                         {item.bot}
-                      </motion.div>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -251,16 +229,14 @@ export default function AIChatbot() {
             <div className="border-t border-slate-200/70 px-3 py-3 dark:border-white/10">
               <div className="mb-3 flex flex-wrap gap-2">
                 {QUICK_PROMPTS.map((text) => (
-                  <motion.button
+                  <button
                     key={text}
                     type="button"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.96 }}
                     onClick={() => sendMessage(text)}
                     className="rounded-full border border-slate-200/80 bg-slate-100/90 px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:bg-cyan-400/20 hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:bg-white/10 dark:hover:text-white"
                   >
                     {text.charAt(0).toUpperCase() + text.slice(1)}
-                  </motion.button>
+                  </button>
                 ))}
               </div>
 
@@ -288,11 +264,9 @@ export default function AIChatbot() {
                   className="flex-1 bg-transparent px-4 py-3 text-sm text-slate-800 outline-none placeholder:text-slate-500 dark:text-white dark:placeholder:text-slate-400"
                 />
 
-                <motion.button
+                <button
                   type="button"
                   onClick={() => sendMessage()}
-                  whileHover={{ scale: isSendDisabled ? 1 : 1.05 }}
-                  whileTap={{ scale: isSendDisabled ? 1 : 0.96 }}
                   disabled={isSendDisabled}
                   className={`mr-2 flex h-10 w-10 items-center justify-center rounded-full transition ${
                     isSendDisabled
@@ -301,12 +275,11 @@ export default function AIChatbot() {
                   }`}
                 >
                   <FaPaperPlane className="text-sm" />
-                </motion.button>
+                </button>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
     </div>
   );
 }

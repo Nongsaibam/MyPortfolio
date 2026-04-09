@@ -1,7 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
-
-void motion;
 
 const GetInTouch = () => {
   return (
@@ -40,14 +37,12 @@ const GetInTouch = () => {
 
         {/* CTA Buttons */}
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <motion.a
+          <a
             href="mailto:nongsaibamtazkhan@gmail.com"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
             className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 px-8 py-3 font-semibold text-white shadow-[0_0_20px_rgba(34,211,238,0.35)] transition hover:shadow-[0_0_25px_rgba(168,85,247,0.45)]"
           >
             Say Hello👋
-          </motion.a>
+          </a>
 
          
         </div>

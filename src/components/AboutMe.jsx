@@ -1,14 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
-
-void motion;
-
-// 🔹 Animation configs (reusable)
-const fadeUp = {
-  initial: { opacity: 0, y: 60 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-};
 
 const AboutMe = () => {
   const stats = [
@@ -72,37 +62,26 @@ const AboutMe = () => {
         </div>
 
         {/* 🔹 Glass Card */}
-        <motion.div
-          {...fadeUp}
-          transition={{ duration: 0.8 }}
-          className="group relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white/70 p-10 shadow-[0_0_60px_rgba(34,211,238,0.12)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/5 md:p-14"
-        >
+        <div className="group relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white/70 p-10 shadow-[0_0_60px_rgba(34,211,238,0.12)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/5 md:p-14">
           {/* Hover Effects */}
           <div className="absolute inset-0 rounded-3xl border border-cyan-400/20 opacity-0 transition group-hover:opacity-100" />
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 blur-xl transition group-hover:opacity-100 dark:via-white/5" />
 
           {/* Content */}
-          <article className="relative z-10 space-y-6 text-lg leading-relaxed text-slate-700 dark:text-white/90">
-            {paragraphs.map((text, i) => (
-              <motion.p
-                key={i}
-                {...fadeUp}
-                transition={{ delay: i * 0.2 }}
-              >
+            <article className="relative z-10 space-y-6 text-lg leading-relaxed text-slate-700 dark:text-white/90">
+              {paragraphs.map((text, i) => (
+              <p key={i}>
                 {text}
-              </motion.p>
+              </p>
             ))}
           </article>
-        </motion.div>
+        </div>
 
         {/* 🔹 Stats */}
         <div className="mt-20 grid grid-cols-2 gap-6 md:grid-cols-4">
           {stats.map((item, i) => (
-            <motion.div
+            <div
               key={i}
-              {...fadeUp}
-              transition={{ delay: i * 0.15 }}
-              whileHover={{ scale: 1.08 }}
               className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white/70 p-6 text-center shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-white/5"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-cyan-400/10 opacity-0 transition group-hover:opacity-100" />
@@ -113,7 +92,7 @@ const AboutMe = () => {
               <p className="mt-2 text-sm text-slate-600 dark:text-gray-300">
                 {item.label}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

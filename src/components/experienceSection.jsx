@@ -1,7 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
-
-void motion;
 
 const experiences = [
    {
@@ -70,13 +67,7 @@ export default function ExperienceSection() {
         <div className="relative space-y-16 border-l border-slate-300/80 pl-10 dark:border-white/10">
 
           {experiences.map((exp, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 80 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: index * 0.2 }}
-              className="relative"
-            >
+            <div key={index} className="relative">
               {/* ✨ Neon Dot */}
               <div className="absolute -left-[22px] top-3 w-4 h-4 rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)]" />
 
@@ -108,7 +99,7 @@ export default function ExperienceSection() {
                 </ul>
 
               </div>
-            </motion.div>
+            </div>
           ))}
 
         </div>

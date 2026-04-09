@@ -1,12 +1,9 @@
 import React from "react";
-import { motion } from "framer-motion";
 import {
   FaCodeBranch,
   FaMicrophone,
   FaRegCalendarAlt
 } from "react-icons/fa";
-
-void motion;
 
 const activities = [
   {
@@ -67,12 +64,8 @@ const ActivitiesSection = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
           {activities.map((activity, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              whileHover={{ scale: 1.06 }}
               className="group rounded-2xl border border-slate-200/80 bg-white/75 p-6 shadow-xl backdrop-blur-xl transition hover:shadow-2xl dark:border-white/10 dark:bg-white/5"
             >
 
@@ -111,7 +104,7 @@ const ActivitiesSection = () => {
 
               </div>
 
-            </motion.div>
+            </div>
           ))}
 
         </div>

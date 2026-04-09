@@ -1,13 +1,10 @@
 import React, { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   HiOutlineCodeBracket,
   HiOutlineEye,
   HiOutlineXMark,
   HiOutlineArrowTopRightOnSquare,
 } from "react-icons/hi2";
-
-void motion;
 
 // Import your local images
 import miniCrmImg from "../assets/ProjectIMG/crm.png";
@@ -103,53 +100,9 @@ const projects = [
 
 const allFilters = ["All", "Featured", "AI/ML", "Computer Vision", "Full Stack", "Frontend"];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 35, scale: 0.96 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.55, ease: "easeOut" },
-  },
-};
-
 function TiltCard({ children, className = "" }) {
-  const [transform, setTransform] = useState(
-    "perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)"
-  );
-
-  const handleMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const rotateY = ((x / rect.width) - 0.5) * 14;
-    const rotateX = ((y / rect.height) - 0.5) * -14;
-
-    setTransform(
-      `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02,1.02,1.02)`
-    );
-  };
-
-  const reset = () => {
-    setTransform("perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)");
-  };
-
   return (
-    <div
-      onMouseMove={handleMove}
-      onMouseLeave={reset}
-      style={{ transform }}
-      className={`transition-transform duration-200 will-change-transform ${className}`}
-    >
+    <div className={className}>
       {children}
     </div>
   );
@@ -226,27 +179,19 @@ export default function FeaturedProjects() {
         </div>
 
         {/* Project Grid */}
-        <motion.div
-          className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-        >
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
           {filteredProjects.map((project, index) => (
-            <motion.div key={index} variants={cardVariants}>
+            <div key={index}>
               <TiltCard className="group relative h-full">
                 <div className="absolute -inset-[1px] rounded-[2rem] bg-gradient-to-br from-cyan-400/30 via-transparent to-fuchsia-400/20 opacity-0 blur-xl transition duration-500 group-hover:opacity-100" />
 
                 <div className="relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/85 shadow-[0_20px_60px_rgba(15,23,42,0.12)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/10 dark:shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
                   {/* Image */}
                   <div className="relative overflow-hidden">
-                    <motion.img
+                    <img
                       src={project.image}
                       alt={project.title}
                       className="h-56 w-full object-cover"
-                      whileHover={{ scale: 1.08 }}
-                      transition={{ duration: 0.45 }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
 
@@ -284,14 +229,13 @@ export default function FeaturedProjects() {
                     {/* Tags */}
                     <div className="mt-5 flex flex-wrap gap-2">
                       {project.tags.map((tag, i) => (
-                        <motion.button
+                        <button
                           key={i}
                           onClick={() => setSearch(tag)}
                           className="rounded-full border border-slate-200/80 bg-slate-100/80 px-3 py-1 text-xs text-slate-700 transition hover:bg-cyan-500/20 hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:text-white"
-                          whileHover={{ scale: 1.08 }}
                         >
                           {tag}
-                        </motion.button>
+                        </button>
                       ))}
                     </div>
 
@@ -318,9 +262,9 @@ export default function FeaturedProjects() {
                   </div>
                 </div>
               </TiltCard>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Empty State */}
         {filteredProjects.length === 0 && (
@@ -334,23 +278,15 @@ export default function FeaturedProjects() {
       </div>
 
       {/* Quick Preview Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-md"
-            onClick={() => setSelectedProject(null)}
+      {selectedProject && (
+        <div
+          className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-md"
+          onClick={() => setSelectedProject(null)}
+        >
+          <div
+            className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/95 shadow-[0_20px_80px_rgba(15,23,42,0.2)] backdrop-blur-3xl dark:border-white/10 dark:bg-slate-900/90 dark:shadow-[0_20px_80px_rgba(0,0,0,0.5)]"
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.92 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.92 }}
-              transition={{ duration: 0.28 }}
-              className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/95 shadow-[0_20px_80px_rgba(15,23,42,0.2)] backdrop-blur-3xl dark:border-white/10 dark:bg-slate-900/90 dark:shadow-[0_20px_80px_rgba(0,0,0,0.5)]"
-              onClick={(e) => e.stopPropagation()}
-            >
               <button
                 onClick={() => setSelectedProject(null)}
                 className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white transition hover:bg-slate-950/60"
@@ -422,10 +358,9 @@ export default function FeaturedProjects() {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

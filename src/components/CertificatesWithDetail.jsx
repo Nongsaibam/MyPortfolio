@@ -1,14 +1,11 @@
 import React, { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   HiOutlineArrowLeft,
   HiOutlineMagnifyingGlassPlus,
   HiOutlineSparkles,
   HiOutlineXMark,
 } from "react-icons/hi2";
-
-void motion;
 
 /* ---------------- AUTO IMPORT IMAGES ---------------- */
 
@@ -66,20 +63,6 @@ const certificates = [
 
 const filters = ["All", "Course", "Internship", "Workshop"];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.96 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      delay: i * 0.05,
-      duration: 0.55,
-      ease: "easeOut",
-    },
-  }),
-};
-
 const CertificatesWithDetail = () => {
   const { id } = useParams();
   const [activeFilter, setActiveFilter] = useState("All");
@@ -136,12 +119,7 @@ const CertificatesWithDetail = () => {
             Back to Certificates
           </Link>
 
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65 }}
-            className="mt-8 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]"
-          >
+          <div className="mt-8 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
             {/* Left big preview */}
             <div className="relative rounded-[2rem] border border-slate-200/80 bg-white/90 p-4 shadow-[0_20px_80px_rgba(15,23,42,0.18)] backdrop-blur-3xl dark:border-white/10 dark:bg-white/8 dark:shadow-[0_20px_80px_rgba(0,0,0,0.45)]">
               <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-white/10 via-transparent to-cyan-400/5" />
@@ -217,27 +195,19 @@ const CertificatesWithDetail = () => {
                 )}
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* ZOOM MODAL */}
-        <AnimatePresence>
-          {zoomImage && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md"
-              onClick={() => setZoomImage(null)}
+        {zoomImage && (
+          <div
+            className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md"
+            onClick={() => setZoomImage(null)}
+          >
+            <div
+              className="relative max-h-[92vh] max-w-[95vw] overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 p-3 shadow-[0_20px_80px_rgba(0,0,0,0.5)] backdrop-blur-3xl"
+              onClick={(e) => e.stopPropagation()}
             >
-              <motion.div
-                initial={{ scale: 0.88, opacity: 0, y: 20 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ scale: 0.92, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="relative max-h-[92vh] max-w-[95vw] overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 p-3 shadow-[0_20px_80px_rgba(0,0,0,0.5)] backdrop-blur-3xl"
-                onClick={(e) => e.stopPropagation()}
-              >
                 <button
                   onClick={() => setZoomImage(null)}
                   className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white backdrop-blur-xl transition hover:bg-slate-950/60"
@@ -249,10 +219,9 @@ const CertificatesWithDetail = () => {
                   alt="Zoom Certificate"
                   className="max-h-[86vh] max-w-full rounded-[1.4rem] object-contain"
                 />
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </div>
+          </div>
+        )}
       </section>
     );
   }
@@ -272,11 +241,7 @@ const CertificatesWithDetail = () => {
 
       <div className="relative z-10 mx-auto max-w-7xl">
         {/* Top header */}
-        <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mx-auto max-w-3xl text-center"
-        >
+        <div className="mx-auto max-w-3xl text-center">
          
 
           <h2 className="text-4xl font-black leading-tight md:text-6xl">
@@ -287,15 +252,10 @@ const CertificatesWithDetail = () => {
           </h2>
 
          
-        </motion.div>
+        </div>
 
         {/* FILTERS */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="mt-10 flex flex-wrap justify-center gap-3"
-        >
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
           {filters.map((filter) => {
             const active = activeFilter === filter;
             return (
@@ -312,25 +272,13 @@ const CertificatesWithDetail = () => {
               </button>
             );
           })}
-        </motion.div>
+        </div>
 
         {/* GRID */}
         <div className="mt-14 grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
-          {filteredCertificates.map((cert, i) => (
-            <motion.div
+          {filteredCertificates.map((cert) => (
+            <div
               key={cert.id}
-              custom={i}
-              variants={cardVariants}
-              initial="hidden"
-              animate="visible"
-              whileHover={{
-                y: -10,
-                rotateX: 6,
-                rotateY: -6,
-                scale: 1.02,
-              }}
-              transition={{ type: "spring", stiffness: 180, damping: 18 }}
-              style={{ transformStyle: "preserve-3d" }}
               className="group relative"
             >
               {/* outer glow */}
@@ -383,29 +331,21 @@ const CertificatesWithDetail = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
 
       {/* ZOOM MODAL */}
-      <AnimatePresence>
-        {zoomImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md"
-            onClick={() => setZoomImage(null)}
+      {zoomImage && (
+        <div
+          className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md"
+          onClick={() => setZoomImage(null)}
+        >
+          <div
+            className="relative max-h-[92vh] max-w-[95vw] overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 p-3 shadow-[0_20px_80px_rgba(0,0,0,0.5)] backdrop-blur-3xl"
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              initial={{ scale: 0.88, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.92, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative max-h-[92vh] max-w-[95vw] overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 p-3 shadow-[0_20px_80px_rgba(0,0,0,0.5)] backdrop-blur-3xl"
-              onClick={(e) => e.stopPropagation()}
-            >
               <button
                 onClick={() => setZoomImage(null)}
                 className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white backdrop-blur-xl transition hover:bg-slate-950/60"
@@ -417,10 +357,9 @@ const CertificatesWithDetail = () => {
                 alt="Zoom Certificate"
                 className="max-h-[86vh] max-w-full rounded-[1.4rem] object-contain"
               />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
