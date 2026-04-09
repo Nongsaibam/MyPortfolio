@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 
+void motion;
+
 const AboutMe = () => {
   const stats = [
     { value: "8+", label: "Months Experience" },
@@ -10,7 +12,10 @@ const AboutMe = () => {
   ];
 
   return (
-    <section id="about" className="relative min-h-screen px-6 py-24 md:px-20 text-white overflow-hidden bg-black">
+    <section
+      id="about"
+      className="relative min-h-screen overflow-hidden bg-slate-50 px-6 py-24 text-slate-900 transition-colors duration-500 md:px-20 dark:bg-[#030712] dark:text-white"
+    >
       {/* Glow Blurs */}
       <div className="absolute top-[-200px] left-[-150px] w-[600px] h-[600px] bg-purple-500/20 blur-[180px] z-0" />
       <div className="absolute bottom-[-150px] right-[-120px] w-[500px] h-[500px] bg-cyan-500/20 blur-[160px] z-0" />
@@ -22,7 +27,7 @@ const AboutMe = () => {
       <div className="relative max-w-5xl mx-auto z-10">
         {/* Title */}
         <div className="flex items-center gap-4 mb-16">
-          <h1 className="text-7xl font-extrabold text-white/10">01</h1>
+          <h1 className="text-7xl font-extrabold text-slate-300 dark:text-white/10">01</h1>
           <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
             About Me
           </h2>
@@ -33,12 +38,12 @@ const AboutMe = () => {
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="relative group backdrop-blur-2xl bg-white/5 border border-white/10 rounded-3xl shadow-[0_0_60px_rgba(34,211,238,0.15)] p-10 md:p-14 overflow-hidden"
+          className="relative group overflow-hidden rounded-3xl border border-slate-200/80 bg-white/70 p-10 shadow-[0_0_60px_rgba(34,211,238,0.12)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/5 md:p-14"
         >
-          <div className="absolute inset-0 rounded-3xl border border-white/10 opacity-0 group-hover:opacity-100 transition duration-500" />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 blur-xl transition duration-700" />
+          <div className="absolute inset-0 rounded-3xl border border-cyan-400/20 opacity-0 transition duration-500 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 blur-xl transition duration-700 group-hover:opacity-100 dark:via-white/5" />
 
-          <article className="relative z-10 text-lg leading-relaxed space-y-6 text-white/90">
+          <article className="relative z-10 space-y-6 text-lg leading-relaxed text-slate-700 dark:text-white/90">
             {[
               <>
                 My name is <span className="text-cyan-400 font-semibold">Nongsaibam Tazkhan</span>. I’m basically from <span className="text-purple-400 font-semibold">Manipur</span> and currently living in <span className="text-purple-400 font-semibold">Bangalore</span>. I have completed my Bachelor’s degree in Computer Applications (BCA) from <span className="text-cyan-400 font-semibold">Manipur University</span>.
@@ -71,11 +76,11 @@ const AboutMe = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.2 }}
               whileHover={{ scale: 1.08 }}
-              className="group relative backdrop-blur-xl bg-white/5 border border-white/10 p-6 rounded-2xl shadow-xl text-center overflow-hidden"
+              className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white/70 p-6 text-center shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-white/5"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-cyan-400/10 opacity-0 group-hover:opacity-100 transition" />
               <h3 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">{item.value}</h3>
-              <p className="text-sm text-gray-300 mt-2">{item.label}</p>
+              <p className="mt-2 text-sm text-slate-600 dark:text-gray-300">{item.label}</p>
             </motion.div>
           ))}
         </div>

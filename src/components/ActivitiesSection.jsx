@@ -6,6 +6,8 @@ import {
   FaRegCalendarAlt
 } from "react-icons/fa";
 
+void motion;
+
 const activities = [
   {
     title: "Manipur Tourism Website",
@@ -45,7 +47,7 @@ const ActivitiesSection = () => {
   return (
     <section
       id="activities"
-      className="relative bg-black text-white py-24 px-6 overflow-hidden"
+      className="relative overflow-hidden bg-slate-50 px-6 py-24 text-slate-900 transition-colors duration-500 dark:bg-[#030712] dark:text-white"
     >
       {/* 🌌 Background Glow */}
       <div className="absolute top-[-150px] left-[-100px] w-[500px] h-[500px] bg-purple-500/20 blur-[140px]" />
@@ -55,7 +57,7 @@ const ActivitiesSection = () => {
 
         {/* 🔥 Title */}
         <div className="flex justify-center items-center gap-4 mb-16">
-          <h2 className="text-6xl font-bold text-white/10">04</h2>
+          <h2 className="text-6xl font-bold text-slate-300 dark:text-white/10">04</h2>
           <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
             Activities & Engagements
           </h3>
@@ -71,7 +73,7 @@ const ActivitiesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               whileHover={{ scale: 1.06 }}
-              className="group backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition"
+              className="group rounded-2xl border border-slate-200/80 bg-white/75 p-6 shadow-xl backdrop-blur-xl transition hover:shadow-2xl dark:border-white/10 dark:bg-white/5"
             >
 
               {/* Icon + Title */}
@@ -81,13 +83,13 @@ const ActivitiesSection = () => {
                   {activity.icon}
                 </div>
 
-                <h4 className="ml-3 text-lg font-semibold text-white">
+                <h4 className="ml-3 text-lg font-semibold text-slate-900 dark:text-white">
                   {activity.title}
                 </h4>
 
               </div>
 
-              <p className="text-gray-300 mb-4">
+              <p className="mb-4 text-slate-600 dark:text-gray-300">
                 {activity.description}
               </p>
 
@@ -101,7 +103,7 @@ const ActivitiesSection = () => {
                 {activity.tags.map((tag, i) => (
                   <span
                     key={i}
-                    className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:bg-cyan-500/20 hover:text-white transition"
+                    className="rounded-full border border-slate-200/80 bg-slate-100/80 px-3 py-1 text-xs text-slate-600 transition hover:bg-cyan-500/20 hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-gray-300 dark:hover:text-white"
                   >
                     {tag}
                   </span>

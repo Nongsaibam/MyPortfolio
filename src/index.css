@@ -1,7 +1,16 @@
 @import "tailwindcss";
-/* Custom global styles */
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  @apply bg-black dark:bg-black text-white dark:text-white;
+  @apply bg-slate-50 text-slate-900 transition-colors duration-500 dark:bg-[#030712] dark:text-slate-100;
+}
+
+#root {
+  @apply min-h-screen;
 }
 
 /* Remove scrollbar */

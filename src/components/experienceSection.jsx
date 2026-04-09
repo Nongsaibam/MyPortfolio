@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 
+void motion;
+
 const experiences = [
   {
     title: "Full Stack Web Developer Intern",
@@ -28,7 +30,7 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="relative py-24 px-6 md:px-16 bg-black text-white overflow-hidden"
+      className="relative overflow-hidden bg-slate-100 px-6 py-24 text-slate-900 transition-colors duration-500 md:px-16 dark:bg-[#020617] dark:text-white"
     >
       {/* 🌌 Background Glow */}
       <div className="absolute top-[-200px] left-[-150px] w-[600px] h-[600px] bg-purple-500/20 blur-[180px]" />
@@ -41,14 +43,14 @@ export default function ExperienceSection() {
         
         {/* 🔥 Title */}
         <div className="flex items-center gap-4 mb-20">
-          <h2 className="text-6xl font-bold text-white/10">02</h2>
+          <h2 className="text-6xl font-bold text-slate-300 dark:text-white/10">02</h2>
           <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
             Experience
           </h3>
         </div>
 
         {/* 🧠 Timeline */}
-        <div className="relative border-l border-white/10 pl-10 space-y-16">
+        <div className="relative space-y-16 border-l border-slate-300/80 pl-10 dark:border-white/10">
 
           {experiences.map((exp, index) => (
             <motion.div
@@ -62,12 +64,12 @@ export default function ExperienceSection() {
               <div className="absolute -left-[22px] top-3 w-4 h-4 rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)]" />
 
               {/* 💎 Glass Card */}
-              <div className="backdrop-blur-2xl bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl shadow-[0_0_60px_rgba(34,211,238,0.15)] hover:scale-[1.03] transition duration-300 relative overflow-hidden group">
+              <div className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white/75 p-6 shadow-[0_0_60px_rgba(34,211,238,0.12)] backdrop-blur-2xl transition duration-300 hover:scale-[1.03] dark:border-white/10 dark:bg-white/5 md:p-8">
                 
                 {/* Glow Border */}
                 <div className="absolute inset-0 rounded-2xl border border-cyan-400/20 opacity-0 group-hover:opacity-100 transition duration-500" />
                 {/* Light Sweep */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 blur-xl transition duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/35 to-transparent opacity-0 blur-xl transition duration-700 group-hover:opacity-100 dark:via-white/5" />
 
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
                   <h4 className="text-xl font-semibold text-cyan-400">
@@ -78,11 +80,11 @@ export default function ExperienceSection() {
                   </span>
                 </div>
 
-                <p className="text-gray-300 mb-4">
+                <p className="mb-4 text-slate-600 dark:text-gray-300">
                   {exp.location}
                 </p>
 
-                <ul className="list-disc list-inside text-gray-300 space-y-1">
+                <ul className="list-inside list-disc space-y-1 text-slate-600 dark:text-gray-300">
                   {exp.points.map((point, i) => (
                     <li key={i}>{point}</li>
                   ))}

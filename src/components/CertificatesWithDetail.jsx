@@ -8,6 +8,8 @@ import {
   HiOutlineXMark,
 } from "react-icons/hi2";
 
+void motion;
+
 /* ---------------- AUTO IMPORT IMAGES ---------------- */
 
 const images = import.meta.glob("../assets/CertificateImage/*", { eager: true });
@@ -21,8 +23,8 @@ const getImage = (name) => {
 
 const certificates = [
   { id: 1, title: "JavaScript Course", platform: "Udemy", category: "Course", image: "Udemy.jpg" },
-  { id: 2, title: "Full Stack Web Developer", platform: "CodeXp", category: "Internship", image: "Codexp.jpg" },
-  { id: 3, title: "Full Stack Web Developer", platform: "WaySpire", category: "Internship", image: "Wayspire1.png", extraImages: ["wayspire2.png"] },
+  { id: 2, title: "Full Stack Web Development", platform: "CodeXp", category: "Internship", image: "Codexp.jpg" },
+  { id: 3, title: "Full Stack Web Development", platform: "WaySpire", category: "Internship", image: "Wayspire1.png", extraImages: ["wayspire2.png"] },
   { id: 4, title: "IIIT Workshop", platform: "Others", category: "Workshop", image: "Workshop.png" },
   { id: 5, title: "React.js", platform: "Great Learning", category: "Course", image: "GreatLearning.png" },
   { id: 6, title: "Generative AI For Beginners", platform: "Great Learning", category: "Course", image: "GenerativeAIForBeginners.png" },
@@ -44,11 +46,17 @@ const certificates = [
   { id: 22, title: "Passive Income with AI Tools", platform: "AI Workshop", category: "Workshop", image: "PassiveIncomeAI.png" },
   { id: 23, title: "Personality Development", platform: "Training", category: "Workshop", image: "Personality Development.png" },
   { id: 24, title: "ReactJS Projects For Beginners", platform: "React Development", category: "Course", image: "ReactJS Projects For Beginners.png" },
-  { id: 25, title: "Full Stack Web Developer", platform: "CodeXp", category: "Internship", image: "Recomandation.png" },
+  { id: 25, title: "Full Stack Web Development", platform: "CodeXp", category: "Internship", image: "Recomandation.png" },
   { id: 26, title: "The Quitet Power Quiz", platform: "Training", category: "Workshop", image: "Mahindra.png" },
-  { id: 27, title: "Full Stack Web Developer", platform: "CODEC Thechnologies", category: "Internship", image: "Codec.png" },
-  { id: 28, title: "Full Stack Web Developer", platform: "CODEC Thechnologies", category: "Internship", image: "Recommendation.png" },
-  { id: 29, title: "Full Stack Web Developer", platform: "CODEC Thechnologies", category: "Internship", image: "CourseCompletation.png" },
+  { id: 27, title: "Full Stack Web Development", platform: "CODEC Thechnologies", category: "Internship", image: "Codec.png" },
+  { id: 28, title: "Full Stack Web Development", platform: "CODEC Thechnologies", category: "Internship", image: "Recommendation.png" },
+  { id: 29, title: "Full Stack Web Development", platform: "CODEC Thechnologies", category: "Internship", image: "CourseCompletation.png" },
+  { id: 30, title: "Full Stack Web Development", platform: "Future Interns", category: "Internship", image: "futureCerdi.png" },
+  { id: 31, title: "Full Stack Web Development", platform: "Future Interns", category: "Internship", image: "futurOffer.png" },
+  { id: 32, title: "Full Stack Web Development", platform: "Future Interns", category: "Internship", image: "future LoR.png" },
+  { id: 33, title: "Full Stack Web Development", platform: "Cursa", category: "Course", image: "fullCursa.png" },
+  { id: 34, title: "MongoDB", platform: "Cursa", category: "Course", image: "cursa.png" },
+  
   
 
   
@@ -90,8 +98,8 @@ const CertificatesWithDetail = () => {
 
     if (!certificate) {
       return (
-        <div className="flex min-h-screen items-center justify-center bg-[#030712] px-6 text-center text-white">
-          <div className="rounded-3xl border border-white/10 bg-white/5 px-8 py-10 backdrop-blur-2xl">
+        <div className="flex min-h-screen items-center justify-center bg-slate-50 px-6 text-center text-slate-900 dark:bg-[#030712] dark:text-white">
+          <div className="rounded-3xl border border-slate-200/80 bg-white/85 px-8 py-10 backdrop-blur-2xl dark:border-white/10 dark:bg-white/5">
             <h2 className="text-2xl font-bold">Certificate not found</h2>
             <Link
               to="/certificates"
@@ -110,7 +118,7 @@ const CertificatesWithDetail = () => {
     ].filter(Boolean);
 
     return (
-      <section className="relative min-h-screen overflow-hidden bg-[#030712] px-6 py-10 text-white md:px-10">
+      <section className="relative min-h-screen overflow-hidden bg-slate-50 px-6 py-10 text-slate-900 dark:bg-[#030712] dark:text-white md:px-10">
         {/* Background */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute left-[-8rem] top-[-8rem] h-[26rem] w-[26rem] rounded-full bg-cyan-500/15 blur-[140px]" />
@@ -122,7 +130,7 @@ const CertificatesWithDetail = () => {
         <div className="relative z-10 mx-auto max-w-7xl">
           <Link
             to="/certificates"
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-cyan-300 backdrop-blur-xl transition hover:bg-white/10 hover:text-white"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/85 px-4 py-2 text-sm text-cyan-700 backdrop-blur-xl transition hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-cyan-300 dark:hover:bg-white/10 dark:hover:text-white"
           >
             <HiOutlineArrowLeft className="text-lg" />
             Back to Certificates
@@ -135,7 +143,7 @@ const CertificatesWithDetail = () => {
             className="mt-8 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]"
           >
             {/* Left big preview */}
-            <div className="relative rounded-[2rem] border border-white/10 bg-white/8 p-4 shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-3xl">
+            <div className="relative rounded-[2rem] border border-slate-200/80 bg-white/90 p-4 shadow-[0_20px_80px_rgba(15,23,42,0.18)] backdrop-blur-3xl dark:border-white/10 dark:bg-white/8 dark:shadow-[0_20px_80px_rgba(0,0,0,0.45)]">
               <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-white/10 via-transparent to-cyan-400/5" />
               <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/30">
                 <img
@@ -155,7 +163,7 @@ const CertificatesWithDetail = () => {
             </div>
 
             {/* Right info panel */}
-            <div className="relative rounded-[2rem] border border-white/10 bg-white/8 p-6 shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-3xl">
+            <div className="relative rounded-[2rem] border border-slate-200/80 bg-white/90 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.15)] backdrop-blur-3xl dark:border-white/10 dark:bg-white/8 dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
               <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-cyan-400/10 via-transparent to-fuchsia-400/10" />
 
               <div className="relative">
@@ -170,24 +178,24 @@ const CertificatesWithDetail = () => {
 
                 <div className="mt-6 grid gap-4">
                   <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
-                    <p className="text-xs uppercase tracking-[0.2em] text-white/40">Platform</p>
-                    <p className="mt-2 text-lg font-semibold text-white">{certificate.platform}</p>
+                    <p className="text-xs uppercase tracking-[0.2em] text-slate-400 dark:text-white/40">Platform</p>
+                    <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">{certificate.platform}</p>
                   </div>
 
                   <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
-                    <p className="text-xs uppercase tracking-[0.2em] text-white/40">Category</p>
-                    <p className="mt-2 text-lg font-semibold text-white">{certificate.category}</p>
+                    <p className="text-xs uppercase tracking-[0.2em] text-slate-400 dark:text-white/40">Category</p>
+                    <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">{certificate.category}</p>
                   </div>
 
                   <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
-                    <p className="text-xs uppercase tracking-[0.2em] text-white/40">Certificate ID</p>
-                    <p className="mt-2 text-lg font-semibold text-white">#{certificate.id}</p>
+                    <p className="text-xs uppercase tracking-[0.2em] text-slate-400 dark:text-white/40">Certificate ID</p>
+                    <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">#{certificate.id}</p>
                   </div>
                 </div>
 
                 {allImages.length > 1 && (
                   <div className="mt-8">
-                    <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/50">
+                    <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-white/50">
                       More Preview Images
                     </h3>
                     <div className="grid grid-cols-2 gap-4">
@@ -252,7 +260,7 @@ const CertificatesWithDetail = () => {
   /* ---------------- LIST PAGE ---------------- */
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#030712] px-6 py-10 text-white md:px-10">
+    <section className="relative min-h-screen overflow-hidden bg-slate-50 px-6 py-10 text-slate-900 dark:bg-[#030712] dark:text-white md:px-10">
       {/* Premium Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute left-[-10rem] top-[-10rem] h-[34rem] w-[34rem] rounded-full bg-cyan-500/12 blur-[170px]" />
@@ -297,7 +305,7 @@ const CertificatesWithDetail = () => {
                 className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
                   active
                     ? "border border-cyan-300/30 bg-gradient-to-r from-cyan-400 to-emerald-400 text-black shadow-[0_8px_30px_rgba(34,211,238,0.35)]"
-                    : "border border-white/10 bg-white/5 text-white/75 backdrop-blur-xl hover:bg-white/10 hover:text-white"
+                    : "border border-slate-200/80 bg-white/85 text-slate-700 backdrop-blur-xl hover:bg-white hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white"
                 }`}
               >
                 {filter}
@@ -328,7 +336,7 @@ const CertificatesWithDetail = () => {
               {/* outer glow */}
               <div className="absolute -inset-[1px] rounded-[2rem] bg-gradient-to-br from-cyan-400/30 via-transparent to-fuchsia-400/20 opacity-0 blur-xl transition duration-500 group-hover:opacity-100" />
 
-              <div className="relative h-full overflow-hidden rounded-[2rem] border border-white/10 bg-white/8 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-3xl">
+              <div className="relative h-full overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/90 p-4 shadow-[0_20px_60px_rgba(15,23,42,0.15)] backdrop-blur-3xl dark:border-white/10 dark:bg-white/8 dark:shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-cyan-400/5" />
 
                 <div className="relative">
@@ -353,12 +361,12 @@ const CertificatesWithDetail = () => {
                   {/* content */}
                   <div className="mt-5 space-y-3">
                     <div className="flex items-start justify-between gap-3">
-                      <h4 className="text-lg font-bold leading-snug text-white">
+                      <h4 className="text-lg font-bold leading-snug text-slate-900 dark:text-white">
                         {cert.title}
                       </h4>
                     </div>
 
-                    <p className="text-sm text-white/55">{cert.platform}</p>
+                    <p className="text-sm text-slate-600 dark:text-white/55">{cert.platform}</p>
 
                     <div className="flex items-center justify-between gap-3 pt-1">
                       <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-300">
@@ -367,7 +375,7 @@ const CertificatesWithDetail = () => {
 
                       <Link
                         to={`/certificates/${cert.id}`}
-                        className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80 backdrop-blur-xl transition hover:bg-white/10 hover:text-white"
+                        className="rounded-full border border-slate-200/80 bg-slate-100/80 px-4 py-2 text-sm text-slate-700 backdrop-blur-xl transition hover:bg-slate-200 hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:bg-white/10 dark:hover:text-white"
                       >
                         View Details
                       </Link>

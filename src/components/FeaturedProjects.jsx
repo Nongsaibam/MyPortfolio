@@ -1,13 +1,13 @@
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  HiOutlineMagnifyingGlass,
   HiOutlineCodeBracket,
   HiOutlineEye,
   HiOutlineXMark,
-  HiOutlineSparkles,
   HiOutlineArrowTopRightOnSquare,
 } from "react-icons/hi2";
+
+void motion;
 
 // Import your local images
 import miniCrmImg from "../assets/ProjectIMG/crm.png";
@@ -161,11 +161,9 @@ export default function FeaturedProjects() {
       return matchesSearch && matchesFilter;
     });
   }, [search, activeFilter]);
-  const featuredCount = projects.filter((p) => p.featured).length;
-
   return (
     <section
-      className="relative overflow-hidden bg-[#040816] px-6 py-20 text-white"
+      className="relative overflow-hidden bg-slate-50 px-6 py-20 text-slate-900 transition-colors duration-500 dark:bg-[#040816] dark:text-white"
       id="projects"
     >
       {/* Premium Background */}
@@ -182,7 +180,7 @@ export default function FeaturedProjects() {
          
 
           <h2 className="mb-4 text-4xl font-black md:text-6xl">
-            <span className="text-white/20 mr-3">03</span>
+            <span className="mr-3 text-slate-300 dark:text-white/20">03</span>
             <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent">
               Featured Projects
             </span>
@@ -200,7 +198,7 @@ export default function FeaturedProjects() {
               className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
                 activeFilter === filter
                   ? "bg-gradient-to-r from-cyan-400 to-emerald-400 text-black shadow-[0_8px_30px_rgba(34,211,238,0.35)]"
-                  : "border border-white/10 bg-white/5 text-white/75 backdrop-blur-xl hover:bg-white/10 hover:text-white"
+                  : "border border-slate-300/70 bg-white/70 text-slate-700 backdrop-blur-xl hover:bg-white hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white"
               }`}
             >
               {filter}
@@ -221,7 +219,7 @@ export default function FeaturedProjects() {
               <TiltCard className="group relative h-full">
                 <div className="absolute -inset-[1px] rounded-[2rem] bg-gradient-to-br from-cyan-400/30 via-transparent to-fuchsia-400/20 opacity-0 blur-xl transition duration-500 group-hover:opacity-100" />
 
-                <div className="relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-2xl">
+                <div className="relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/85 shadow-[0_20px_60px_rgba(15,23,42,0.12)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/10 dark:shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
                   {/* Image */}
                   <div className="relative overflow-hidden">
                     <motion.img
@@ -246,8 +244,8 @@ export default function FeaturedProjects() {
 
                   {/* Content */}
                   <div className="flex flex-1 flex-col p-6">
-                    <h3 className="text-xl font-bold text-white">{project.title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-white/65">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white">{project.title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-white/65">
                       {project.description}
                     </p>
 
@@ -256,7 +254,7 @@ export default function FeaturedProjects() {
                         {project.features.slice(0, 2).map((feature, i) => (
                           <div
                             key={i}
-                            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/70"
+                            className="rounded-xl border border-slate-200/80 bg-slate-100/80 px-3 py-2 text-xs text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-white/70"
                           >
                             {feature}
                           </div>
@@ -270,7 +268,7 @@ export default function FeaturedProjects() {
                         <motion.button
                           key={i}
                           onClick={() => setSearch(tag)}
-                          className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80 transition hover:bg-cyan-500/20 hover:text-white"
+                          className="rounded-full border border-slate-200/80 bg-slate-100/80 px-3 py-1 text-xs text-slate-700 transition hover:bg-cyan-500/20 hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:text-white"
                           whileHover={{ scale: 1.08 }}
                         >
                           {tag}
@@ -282,7 +280,7 @@ export default function FeaturedProjects() {
                     <div className="mt-6 grid grid-cols-2 gap-3">
                       <button
                         onClick={() => setSelectedProject(project)}
-                        className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white/90 transition hover:bg-white/10"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200/80 bg-slate-100/80 px-4 py-3 text-sm font-medium text-slate-800 transition hover:bg-slate-200 dark:border-white/10 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10"
                       >
                         <HiOutlineEye />
                         Preview
@@ -307,9 +305,9 @@ export default function FeaturedProjects() {
 
         {/* Empty State */}
         {filteredProjects.length === 0 && (
-          <div className="rounded-[2rem] border border-white/10 bg-white/5 px-6 py-16 text-center backdrop-blur-2xl">
-            <h3 className="text-2xl font-bold text-white">No projects found</h3>
-            <p className="mt-3 text-white/55">
+          <div className="rounded-[2rem] border border-slate-200/80 bg-white/80 px-6 py-16 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-white/5">
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">No projects found</h3>
+            <p className="mt-3 text-slate-600 dark:text-white/55">
               Try another search term or choose a different filter.
             </p>
           </div>
@@ -331,7 +329,7 @@ export default function FeaturedProjects() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.92 }}
               transition={{ duration: 0.28 }}
-              className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#0a1020]/90 shadow-[0_20px_80px_rgba(0,0,0,0.5)] backdrop-blur-3xl"
+              className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/95 shadow-[0_20px_80px_rgba(15,23,42,0.2)] backdrop-blur-3xl dark:border-white/10 dark:bg-[#0a1020]/90 dark:shadow-[0_20px_80px_rgba(0,0,0,0.5)]"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -356,8 +354,8 @@ export default function FeaturedProjects() {
                     {selectedProject.category}
                   </div>
 
-                  <h3 className="text-3xl font-black">{selectedProject.title}</h3>
-                  <p className="mt-4 leading-8 text-white/65">
+                  <h3 className="text-3xl font-black text-slate-900 dark:text-white">{selectedProject.title}</h3>
+                  <p className="mt-4 leading-8 text-slate-600 dark:text-white/65">
                     {selectedProject.description}
                   </p>
 
@@ -366,7 +364,7 @@ export default function FeaturedProjects() {
                       {selectedProject.features.map((feature, i) => (
                         <div
                           key={i}
-                          className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/75"
+                          className="rounded-xl border border-slate-200/80 bg-slate-100/80 px-4 py-3 text-sm text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-white/75"
                         >
                           {feature}
                         </div>
@@ -378,7 +376,7 @@ export default function FeaturedProjects() {
                     {selectedProject.tags.map((tag, i) => (
                       <span
                         key={i}
-                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80"
+                        className="rounded-full border border-slate-200/80 bg-slate-100/80 px-3 py-1 text-xs text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-white/80"
                       >
                         {tag}
                       </span>
@@ -398,7 +396,7 @@ export default function FeaturedProjects() {
 
                     <button
                       onClick={() => setSelectedProject(null)}
-                      className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 font-medium text-white/90 transition hover:bg-white/10"
+                      className="rounded-xl border border-slate-200/80 bg-slate-100/80 px-5 py-3 font-medium text-slate-800 transition hover:bg-slate-200 dark:border-white/10 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10"
                     >
                       Close
                     </button>

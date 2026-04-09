@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope } from "react-icons/fa6";
 import { motion } from "framer-motion";
+import { useTheme } from "../context/ThemeContext";
 import tkImage from "../assets/1736923031405.jpg";
+
+void motion;
 
 const socialLinks = [
   { icon: FaGithub, href: "https://github.com/Nongsaibam" },
@@ -12,20 +15,7 @@ const socialLinks = [
 ];
 
 const ProfilePage = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) setIsDarkMode(savedTheme === "dark");
-    else setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
-  }, []);
-
-  useEffect(() => {
-    const html = document.documentElement;
-    if (isDarkMode) html.classList.add("dark");
-    else html.classList.remove("dark");
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-  }, [isDarkMode]);
+  const { isDarkMode, toggleTheme } = useTheme();
 
   const downloadResume = () => {
     const link = document.createElement("a");
@@ -35,19 +25,19 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-black dark:bg-black transition-colors duration-500">
+    <div className="relative min-h-screen overflow-hidden bg-slate-50 text-slate-900 transition-colors duration-500 dark:bg-[#030712] dark:text-white">
       {/* Background Glows */}
       <div className="absolute top-[-200px] left-[-150px] w-[600px] h-[600px] bg-purple-500/20 blur-[180px]" />
       <div className="absolute bottom-[-150px] right-[-120px] w-[500px] h-[500px] bg-cyan-500/20 blur-[160px]" />
       <div className="absolute inset-0 -z-10">
         <div className="absolute w-[600px] h-[600px] bg-purple-500/20 rounded-full blur-[180px] top-[-150px] left-[-150px] animate-pulse" />
         <div className="absolute w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[160px] bottom-[-120px] right-[-120px] animate-pulse" />
-        <div className="absolute w-[400px] h-[400px] bg-white/5 rounded-full blur-[140px] top-[40%] left-[40%] animate-pulse" />
+        <div className="absolute top-[40%] left-[40%] h-[400px] w-[400px] rounded-full bg-slate-950/5 blur-[140px] animate-pulse dark:bg-white/5" />
         <div className="absolute inset-0 opacity-[0.03] bg-[url('/noise.png')]" />
       </div>
 
       {/* Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-30 flex justify-between items-center px-6 md:px-16 py-4 backdrop-blur-xl bg-black/5 border-b border-white/10 shadow-lg transition-colors duration-500">
+      <header className="fixed top-0 left-0 right-0 z-30 flex items-center justify-between border-b border-slate-900/10 bg-white/55 px-6 py-4 shadow-lg backdrop-blur-xl transition-colors duration-500 md:px-16 dark:border-white/10 dark:bg-black/15">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -61,24 +51,24 @@ const ProfilePage = () => {
             <a
               key={i}
               href={`#${item.toLowerCase()}`}
-              className="relative text-white hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-cyan-500 after:transition-all after:duration-300 hover:after:w-full"
+              className="relative text-slate-700 transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-cyan-500 after:transition-all after:duration-300 hover:text-slate-950 hover:after:w-full dark:text-slate-200 dark:hover:text-white"
             >
               {item}
             </a>
           ))}
           <Link
             to="/certificates"
-            className="relative text-white hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-cyan-500 after:transition-all after:duration-300 hover:after:w-full"
+            className="relative text-slate-700 transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-cyan-500 after:transition-all after:duration-300 hover:text-slate-950 hover:after:w-full dark:text-slate-200 dark:hover:text-white"
           >
             Certifications
           </Link>
         </nav>
 
         <button
-          onClick={() => setIsDarkMode(!isDarkMode)}
-          className="px-3 py-2 hover:bg-white/20 transition"
+          onClick={toggleTheme}
+          className="rounded-xl px-3 py-2 transition hover:bg-slate-900/10 dark:hover:bg-white/20"
         >
-          {isDarkMode ? "🌙" : "☀️"}
+          {isDarkMode ? "☀️" : "🌙"}
         </button>
       </header>
 
@@ -92,12 +82,12 @@ const ProfilePage = () => {
           className="max-w-xl text-center md:text-left"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="text-white">Hi, I'm </span>
+            <span className="text-slate-900 dark:text-white">Hi, I'm </span>
             <span className="bg-gradient-to-r from-purple-400 to-cyan-400 text-transparent bg-clip-text animate-pulse">
               Nongsaibam Tazkhan
             </span>
           </h1>
-          <p className="text-white text-lg md:text-xl mb-8">
+          <p className="mb-8 text-lg text-slate-700 md:text-xl dark:text-slate-200">
             MERN Stack Developer building modern web apps with React, Node.js, and AI-powered technologies.
           </p>
 
@@ -111,9 +101,7 @@ const ProfilePage = () => {
 
             <motion.button
               whileHover={{ scale: 1.1 }}
-              className="px-6 py-3 rounded-xl border border-white/10 text-white backdrop-blur-md 
-                 bg-white/10 hover:bg-gradient-to-r hover:from-purple-400 hover:via-pink-400 hover:to-cyan-400 
-                 hover:shadow-[0_0_25px_rgba(255,0,255,0.6)] transition-all duration-300"
+              className="rounded-xl border border-slate-300/70 bg-white/60 px-6 py-3 text-slate-800 backdrop-blur-md transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-400 hover:via-pink-400 hover:to-cyan-400 hover:text-white hover:shadow-[0_0_25px_rgba(255,0,255,0.6)] dark:border-white/10 dark:bg-white/10 dark:text-white"
               onClick={downloadResume}
             >
               Download Resume
@@ -137,27 +125,31 @@ const ProfilePage = () => {
           </div>
 
           {/* Social Icons */}
-          <div className="flex justify-center mt-8 gap-8 text-2xl text-cyan-400">
-            {socialLinks.map(({ icon: Icon, href }, i) => (
-              <motion.a
-                key={i}
+          <div className="mt-8 flex justify-center gap-8 text-2xl text-cyan-500 dark:text-cyan-400">
+            {socialLinks.map(({ icon: socialIcon, href }, i) => {
+              const SocialIcon = socialIcon;
+
+              return (
+                <motion.a
+                  key={i}
                 whileHover={{ scale: 1.2, rotate: 10 }}
-                className="hover:text-white transition"
+                className="transition hover:text-slate-950 dark:hover:text-white"
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Icon />
-              </motion.a>
-            ))}
+                  <SocialIcon />
+                </motion.a>
+              );
+            })}
           </div>
         </motion.div>
       </main>
 
       {/* Scroll Indicator */}
       <div className="flex flex-col items-center pb-10 animate-bounce">
-        <div className="w-6 h-10 border border-white rounded-full flex items-start justify-center">
-          <div className="w-1 h-2 bg-white rounded-full mt-2"></div>
+        <div className="flex h-10 w-6 items-start justify-center rounded-full border border-slate-500 dark:border-white">
+          <div className="mt-2 h-2 w-1 rounded-full bg-slate-700 dark:bg-white"></div>
         </div>
       </div>
 
