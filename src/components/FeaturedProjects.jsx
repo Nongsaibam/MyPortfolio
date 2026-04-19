@@ -1,16 +1,15 @@
 import React, { useMemo, useState } from "react";
 import {
+  HiOutlineArrowTopRightOnSquare,
   HiOutlineCodeBracket,
   HiOutlineEye,
   HiOutlineXMark,
-  HiOutlineArrowTopRightOnSquare,
 } from "react-icons/hi2";
 
-// Import your local images
 import miniCrmImg from "../assets/ProjectIMG/crm.png";
 import coffeeShopImg from "../assets/ProjectIMG/Business.png";
 import multiAppImg from "../assets/ProjectIMG/Multi.png";
-import Edu from "../assets/ProjectIMG/Edu.png";
+import eduImg from "../assets/ProjectIMG/Edu.png";
 
 const projects = [
   {
@@ -79,33 +78,35 @@ const projects = [
     featured: true,
   },
   {
-  title: "EduLearn - Student Portal",
-  description:
-    "A full-stack learning platform with AI features, gamification, and dashboards.",
-
-  features: [
-    "Frontend: React + Vite + Tailwind",
-    "Backend: Express.js API",
-    "AI chatbot & recommendations",
-    "Gamification & leaderboard",
-    "Student & Admin dashboards"
-  ],
-
-  tags: ["React", "Tailwind CSS", "Node.js", "AI"],
-  image: Edu,
-  gitLink: "https://github.com/Nongsaibam/EduLearn.git",
-  category: "Full Stack",
-},
+    title: "EduLearn - Student Portal",
+    description:
+      "A full-stack learning platform with AI features, gamification, and dashboards.",
+    features: [
+      "Frontend: React + Vite + Tailwind",
+      "Backend: Express.js API",
+      "AI chatbot & recommendations",
+      "Gamification & leaderboard",
+      "Student & Admin dashboards",
+    ],
+    tags: ["React", "Tailwind CSS", "Node.js", "AI"],
+    image: eduImg,
+    gitLink: "https://github.com/Nongsaibam/EduLearn.git",
+    category: "Full Stack",
+    featured: false,
+  },
 ];
 
-const allFilters = ["All", "Featured", "AI/ML", "Computer Vision", "Full Stack", "Frontend"];
+const allFilters = [
+  "All",
+  "Featured",
+  "AI/ML",
+  "Computer Vision",
+  "Full Stack",
+  "Frontend",
+];
 
 function TiltCard({ children, className = "" }) {
-  return (
-    <div className={className}>
-      {children}
-    </div>
-  );
+  return <div className={className}>{children}</div>;
 }
 
 export default function FeaturedProjects() {
@@ -115,53 +116,45 @@ export default function FeaturedProjects() {
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
-      const q = search.toLowerCase();
+      const query = search.toLowerCase();
 
       const matchesSearch =
-        project.title.toLowerCase().includes(q) ||
-        project.description.toLowerCase().includes(q) ||
-        project.tags.some((tag) => tag.toLowerCase().includes(q)) ||
-        project.category.toLowerCase().includes(q);
+        project.title.toLowerCase().includes(query) ||
+        project.description.toLowerCase().includes(query) ||
+        project.tags.some((tag) => tag.toLowerCase().includes(query)) ||
+        project.category.toLowerCase().includes(query);
 
       const matchesFilter =
         activeFilter === "All"
           ? true
           : activeFilter === "Featured"
-          ? project.featured
-          : project.category === activeFilter;
+            ? project.featured
+            : project.category === activeFilter;
 
       return matchesSearch && matchesFilter;
     });
   }, [search, activeFilter]);
+
   return (
     <section
-      className="relative overflow-hidden bg-slate-50 px-6 py-20 text-slate-900 transition-colors duration-500 dark:bg-slate-950 dark:text-white"
       id="projects"
+      className="relative overflow-hidden bg-transparent px-6 py-20 text-slate-900 transition-colors duration-500 dark:text-white"
     >
-      {/* Premium Background */}
-      <div className="absolute inset-0">
-        <div className="absolute left-[-120px] top-[-100px] h-[420px] w-[420px] rounded-full bg-fuchsia-500/20 blur-[120px]" />
-        <div className="absolute right-[-120px] bottom-[-120px] h-[420px] w-[420px] rounded-full bg-cyan-500/20 blur-[120px]" />
-        <div className="absolute left-[35%] top-[20%] h-[260px] w-[260px] rounded-full bg-violet-500/10 blur-[120px]" />
-        <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:72px_72px]" />
+      <div className="pointer-events-none absolute inset-0 opacity-30">
+        <div className="absolute left-0 top-10 h-72 w-72 rounded-full bg-fuchsia-500/10 blur-3xl" />
+        <div className="absolute right-0 bottom-10 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-7xl">
-        {/* Header */}
         <div className="mx-auto mb-12 max-w-4xl text-center">
-         
-
           <h2 className="mb-4 text-4xl font-black md:text-6xl">
             <span className="mr-3 text-slate-300 dark:text-white/20">03</span>
             <span className="bg-gradient-to-r from-fuchsia-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent">
               Featured Projects
             </span>
           </h2>
-
-        
         </div>
 
-        {/* Filters */}
         <div className="mb-12 flex flex-wrap justify-center gap-3">
           {allFilters.map((filter) => (
             <button
@@ -170,7 +163,7 @@ export default function FeaturedProjects() {
               className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
                 activeFilter === filter
                   ? "bg-gradient-to-r from-cyan-400 to-emerald-400 text-black shadow-[0_8px_30px_rgba(34,211,238,0.35)]"
-                  : "border border-slate-300/70 bg-white/70 text-slate-700 backdrop-blur-xl hover:bg-white hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white"
+                  : "border border-black/10 bg-white/55 text-slate-700 backdrop-blur-xl hover:bg-white hover:text-slate-950 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white"
               }`}
             >
               {filter}
@@ -178,37 +171,41 @@ export default function FeaturedProjects() {
           ))}
         </div>
 
-        {/* Project Grid */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
           {filteredProjects.map((project, index) => (
             <div key={index}>
-              <TiltCard className="group relative h-full">
+              <TiltCard className="group relative h-full transition-all duration-500 hover:-translate-y-3">
                 <div className="absolute -inset-[1px] rounded-[2rem] bg-gradient-to-br from-cyan-400/30 via-transparent to-fuchsia-400/20 opacity-0 blur-xl transition duration-500 group-hover:opacity-100" />
 
-                <div className="relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/85 shadow-[0_20px_60px_rgba(15,23,42,0.12)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/10 dark:shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
-                  {/* Image */}
+                <div className="relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-black/10 bg-white/55 backdrop-blur-[22px] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] transition-all duration-500 group-hover:shadow-[0_25px_70px_rgba(0,0,0,0.15)] dark:border-white/15 dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
+                  <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-700 group-hover:opacity-100">
+                    <div className="absolute -left-[50%] top-0 h-full w-[200%] rotate-12 bg-gradient-to-r from-transparent via-white/30 to-transparent blur-xl animate-[shine_1.5s_linear]" />
+                  </div>
+
                   <div className="relative overflow-hidden">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="h-56 w-full object-cover"
+                      className="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
                     {project.featured && (
-                      <div className="absolute left-4 top-4 rounded-full border border-cyan-300/20 bg-cyan-400/15 px-3 py-1 text-xs font-semibold text-cyan-300 backdrop-blur-xl">
+                      <div className="absolute left-4 top-4 rounded-full border border-white/20 bg-white/20 px-3 py-1 text-xs font-semibold backdrop-blur-md dark:text-white">
                         Featured
                       </div>
                     )}
 
-                    <div className="absolute right-4 top-4 rounded-full border border-white/10 bg-slate-950/30 px-3 py-1 text-xs text-white/80 backdrop-blur-xl">
+                    <div className="absolute right-4 top-4 rounded-full border border-white/20 bg-white/20 px-3 py-1 text-xs backdrop-blur-md dark:text-white">
                       {project.category}
                     </div>
                   </div>
 
-                  {/* Content */}
                   <div className="flex flex-1 flex-col p-6">
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-white">{project.title}</h3>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                      {project.title}
+                    </h3>
+
                     <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-white/65">
                       {project.description}
                     </p>
@@ -218,7 +215,7 @@ export default function FeaturedProjects() {
                         {project.features.slice(0, 2).map((feature, i) => (
                           <div
                             key={i}
-                            className="rounded-xl border border-slate-200/80 bg-slate-100/80 px-3 py-2 text-xs text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-white/70"
+                            className="rounded-xl border border-black/10 bg-white/55 px-3 py-2 text-xs text-slate-700 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75"
                           >
                             {feature}
                           </div>
@@ -226,24 +223,22 @@ export default function FeaturedProjects() {
                       </div>
                     )}
 
-                    {/* Tags */}
                     <div className="mt-5 flex flex-wrap gap-2">
                       {project.tags.map((tag, i) => (
                         <button
                           key={i}
                           onClick={() => setSearch(tag)}
-                          className="rounded-full border border-slate-200/80 bg-slate-100/80 px-3 py-1 text-xs text-slate-700 transition hover:bg-cyan-500/20 hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:text-white"
+                          className="rounded-full border border-black/10 bg-white/55 px-3 py-1 text-xs text-slate-700 transition hover:scale-105 hover:bg-cyan-500/20 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75"
                         >
                           {tag}
                         </button>
                       ))}
                     </div>
 
-                    {/* Actions */}
                     <div className="mt-6 grid grid-cols-2 gap-3">
                       <button
                         onClick={() => setSelectedProject(project)}
-                        className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200/80 bg-slate-100/80 px-4 py-3 text-sm font-medium text-slate-800 transition hover:bg-slate-200 dark:border-white/10 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl border border-black/10 bg-white/55 px-4 py-3 text-sm font-medium text-slate-800 transition hover:scale-105 hover:bg-white dark:border-white/15 dark:bg-white/[0.08] dark:text-white"
                       >
                         <HiOutlineEye />
                         Preview
@@ -253,7 +248,7 @@ export default function FeaturedProjects() {
                         href={project.gitLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500/80 to-blue-500/80 px-4 py-3 text-sm font-semibold text-white shadow-lg transition hover:scale-[1.02]"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 px-4 py-3 text-sm font-semibold text-white shadow-md transition hover:scale-105"
                       >
                         <HiOutlineCodeBracket />
                         GitHub
@@ -266,10 +261,11 @@ export default function FeaturedProjects() {
           ))}
         </div>
 
-        {/* Empty State */}
         {filteredProjects.length === 0 && (
-          <div className="rounded-[2rem] border border-slate-200/80 bg-white/80 px-6 py-16 text-center backdrop-blur-2xl dark:border-white/10 dark:bg-white/5">
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">No projects found</h3>
+          <div className="rounded-[2rem] border border-black/10 bg-white/55 px-6 py-16 text-center backdrop-blur-2xl dark:border-white/15 dark:bg-white/[0.08]">
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+              No projects found
+            </h3>
             <p className="mt-3 text-slate-600 dark:text-white/55">
               Try another search term or choose a different filter.
             </p>
@@ -277,87 +273,88 @@ export default function FeaturedProjects() {
         )}
       </div>
 
-      {/* Quick Preview Modal */}
       {selectedProject && (
         <div
           className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-md"
           onClick={() => setSelectedProject(null)}
         >
           <div
-            className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/95 shadow-[0_20px_80px_rgba(15,23,42,0.2)] backdrop-blur-3xl dark:border-white/10 dark:bg-slate-900/90 dark:shadow-[0_20px_80px_rgba(0,0,0,0.5)]"
+            className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-black/10 bg-white/55 shadow-[0_20px_80px_rgba(15,23,42,0.2)] backdrop-blur-3xl dark:border-white/15 dark:bg-white/[0.08] dark:shadow-[0_20px_80px_rgba(0,0,0,0.5)]"
             onClick={(e) => e.stopPropagation()}
           >
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white transition hover:bg-slate-950/60"
-              >
-                <HiOutlineXMark className="text-2xl" />
-              </button>
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white transition hover:bg-slate-950/60"
+            >
+              <HiOutlineXMark className="text-2xl" />
+            </button>
 
-              <div className="grid gap-0 md:grid-cols-2">
-                <div className="relative">
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.title}
-                    className="h-full min-h-[280px] w-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="grid gap-0 md:grid-cols-2">
+              <div className="relative">
+                <img
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  className="h-full min-h-[280px] w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              </div>
+
+              <div className="p-8">
+                <div className="mb-4 inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-300">
+                  {selectedProject.category}
                 </div>
 
-                <div className="p-8">
-                  <div className="mb-4 inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-300">
-                    {selectedProject.category}
-                  </div>
+                <h3 className="text-3xl font-black text-slate-900 dark:text-white">
+                  {selectedProject.title}
+                </h3>
+                <p className="mt-4 leading-8 text-slate-600 dark:text-white/65">
+                  {selectedProject.description}
+                </p>
 
-                  <h3 className="text-3xl font-black text-slate-900 dark:text-white">{selectedProject.title}</h3>
-                  <p className="mt-4 leading-8 text-slate-600 dark:text-white/65">
-                    {selectedProject.description}
-                  </p>
-
-                  {selectedProject.features && (
-                    <div className="mt-5 space-y-2">
-                      {selectedProject.features.map((feature, i) => (
-                        <div
-                          key={i}
-                          className="rounded-xl border border-slate-200/80 bg-slate-100/80 px-4 py-3 text-sm text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-white/75"
-                        >
-                          {feature}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {selectedProject.tags.map((tag, i) => (
-                      <span
+                {selectedProject.features && (
+                  <div className="mt-5 space-y-2">
+                    {selectedProject.features.map((feature, i) => (
+                      <div
                         key={i}
-                        className="rounded-full border border-slate-200/80 bg-slate-100/80 px-3 py-1 text-xs text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-white/80"
+                        className="rounded-xl border border-black/10 bg-white/55 px-4 py-3 text-sm text-slate-700 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75"
                       >
-                        {tag}
-                      </span>
+                        {feature}
+                      </div>
                     ))}
                   </div>
+                )}
 
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <a
-                      href={selectedProject.gitLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 px-5 py-3 font-semibold text-white shadow-lg"
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {selectedProject.tags.map((tag, i) => (
+                    <span
+                      key={i}
+                      className="rounded-full border border-black/10 bg-white/55 px-3 py-1 text-xs text-slate-700 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75"
                     >
-                      <HiOutlineArrowTopRightOnSquare />
-                      Open GitHub
-                    </a>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
 
-                    <button
-                      onClick={() => setSelectedProject(null)}
-                      className="rounded-xl border border-slate-200/80 bg-slate-100/80 px-5 py-3 font-medium text-slate-800 transition hover:bg-slate-200 dark:border-white/10 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10"
-                    >
-                      Close
-                    </button>
-                  </div>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a
+                    href={selectedProject.gitLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 px-5 py-3 font-semibold text-white shadow-lg"
+                  >
+                    <HiOutlineArrowTopRightOnSquare />
+                    Open GitHub
+                  </a>
+
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="rounded-xl border border-black/10 bg-white/55 px-5 py-3 font-medium text-slate-800 transition hover:bg-slate-200 dark:border-white/15 dark:bg-white/[0.08] dark:text-white dark:hover:bg-white/10"
+                  >
+                    Close
+                  </button>
                 </div>
               </div>
+            </div>
           </div>
         </div>
       )}

@@ -4,7 +4,7 @@ import { FaPython, FaReact, FaDatabase, FaTools } from "react-icons/fa";
 const skills = [
   {
     category: "Python Full Stack + AI Developer",
-    icon: <FaPython className="text-cyan-400 w-6 h-6" />,
+    icon: <FaPython className="h-6 w-6 text-cyan-600 dark:text-cyan-300" />,
     items: [
       "Python",
       "HTML",
@@ -22,7 +22,7 @@ const skills = [
   },
   {
     category: "Full Stack Web Developer (MERN)",
-    icon: <FaReact className="text-cyan-400 w-6 h-6" />,
+    icon: <FaReact className="h-6 w-6 text-cyan-600 dark:text-cyan-300" />,
     items: [
       "JavaScript ES6",
       "React.js",
@@ -38,12 +38,12 @@ const skills = [
   },
   {
     category: "Backend & Databases",
-    icon: <FaDatabase className="text-purple-400 w-6 h-6" />,
+    icon: <FaDatabase className="h-6 w-6 text-violet-600 dark:text-violet-300" />,
     items: ["REST API", "FastAPI", "MongoDB", "MySQL"],
   },
   {
     category: "Tools & Version Control",
-    icon: <FaTools className="text-cyan-400 w-6 h-6" />,
+    icon: <FaTools className="h-6 w-6 text-cyan-600 dark:text-cyan-300" />,
     items: ["Git", "GitHub"],
   },
 ];
@@ -51,50 +51,47 @@ const skills = [
 const SkillsSection = () => {
   return (
     <section
-      className="relative overflow-hidden bg-slate-100 px-6 py-24 text-slate-900 transition-colors duration-500 dark:bg-slate-950 dark:text-white"
+      className="relative overflow-hidden bg-transparent px-6 py-24 text-slate-900 dark:text-white"
       id="skills"
     >
-      {/* 🌌 Background Glow */}
-      <div className="absolute top-[-150px] left-[-100px] w-[500px] h-[500px] bg-purple-500/20 blur-[150px]" />
-      <div className="absolute bottom-[-150px] right-[-100px] w-[500px] h-[500px] bg-cyan-500/20 blur-[150px]" />
-
-      {/* ✨ Noise Texture */}
-      <div className="surface-noise absolute inset-0 opacity-[0.35]" />
-
-      <div className="max-w-6xl mx-auto text-center relative z-10">
-        {/* 🔥 Title */}
-        <div className="flex items-center justify-center gap-4 mb-16">
-          <h2 className="text-6xl font-bold text-slate-300 dark:text-white/10">05</h2>
-          <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+      <div className="relative z-10 mx-auto max-w-6xl text-center">
+        <div className="mb-16 flex items-center justify-center gap-4 animate-fade-up">
+          <h2 className="text-6xl font-bold text-slate-300 dark:text-white/10">
+            05
+          </h2>
+          <h3 className="bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-3xl font-bold text-transparent dark:from-violet-300 dark:to-cyan-300 md:text-4xl">
             Skills & Tools
           </h3>
         </div>
 
-        {/* 💎 Skill Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {skills.map((skill, index) => (
             <div
               key={index}
-              className="relative group cursor-pointer overflow-hidden rounded-2xl border border-slate-200/80 bg-white/75 p-6 text-left shadow-[0_0_60px_rgba(34,211,238,0.12)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/5"
+              style={{ animationDelay: `${index * 120}ms` }}
+              className="group relative overflow-hidden rounded-[24px] border border-black/10 bg-white/55 p-6 text-left backdrop-blur-[20px] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(15,23,42,0.12)] dark:border-white/15 dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.25)] animate-fade-up"
             >
-              {/* Glow Border */}
-              <div className="absolute inset-0 rounded-2xl border border-cyan-400/20 opacity-0 group-hover:opacity-100 transition duration-500" />
-              {/* Light Sweep */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/35 to-transparent opacity-0 blur-xl transition duration-700 group-hover:opacity-100 dark:via-white/5" />
+              <div className="pointer-events-none absolute inset-0 rounded-[24px] bg-white/10 dark:bg-white/[0.02]" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/70 dark:bg-white/20" />
 
-              <div className="flex items-center gap-3 mb-4">
-                {/* Icon */}
-                {skill.icon}
-                <h4 className="text-lg font-semibold text-cyan-400">
+              <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-700 group-hover:opacity-100">
+                <div className="absolute -left-[50%] top-0 h-full w-[200%] rotate-12 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-xl animate-[shine_1.5s_linear]" />
+              </div>
+
+              <div className="relative z-10 mb-4 flex items-center gap-3">
+                <div className="transition-transform duration-300 group-hover:scale-125">
+                  {skill.icon}
+                </div>
+                <h4 className="text-lg font-semibold text-cyan-700 dark:text-cyan-300">
                   {skill.category}
                 </h4>
               </div>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="relative z-10 flex flex-wrap gap-2">
                 {skill.items.map((item, idx) => (
                   <span
                     key={idx}
-                    className="cursor-pointer rounded-full border border-slate-200/80 bg-slate-100/80 px-3 py-1 text-sm text-slate-700 shadow-[0_0_15px_rgba(34,211,238,0.15)] transition hover:bg-cyan-500/20 hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-gray-300 dark:shadow-[0_0_15px_rgba(34,211,238,0.2)] dark:hover:text-white"
+                    className="rounded-full border border-black/10 bg-white/55 px-3 py-1 text-sm text-slate-700 transition duration-300 hover:scale-105 hover:bg-cyan-500/20 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75"
                   >
                     {item}
                   </span>

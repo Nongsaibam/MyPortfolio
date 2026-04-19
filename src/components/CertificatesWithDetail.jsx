@@ -53,10 +53,8 @@ const certificates = [
   { id: 32, title: "Full Stack Web Development", platform: "Future Interns", category: "Internship", image: "future LoR.png" },
   { id: 33, title: "Full Stack Web Development", platform: "Cursa", category: "Course", image: "fullCursa.png" },
   { id: 34, title: "MongoDB", platform: "Cursa", category: "Course", image: "cursa.png" },
-  
-  
-
-  
+  { id: 35, title: "AI Tools Workshop", platform: "be10x", category: "Workshop", image: "be10x.png" },
+  { id: 36, title: "Internship Common Aptitude Test", platform: "Icat", category: "Workshop", image: "icat.png" },
 ];
 
 /* ---------------- FILTER OPTIONS ---------------- */
@@ -81,12 +79,12 @@ const CertificatesWithDetail = () => {
 
     if (!certificate) {
       return (
-        <div className="flex min-h-screen items-center justify-center bg-slate-50 px-6 text-center text-slate-900 dark:bg-slate-950 dark:text-white">
-          <div className="rounded-3xl border border-slate-200/80 bg-white/85 px-8 py-10 backdrop-blur-2xl dark:border-white/10 dark:bg-white/5">
+        <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-transparent px-6 text-center text-slate-900 dark:text-white">
+          <div className="rounded-[28px] border border-black/10 bg-white/55 px-8 py-10 backdrop-blur-[20px] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] dark:border-white/15 dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
             <h2 className="text-2xl font-bold">Certificate not found</h2>
             <Link
               to="/certificates"
-              className="mt-4 inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2 text-cyan-300 transition hover:bg-cyan-400/20"
+              className="mt-4 inline-flex rounded-full border border-black/10 bg-white/55 px-5 py-2 text-slate-700 transition hover:bg-white dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75 dark:hover:bg-white/10"
             >
               Go Back
             </Link>
@@ -101,29 +99,26 @@ const CertificatesWithDetail = () => {
     ].filter(Boolean);
 
     return (
-      <section className="relative min-h-screen overflow-hidden bg-slate-50 px-6 py-10 text-slate-900 dark:bg-slate-950 dark:text-white md:px-10">
-        {/* Background */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute left-[-8rem] top-[-8rem] h-[26rem] w-[26rem] rounded-full bg-cyan-500/15 blur-[140px]" />
-          <div className="absolute right-[-6rem] top-[20%] h-[24rem] w-[24rem] rounded-full bg-fuchsia-500/15 blur-[140px]" />
-          <div className="absolute bottom-[-10rem] left-[20%] h-[22rem] w-[22rem] rounded-full bg-emerald-500/10 blur-[140px]" />
-          <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(255,255,255,0.13)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.13)_1px,transparent_1px)] [background-size:70px_70px]" />
-        </div>
-
+      <section className="relative min-h-screen overflow-hidden bg-transparent px-6 py-10 text-slate-900 dark:text-white md:px-10">
         <div className="relative z-10 mx-auto max-w-7xl">
           <Link
             to="/certificates"
-            className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/85 px-4 py-2 text-sm text-cyan-700 backdrop-blur-xl transition hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-cyan-300 dark:hover:bg-white/10 dark:hover:text-white"
+            className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/55 px-4 py-2 text-sm text-slate-700 backdrop-blur-[20px] transition duration-300 hover:-translate-y-0.5 hover:bg-white dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75 dark:hover:bg-white/10"
           >
             <HiOutlineArrowLeft className="text-lg" />
             Back to Certificates
           </Link>
 
           <div className="mt-8 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-            {/* Left big preview */}
-            <div className="relative rounded-[2rem] border border-slate-200/80 bg-white/90 p-4 shadow-[0_20px_80px_rgba(15,23,42,0.18)] backdrop-blur-3xl dark:border-white/10 dark:bg-white/8 dark:shadow-[0_20px_80px_rgba(0,0,0,0.45)]">
-              <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-white/10 via-transparent to-cyan-400/5" />
-              <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/30">
+            <div className="group relative overflow-hidden rounded-[32px] border border-black/10 bg-white/55 p-4 backdrop-blur-[22px] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(15,23,42,0.12)] dark:border-white/15 dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] dark:hover:shadow-[0_18px_50px_rgba(0,0,0,0.28)]">
+              <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-white/10 dark:bg-white/[0.02]" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/70 dark:bg-white/15" />
+
+              <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-700 group-hover:opacity-100">
+                <div className="absolute -left-[50%] top-0 h-full w-[200%] rotate-12 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-xl animate-[shine_1.5s_linear]" />
+              </div>
+
+              <div className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white/40 dark:border-white/10 dark:bg-white/[0.04]">
                 <img
                   src={getImage(certificate.image)}
                   alt={certificate.title}
@@ -133,41 +128,57 @@ const CertificatesWithDetail = () => {
 
               <button
                 onClick={() => setZoomImage(getImage(certificate.image))}
-                className="absolute right-8 top-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/40 px-4 py-2 text-sm text-white/90 backdrop-blur-xl transition hover:bg-slate-950/60"
+                className="absolute right-8 top-8 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/65 px-4 py-2 text-sm text-slate-800 backdrop-blur-xl transition hover:scale-105 hover:bg-white dark:border-white/15 dark:bg-white/[0.08] dark:text-white"
               >
                 <HiOutlineMagnifyingGlassPlus className="text-lg" />
                 Preview
               </button>
             </div>
 
-            {/* Right info panel */}
-            <div className="relative rounded-[2rem] border border-slate-200/80 bg-white/90 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.15)] backdrop-blur-3xl dark:border-white/10 dark:bg-white/8 dark:shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
-              <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-cyan-400/10 via-transparent to-fuchsia-400/10" />
+            <div className="group relative overflow-hidden rounded-[32px] border border-black/10 bg-white/55 p-6 backdrop-blur-[22px] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(15,23,42,0.12)] dark:border-white/15 dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] dark:hover:shadow-[0_18px_50px_rgba(0,0,0,0.28)]">
+              <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-white/10 dark:bg-white/[0.02]" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/70 dark:bg-white/15" />
+
+              <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-700 group-hover:opacity-100">
+                <div className="absolute -left-[50%] top-0 h-full w-[200%] rotate-12 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-xl animate-[shine_1.5s_linear]" />
+              </div>
 
               <div className="relative">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm text-cyan-300">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/55 px-4 py-2 text-sm text-slate-700 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75">
                   <HiOutlineSparkles />
                   Certificate View
                 </div>
 
-                <h1 className="text-3xl font-black leading-tight md:text-4xl">
+                <h1 className="text-3xl font-black leading-tight text-slate-900 dark:text-white md:text-4xl">
                   {certificate.title}
                 </h1>
 
                 <div className="mt-6 grid gap-4">
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
-                    <p className="text-xs uppercase tracking-[0.2em] text-slate-400 dark:text-white/40">Platform</p>
-                    <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">{certificate.platform}</p>
+                  <div className="rounded-[24px] border border-black/10 bg-white/50 p-4 backdrop-blur-[18px] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] dark:border-white/15 dark:bg-white/[0.07] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
+                    <p className="text-xs uppercase tracking-[0.2em] text-slate-400 dark:text-white/40">
+                      Platform
+                    </p>
+                    <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">
+                      {certificate.platform}
+                    </p>
                   </div>
 
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
-                    <p className="text-xs uppercase tracking-[0.2em] text-slate-400 dark:text-white/40">Category</p>
-                    <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">{certificate.category}</p>
+                  <div className="rounded-[24px] border border-black/10 bg-white/50 p-4 backdrop-blur-[18px] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] dark:border-white/15 dark:bg-white/[0.07] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
+                    <p className="text-xs uppercase tracking-[0.2em] text-slate-400 dark:text-white/40">
+                      Category
+                    </p>
+                    <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">
+                      {certificate.category}
+                    </p>
                   </div>
 
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
-                    <p className="text-xs uppercase tracking-[0.2em] text-slate-400 dark:text-white/40">Certificate ID</p>
-                    <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">#{certificate.id}</p>
+                  <div className="rounded-[24px] border border-black/10 bg-white/50 p-4 backdrop-blur-[18px] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] dark:border-white/15 dark:bg-white/[0.07] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
+                    <p className="text-xs uppercase tracking-[0.2em] text-slate-400 dark:text-white/40">
+                      Certificate ID
+                    </p>
+                    <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-white">
+                      #{certificate.id}
+                    </p>
                   </div>
                 </div>
 
@@ -181,7 +192,7 @@ const CertificatesWithDetail = () => {
                         <button
                           key={index}
                           onClick={() => setZoomImage(img)}
-                          className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:scale-[1.02] hover:border-cyan-400/20"
+                          className="overflow-hidden rounded-[20px] border border-black/10 bg-white/50 backdrop-blur-[18px] transition duration-300 hover:scale-[1.02] hover:bg-white dark:border-white/15 dark:bg-white/[0.07] dark:hover:bg-white/[0.1]"
                         >
                           <img
                             src={img}
@@ -198,27 +209,26 @@ const CertificatesWithDetail = () => {
           </div>
         </div>
 
-        {/* ZOOM MODAL */}
         {zoomImage && (
           <div
-            className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md"
+            className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-md"
             onClick={() => setZoomImage(null)}
           >
             <div
-              className="relative max-h-[92vh] max-w-[95vw] overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 p-3 shadow-[0_20px_80px_rgba(0,0,0,0.5)] backdrop-blur-3xl"
+              className="relative max-h-[92vh] max-w-[95vw] overflow-hidden rounded-[32px] border border-white/10 bg-white/10 p-3 backdrop-blur-3xl shadow-[0_20px_80px_rgba(0,0,0,0.5)]"
               onClick={(e) => e.stopPropagation()}
             >
-                <button
-                  onClick={() => setZoomImage(null)}
-                  className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white backdrop-blur-xl transition hover:bg-slate-950/60"
-                >
-                  <HiOutlineXMark className="text-2xl" />
-                </button>
-                <img
-                  src={zoomImage}
-                  alt="Zoom Certificate"
-                  className="max-h-[86vh] max-w-full rounded-[1.4rem] object-contain"
-                />
+              <button
+                onClick={() => setZoomImage(null)}
+                className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white backdrop-blur-xl transition hover:bg-slate-950/60"
+              >
+                <HiOutlineXMark className="text-2xl" />
+              </button>
+              <img
+                src={zoomImage}
+                alt="Zoom Certificate"
+                className="max-h-[86vh] max-w-full rounded-[24px] object-contain"
+              />
             </div>
           </div>
         )}
@@ -229,33 +239,18 @@ const CertificatesWithDetail = () => {
   /* ---------------- LIST PAGE ---------------- */
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-slate-50 px-6 py-10 text-slate-900 dark:bg-slate-950 dark:text-white md:px-10">
-      {/* Premium Background */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute left-[-10rem] top-[-10rem] h-[34rem] w-[34rem] rounded-full bg-cyan-500/12 blur-[170px]" />
-        <div className="absolute right-[-8rem] top-[10%] h-[30rem] w-[30rem] rounded-full bg-fuchsia-500/12 blur-[160px]" />
-        <div className="absolute bottom-[-10rem] left-[28%] h-[28rem] w-[28rem] rounded-full bg-emerald-500/10 blur-[160px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_35%)]" />
-        <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:70px_70px]" />
-      </div>
-
+    <section className="relative min-h-screen overflow-hidden bg-transparent px-6 py-10 text-slate-900 dark:text-white md:px-10">
       <div className="relative z-10 mx-auto max-w-7xl">
-        {/* Top header */}
-        <div className="mx-auto max-w-3xl text-center">
-         
-
+        <div className="mx-auto max-w-3xl text-center animate-fade-up">
           <h2 className="text-4xl font-black leading-tight md:text-6xl">
-            Certificates &
-            <span className="ml-3 bg-gradient-to-r from-cyan-300 via-sky-300 to-emerald-300 bg-clip-text text-transparent">
+            <span className="text-slate-900 dark:text-white">Certificates &</span>
+            <span className="ml-3 bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-transparent dark:from-violet-300 dark:to-cyan-300">
               Achievements
             </span>
           </h2>
-
-         
         </div>
 
-        {/* FILTERS */}
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
+        <div className="mt-10 flex flex-wrap justify-center gap-3 animate-fade-up">
           {filters.map((filter) => {
             const active = activeFilter === filter;
             return (
@@ -264,8 +259,8 @@ const CertificatesWithDetail = () => {
                 onClick={() => setActiveFilter(filter)}
                 className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
                   active
-                    ? "border border-cyan-300/30 bg-gradient-to-r from-cyan-400 to-emerald-400 text-black shadow-[0_8px_30px_rgba(34,211,238,0.35)]"
-                    : "border border-slate-200/80 bg-white/85 text-slate-700 backdrop-blur-xl hover:bg-white hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white"
+                    ? "bg-gradient-to-r from-cyan-500 to-violet-500 text-white shadow-md"
+                    : "border border-black/10 bg-white/55 text-slate-700 backdrop-blur-[18px] hover:bg-white hover:text-slate-950 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white"
                 }`}
               >
                 {filter}
@@ -274,29 +269,28 @@ const CertificatesWithDetail = () => {
           })}
         </div>
 
-        {/* GRID */}
         <div className="mt-14 grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
-          {filteredCertificates.map((cert) => (
+          {filteredCertificates.map((cert, index) => (
             <div
               key={cert.id}
-              className="group relative"
+              style={{ animationDelay: `${index * 80}ms` }}
+              className="group relative animate-fade-up"
             >
-              {/* outer glow */}
-              <div className="absolute -inset-[1px] rounded-[2rem] bg-gradient-to-br from-cyan-400/30 via-transparent to-fuchsia-400/20 opacity-0 blur-xl transition duration-500 group-hover:opacity-100" />
+              <div className="relative h-full overflow-hidden rounded-[32px] border border-black/10 bg-white/55 p-4 backdrop-blur-[22px] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_18px_50px_rgba(15,23,42,0.12)] dark:border-white/15 dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] dark:hover:shadow-[0_18px_50px_rgba(0,0,0,0.28)]">
+                <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-white/10 dark:bg-white/[0.02]" />
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/70 dark:bg-white/15" />
 
-              <div className="relative h-full overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/90 p-4 shadow-[0_20px_60px_rgba(15,23,42,0.15)] backdrop-blur-3xl dark:border-white/10 dark:bg-white/8 dark:shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-cyan-400/5" />
+                <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-700 group-hover:opacity-100">
+                  <div className="absolute -left-[50%] top-0 h-full w-[200%] rotate-12 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-xl animate-[shine_1.5s_linear]" />
+                </div>
 
                 <div className="relative">
-                  {/* image box */}
-                  <div className="relative overflow-hidden rounded-[1.4rem] border border-white/10 bg-slate-950/25">
+                  <div className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white/40 dark:border-white/10 dark:bg-white/[0.04]">
                     <img
                       src={getImage(cert.image)}
                       alt={cert.title}
                       className="h-52 w-full object-cover transition duration-700 group-hover:scale-110"
                     />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent opacity-80" />
 
                     <button
                       onClick={() => setZoomImage(getImage(cert.image))}
@@ -306,24 +300,23 @@ const CertificatesWithDetail = () => {
                     </button>
                   </div>
 
-                  {/* content */}
                   <div className="mt-5 space-y-3">
-                    <div className="flex items-start justify-between gap-3">
-                      <h4 className="text-lg font-bold leading-snug text-slate-900 dark:text-white">
-                        {cert.title}
-                      </h4>
-                    </div>
+                    <h4 className="text-lg font-bold leading-snug text-slate-900 dark:text-white">
+                      {cert.title}
+                    </h4>
 
-                    <p className="text-sm text-slate-600 dark:text-white/55">{cert.platform}</p>
+                    <p className="text-sm text-slate-600 dark:text-white/55">
+                      {cert.platform}
+                    </p>
 
                     <div className="flex items-center justify-between gap-3 pt-1">
-                      <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-300">
+                      <span className="rounded-full border border-black/10 bg-white/55 px-3 py-1 text-xs font-semibold text-slate-700 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75">
                         {cert.category}
                       </span>
 
                       <Link
                         to={`/certificates/${cert.id}`}
-                        className="rounded-full border border-slate-200/80 bg-slate-100/80 px-4 py-2 text-sm text-slate-700 backdrop-blur-xl transition hover:bg-slate-200 hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:bg-white/10 dark:hover:text-white"
+                        className="rounded-full border border-black/10 bg-white/55 px-4 py-2 text-sm text-slate-700 backdrop-blur-xl transition hover:bg-white hover:text-slate-950 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white"
                       >
                         View Details
                       </Link>
@@ -336,27 +329,26 @@ const CertificatesWithDetail = () => {
         </div>
       </div>
 
-      {/* ZOOM MODAL */}
       {zoomImage && (
         <div
-          className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md"
+          className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-md"
           onClick={() => setZoomImage(null)}
         >
           <div
-            className="relative max-h-[92vh] max-w-[95vw] overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 p-3 shadow-[0_20px_80px_rgba(0,0,0,0.5)] backdrop-blur-3xl"
+            className="relative max-h-[92vh] max-w-[95vw] overflow-hidden rounded-[32px] border border-white/10 bg-white/10 p-3 backdrop-blur-3xl shadow-[0_20px_80px_rgba(0,0,0,0.5)]"
             onClick={(e) => e.stopPropagation()}
           >
-              <button
-                onClick={() => setZoomImage(null)}
-                className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white backdrop-blur-xl transition hover:bg-slate-950/60"
-              >
-                <HiOutlineXMark className="text-2xl" />
-              </button>
-              <img
-                src={zoomImage}
-                alt="Zoom Certificate"
-                className="max-h-[86vh] max-w-full rounded-[1.4rem] object-contain"
-              />
+            <button
+              onClick={() => setZoomImage(null)}
+              className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white backdrop-blur-xl transition hover:bg-slate-950/60"
+            >
+              <HiOutlineXMark className="text-2xl" />
+            </button>
+            <img
+              src={zoomImage}
+              alt="Zoom Certificate"
+              className="max-h-[86vh] max-w-full rounded-[24px] object-contain"
+            />
           </div>
         </div>
       )}

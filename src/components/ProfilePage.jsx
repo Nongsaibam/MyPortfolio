@@ -19,54 +19,48 @@ const ProfilePage = () => {
 
   const downloadResume = () => {
     const link = document.createElement("a");
-    link.href = "/resume.pdf"; // Make sure resume.pdf is in public folder
-    link.download = "Tazkhan_Resume.pdf"; // File name when downloaded
+    link.href = "/resume.pdf";
+    link.download = "Tazkhan_Resume.pdf";
     link.click();
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-50 text-slate-900 transition-colors duration-500 dark:bg-slate-950 dark:text-white">
-      {/* Background Glows */}
-      <div className="absolute top-[-200px] left-[-150px] w-[600px] h-[600px] bg-purple-500/20 blur-[180px]" />
-      <div className="absolute bottom-[-150px] right-[-120px] w-[500px] h-[500px] bg-cyan-500/20 blur-[160px]" />
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute w-[600px] h-[600px] bg-purple-500/20 rounded-full blur-[180px] top-[-150px] left-[-150px] animate-pulse" />
-        <div className="absolute w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[160px] bottom-[-120px] right-[-120px]" />
-        <div className="absolute top-[40%] left-[40%] h-[400px] w-[400px] rounded-full bg-slate-950/5 blur-[140px] dark:bg-white/5" />
-        <div className="surface-noise absolute inset-0 opacity-[0.35]" />
+    <section className="relative min-h-screen overflow-hidden bg-transparent text-slate-900 transition-colors duration-500 dark:text-white">
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-30">
+        <div className="absolute left-0 top-10 h-72 w-72 rounded-full bg-fuchsia-500/10 blur-3xl" />
+        <div className="absolute right-0 bottom-10 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
       </div>
 
-      {/* Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-30 border-b border-slate-900/10 bg-white/55 px-4 py-4 shadow-lg backdrop-blur-xl transition-colors duration-500 md:px-16 dark:border-white/10 dark:bg-slate-900/15">
+      <header className="fixed left-0 right-0 top-0 z-30 border-b border-black/10 bg-white/60 px-4 py-4 backdrop-blur-[20px] transition duration-300 md:px-16 dark:border-white/15 dark:bg-white/[0.08]">
         <div className="flex items-center justify-between">
-        <div className="text-2xl font-extrabold bg-gradient-to-r from-purple-400 to-cyan-400 text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(0,255,255,0.7)]">
-          TK
-        </div>
+          <div className="bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-2xl font-bold text-transparent">
+            TK
+          </div>
 
-        <nav className="hidden md:flex space-x-8">
-          {navItems.map((item, i) => (
-            <a
-              key={i}
-              href={`#${item.toLowerCase()}`}
-              className="relative text-slate-700 transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-cyan-500 after:transition-all after:duration-300 hover:text-slate-950 hover:after:w-full dark:text-slate-200 dark:hover:text-white"
+          <nav className="hidden space-x-8 md:flex">
+            {navItems.map((item, i) => (
+              <a
+                key={i}
+                href={`#${item.toLowerCase()}`}
+                className="relative text-slate-700 transition duration-300 hover:text-slate-950 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-cyan-500 after:transition-all after:duration-300 hover:after:w-full dark:text-white/70 dark:hover:text-white"
+              >
+                {item}
+              </a>
+            ))}
+            <Link
+              to="/certificates"
+              className="relative text-slate-700 transition duration-300 hover:text-slate-950 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-cyan-500 after:transition-all after:duration-300 hover:after:w-full dark:text-white/70 dark:hover:text-white"
             >
-              {item}
-            </a>
-          ))}
-          <Link
-            to="/certificates"
-            className="relative text-slate-700 transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-cyan-500 after:transition-all after:duration-300 hover:text-slate-950 hover:after:w-full dark:text-slate-200 dark:hover:text-white"
-          >
-            Certifications
-          </Link>
-        </nav>
+              Certifications
+            </Link>
+          </nav>
 
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={toggleTheme}
               aria-label={`Switch to ${isDarkMode ? "light" : "dark"} mode`}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-300/70 bg-white/85 px-3 py-2 text-sm font-medium text-slate-700 shadow-lg backdrop-blur-xl transition hover:bg-white dark:border-white/10 dark:bg-slate-900/75 dark:text-slate-100 dark:hover:bg-slate-900"
+              className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/55 px-3 py-2 text-sm font-medium text-slate-700 backdrop-blur-[20px] transition duration-300 hover:-translate-y-0.5 hover:bg-white dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75 dark:hover:bg-white/10"
             >
               <span className="text-base">{isDarkMode ? "☀" : "☾"}</span>
               <span className="hidden sm:inline">{isDarkMode ? "Light" : "Dark"}</span>
@@ -75,7 +69,7 @@ const ProfilePage = () => {
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-              className="inline-flex items-center justify-center rounded-xl px-3 py-2 text-slate-700 transition hover:bg-slate-900/10 md:hidden dark:text-slate-200 dark:hover:bg-white/20"
+              className="inline-flex items-center justify-center rounded-xl px-3 py-2 text-slate-700 transition duration-300 hover:bg-slate-900/10 md:hidden dark:text-white/75 dark:hover:bg-white/10"
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMobileMenuOpen ? (
@@ -88,14 +82,14 @@ const ProfilePage = () => {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="mt-4 rounded-2xl border border-slate-200/80 bg-white/85 p-4 shadow-xl md:hidden dark:border-white/10 dark:bg-slate-900/85">
+          <div className="mt-4 overflow-hidden rounded-[24px] border border-black/10 bg-white/70 p-4 backdrop-blur-[20px] dark:border-white/15 dark:bg-white/[0.08]">
             <nav className="flex flex-col gap-3">
               {navItems.map((item) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="rounded-xl px-3 py-2 text-slate-700 transition hover:bg-slate-100 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white"
+                  className="rounded-xl px-3 py-2 text-slate-700 transition duration-300 hover:bg-white hover:text-slate-950 dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white"
                 >
                   {item}
                 </a>
@@ -103,7 +97,7 @@ const ProfilePage = () => {
               <Link
                 to="/certificates"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="rounded-xl px-3 py-2 text-slate-700 transition hover:bg-slate-100 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white"
+                className="rounded-xl px-3 py-2 text-slate-700 transition duration-300 hover:bg-white hover:text-slate-950 dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white"
               >
                 Certifications
               </Link>
@@ -112,73 +106,67 @@ const ProfilePage = () => {
         )}
       </header>
 
-      {/* Hero Section */}
-      <main className="flex flex-col md:flex-row items-center justify-center gap-20 px-6 md:px-16 pt-50 pb-20 relative z-10">
-        {/* Hero Text */}
-        <div className="max-w-xl text-center md:text-left">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+      <main className="relative z-10 flex flex-col items-center justify-center gap-20 px-6 pb-20 pt-40 md:flex-row md:px-16">
+        <div className="max-w-xl animate-fade-up text-center md:text-left">
+          <h1 className="mb-6 text-4xl font-bold leading-tight md:text-6xl">
             <span className="text-slate-900 dark:text-white">Hi, I'm </span>
-            <span className="bg-gradient-to-r from-purple-400 to-cyan-400 text-transparent bg-clip-text animate-pulse">
+            <span className="bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-transparent dark:from-violet-300 dark:to-cyan-300">
               Nongsaibam Tazkhan
             </span>
           </h1>
-          <p className="mb-8 text-lg text-slate-700 md:text-xl dark:text-slate-200">
-            Full Stack Developer | MERN Stack | Building Scalable & Modern Web Apps
+
+          <p className="mb-8 text-lg text-slate-600 md:text-xl dark:text-white/70">
+            Full Stack Developer • MERN Stack • Building Scalable & Modern Web Apps
           </p>
 
-          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-            <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-400 to-cyan-400 text-white shadow-[0_0_20px_rgba(34,211,238,0.5)] hover:shadow-[0_0_25px_rgba(255,0,255,0.5)] transition">
+          <div className="flex flex-wrap justify-center gap-4 md:justify-start">
+            <a
+              href="#projects"
+              className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-cyan-500 to-violet-500 px-6 py-3 font-semibold text-white transition duration-300 hover:-translate-y-1 hover:scale-105"
+            >
               View Projects
-            </button>
+            </a>
 
             <button
-              className="rounded-xl border border-slate-300/70 bg-white/60 px-6 py-3 text-slate-800 backdrop-blur-md transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-400 hover:via-pink-400 hover:to-cyan-400 hover:text-white hover:shadow-[0_0_25px_rgba(255,0,255,0.6)] dark:border-white/10 dark:bg-white/10 dark:text-white"
               onClick={downloadResume}
+              className="rounded-xl border border-black/10 bg-white/55 px-6 py-3 text-slate-800 backdrop-blur-[20px] transition duration-300 hover:-translate-y-1 hover:bg-white dark:border-white/15 dark:bg-white/[0.08] dark:text-white dark:hover:bg-white/10"
             >
               Download Resume
             </button>
           </div>
         </div>
 
-        {/* Hero Image */}
-        <div className="relative group text-center">
-          <div className="relative">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 blur-xl opacity-60 group-hover:opacity-100"></div>
+        <div className="group animate-fade-up text-center" style={{ animationDelay: "120ms" }}>
+          <div className="relative overflow-hidden rounded-full border border-black/10 bg-white/30 p-2 backdrop-blur-[18px] dark:border-white/15 dark:bg-white/[0.05]">
             <img
               src={tkImage}
               alt="Tazkhan"
-              className="relative w-56 h-56 md:w-64 md:h-64 rounded-full object-cover border-2 border-white/10 backdrop-blur-lg shadow-2xl transition-transform duration-500 group-hover:scale-105"
+              className="h-56 w-56 rounded-full object-cover transition duration-500 group-hover:scale-105 md:h-64 md:w-64"
             />
           </div>
 
-          {/* Social Icons */}
-          <div className="mt-8 flex justify-center gap-8 text-2xl text-cyan-500 dark:text-cyan-400">
-            {socialLinks.map(({ icon: socialIcon, href }, i) => {
-              const SocialIcon = socialIcon;
-
-              return (
-                <a
-                  key={i}
-                  className="transition hover:text-slate-950 dark:hover:text-white"
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <SocialIcon />
-                </a>
-              );
-            })}
+          <div className="mt-8 flex justify-center gap-8 text-2xl text-slate-600 dark:text-white/70">
+            {socialLinks.map(({ icon: SocialIcon, href }, i) => (
+              <a
+                key={i}
+                className="transition duration-300 hover:scale-110 hover:text-slate-950 dark:hover:text-white"
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SocialIcon />
+              </a>
+            ))}
           </div>
         </div>
       </main>
 
-      {/* Scroll Indicator */}
       <div className="scroll-indicator flex flex-col items-center pb-10">
-        <div className="flex h-10 w-6 items-start justify-center rounded-full border border-slate-500 dark:border-white">
-          <div className="mt-2 h-2 w-1 rounded-full bg-slate-700 dark:bg-white"></div>
+        <div className="flex h-10 w-6 items-start justify-center rounded-full border border-slate-500 dark:border-white/50">
+          <div className="mt-2 h-2 w-1 rounded-full bg-slate-700 dark:bg-white" />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

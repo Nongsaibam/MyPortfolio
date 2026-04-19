@@ -10,32 +10,26 @@ const AboutMe = () => {
 
   const paragraphs = [
     <>
-      I’m a{" "}
-      <span className="text-cyan-400 font-semibold">
-        Full Stack Developer
-      </span>{" "}
+      I’m a <span className="font-semibold text-cyan-600 dark:text-cyan-300">Full Stack Developer</span>{" "}
       building scalable and modern applications. I specialize in crafting{" "}
-      <span className="text-purple-400 font-semibold">
+      <span className="font-semibold text-violet-600 dark:text-violet-300">
         end-to-end digital products
       </span>{" "}
       — from intuitive user interfaces to robust backend architectures.
     </>,
     <>
-      I work with{" "}
-      <span className="text-cyan-400 font-semibold">React</span>,{" "}
-      <span className="text-cyan-400 font-semibold">Vite</span>, and{" "}
-      <span className="text-cyan-400 font-semibold">Tailwind CSS</span> on the
-      frontend, and{" "}
-      <span className="text-purple-400 font-semibold">Node.js</span>,{" "}
-      <span className="text-purple-400 font-semibold">Express</span>,{" "}
-      <span className="text-purple-400 font-semibold">FastAPI</span>, and{" "}
-      <span className="text-purple-400 font-semibold">MySQL</span> on the backend.
+      I work with <span className="font-semibold text-cyan-600 dark:text-cyan-300">React</span>,{" "}
+      <span className="font-semibold text-cyan-600 dark:text-cyan-300">Vite</span>, and{" "}
+      <span className="font-semibold text-cyan-600 dark:text-cyan-300">Tailwind CSS</span> on the
+      frontend, and <span className="font-semibold text-violet-600 dark:text-violet-300">Node.js</span>,{" "}
+      <span className="font-semibold text-violet-600 dark:text-violet-300">Express</span>,{" "}
+      <span className="font-semibold text-violet-600 dark:text-violet-300">FastAPI</span>, and{" "}
+      <span className="font-semibold text-violet-600 dark:text-violet-300">MySQL</span> on the backend.
     </>,
     <>
-      My focus stays on{" "}
-      <span className="text-cyan-400 font-semibold">performance</span>,{" "}
-      <span className="text-cyan-400 font-semibold">clean architecture</span>, and{" "}
-      <span className="text-cyan-400 font-semibold">maintainable code</span>,
+      My focus stays on <span className="font-semibold text-cyan-600 dark:text-cyan-300">performance</span>,{" "}
+      <span className="font-semibold text-cyan-600 dark:text-cyan-300">clean architecture</span>, and{" "}
+      <span className="font-semibold text-cyan-600 dark:text-cyan-300">maintainable code</span>,
       delivering smooth and user-friendly experiences.
     </>,
   ];
@@ -43,53 +37,51 @@ const AboutMe = () => {
   return (
     <section
       id="about"
-      className="relative min-h-screen overflow-hidden bg-slate-50 px-6 py-24 md:px-20 dark:bg-slate-950"
+      className="relative min-h-screen overflow-hidden bg-transparent px-6 py-24 md:px-20"
     >
-      {/* 🔥 Background Glow */}
-      <div className="pointer-events-none absolute top-[-200px] left-[-150px] h-[600px] w-[600px] bg-purple-500/20 blur-[180px]" />
-      <div className="pointer-events-none absolute bottom-[-150px] right-[-120px] h-[500px] w-[500px] bg-cyan-500/20 blur-[160px]" />
-      <div className="surface-noise pointer-events-none absolute inset-0 opacity-[0.35]" />
-
       <div className="relative z-10 mx-auto max-w-5xl">
-        {/* 🔹 Title */}
-        <div className="mb-16 flex items-center gap-4">
+        <div className="mb-16 flex items-center gap-4 animate-fade-up">
           <h1 className="text-7xl font-extrabold text-slate-300 dark:text-white/10">
             01
           </h1>
-          <h2 className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-3xl font-bold text-transparent md:text-5xl">
+          <h2 className="bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-3xl font-bold text-transparent dark:from-violet-300 dark:to-cyan-300 md:text-5xl">
             About Me
           </h2>
         </div>
 
-        {/* 🔹 Glass Card */}
-        <div className="group relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white/70 p-10 shadow-[0_0_60px_rgba(34,211,238,0.12)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/5 md:p-14">
-          {/* Hover Effects */}
-          <div className="absolute inset-0 rounded-3xl border border-cyan-400/20 opacity-0 transition group-hover:opacity-100" />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 blur-xl transition group-hover:opacity-100 dark:via-white/5" />
+        <div className="group relative overflow-hidden rounded-[32px] border border-black/10 bg-white/55 p-10 backdrop-blur-[22px] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(15,23,42,0.12)] dark:border-white/15 dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.22)] dark:hover:shadow-[0_18px_50px_rgba(0,0,0,0.28)] md:p-14 animate-fade-up">
+          <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-white/20 dark:bg-white/[0.03]" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/70 dark:bg-white/20" />
 
-          {/* Content */}
-            <article className="relative z-10 space-y-6 text-lg leading-relaxed text-slate-700 dark:text-white/90">
-              {paragraphs.map((text, i) => (
-              <p key={i}>
-                {text}
-              </p>
+          <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-700 group-hover:opacity-100">
+            <div className="absolute -left-[50%] top-0 h-full w-[200%] rotate-12 bg-gradient-to-r from-transparent via-white/35 to-transparent blur-xl animate-[shine_1.5s_linear]" />
+          </div>
+
+          <article className="relative z-10 space-y-6 text-lg leading-relaxed text-slate-700 dark:text-white/75">
+            {paragraphs.map((text, i) => (
+              <p key={i}>{text}</p>
             ))}
           </article>
         </div>
 
-        {/* 🔹 Stats */}
         <div className="mt-20 grid grid-cols-2 gap-6 md:grid-cols-4">
           {stats.map((item, i) => (
             <div
               key={i}
-              className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white/70 p-6 text-center shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-white/5"
+              className="group relative overflow-hidden rounded-[24px] border border-black/10 bg-white/50 p-6 text-center backdrop-blur-[18px] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_16px_40px_rgba(15,23,42,0.12)] dark:border-white/15 dark:bg-white/[0.07] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] dark:hover:shadow-[0_16px_40px_rgba(0,0,0,0.24)] animate-fade-up"
+              style={{ animationDelay: `${i * 120}ms` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-cyan-400/10 opacity-0 transition group-hover:opacity-100" />
-              
-              <h3 className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-4xl font-bold text-transparent">
+              <div className="pointer-events-none absolute inset-0 rounded-[24px] bg-white/10 dark:bg-white/[0.02]" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/70 dark:bg-white/15" />
+
+              <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-700 group-hover:opacity-100">
+                <div className="absolute -left-[50%] top-0 h-full w-[200%] rotate-12 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-xl animate-[shine_1.5s_linear]" />
+              </div>
+
+              <h3 className="relative z-10 bg-gradient-to-r from-violet-600 to-cyan-600 bg-clip-text text-4xl font-bold text-transparent dark:from-violet-300 dark:to-cyan-300">
                 {item.value}
               </h3>
-              <p className="mt-2 text-sm text-slate-600 dark:text-gray-300">
+              <p className="relative z-10 mt-2 text-sm text-slate-600 dark:text-white/55">
                 {item.label}
               </p>
             </div>
