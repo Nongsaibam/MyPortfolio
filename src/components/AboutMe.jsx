@@ -1,5 +1,3 @@
-import React from "react";
-
 const AboutMe = () => {
   const stats = [
     { value: "8+", label: "Months Experience" },

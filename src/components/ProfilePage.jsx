@@ -1,15 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope } from "react-icons/fa6";
-import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
+import {
+  HiMiniMoon,
+  HiMiniSun,
+  HiOutlineArrowLongDown,
+  HiOutlineBars3,
+  HiOutlineXMark,
+} from "react-icons/hi2";
 import { useTheme } from "../context/ThemeContext";
 import tkImage from "../assets/1736923031405.jpg";
 
 const socialLinks = [
-  { icon: FaGithub, href: "https://github.com/Nongsaibam" },
-  { icon: FaLinkedin, href: "https://www.linkedin.com/in/nongsaibam-tazkhan-2a07a22b6/" },
-  { icon: FaXTwitter, href: "https://twitter.com/YourHandle" },
-  { icon: FaEnvelope, href: "mailto:nongsaibamtazkhan@gmail.com" },
+  { icon: <FaGithub />, href: "https://github.com/Nongsaibam" },
+  { icon: <FaLinkedin />, href: "https://www.linkedin.com/in/nongsaibam-tazkhan-2a07a22b6/" },
+  { icon: <FaXTwitter />, href: "https://twitter.com/YourHandle" },
+  { icon: <FaEnvelope />, href: "mailto:nongsaibamtazkhan@gmail.com" },
 ];
 
 const ProfilePage = () => {
@@ -62,7 +68,9 @@ const ProfilePage = () => {
               aria-label={`Switch to ${isDarkMode ? "light" : "dark"} mode`}
               className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/55 px-3 py-2 text-sm font-medium text-slate-700 backdrop-blur-[20px] transition duration-300 hover:-translate-y-0.5 hover:bg-white dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75 dark:hover:bg-white/10"
             >
-              <span className="text-base">{isDarkMode ? "☀" : "☾"}</span>
+              <span className="inline-flex h-6 w-6 items-center justify-center text-base">
+                {isDarkMode ? <HiMiniSun /> : <HiMiniMoon />}
+              </span>
               <span className="hidden sm:inline">{isDarkMode ? "Light" : "Dark"}</span>
             </button>
 
@@ -116,7 +124,7 @@ const ProfilePage = () => {
           </h1>
 
           <p className="mb-8 text-lg text-slate-600 md:text-xl dark:text-white/70">
-            Full Stack Developer • MERN Stack • Building Scalable & Modern Web Apps
+           Full Stack Developer, MERN Stack  Building Scalable & Modern Web Apps
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 md:justify-start">
@@ -146,7 +154,7 @@ const ProfilePage = () => {
           </div>
 
           <div className="mt-8 flex justify-center gap-8 text-2xl text-slate-600 dark:text-white/70">
-            {socialLinks.map(({ icon: SocialIcon, href }, i) => (
+            {socialLinks.map(({ icon, href }, i) => (
               <a
                 key={i}
                 className="transition duration-300 hover:scale-110 hover:text-slate-950 dark:hover:text-white"
@@ -154,18 +162,22 @@ const ProfilePage = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <SocialIcon />
+                {icon}
               </a>
             ))}
           </div>
         </div>
       </main>
 
-      <div className="scroll-indicator flex flex-col items-center pb-10">
-        <div className="flex h-10 w-6 items-start justify-center rounded-full border border-slate-500 dark:border-white/50">
-          <div className="mt-2 h-2 w-1 rounded-full bg-slate-700 dark:bg-white" />
-        </div>
-      </div>
+      <a
+        href="#about"
+        className="scroll-indicator group relative z-10 flex flex-col items-center gap-5 pb-10 no-underline"
+      >
+        <div className="neon-scroll-shell">
+          <div className="neon-scroll-wheel" />
+          <HiOutlineArrowLongDown className="neon-scroll-arrow" />
+        </div>     
+      </a>
     </section>
   );
 };

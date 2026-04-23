@@ -1,5 +1,3 @@
-import React from "react";
-
 const GetInTouch = () => {
   return (
     <section
@@ -46,7 +44,7 @@ const GetInTouch = () => {
           </div>
 
           <div className="relative z-10">
-            <p>Designed & Built by Nongsaibam Tazkhan © 2026</p>
+            <p>Designed & Built by Nongsaibam Tazkhan</p>
             <p className="mt-1 text-xs text-slate-400 dark:text-white/40">
               Crafted with React, Tailwind CSS & Passion ✨
             </p>

@@ -1,5 +1,3 @@
-// App.jsx
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Components
@@ -11,8 +9,8 @@ import SkillsSection from "./components/SkillsSection";
 import ActivitiesSection from "./components/ActivitiesSection";
 import GetInTouch from "./components/GetInTouch";
 import CertificatesWithDetail from "./components/CertificatesWithDetail";
-import FeaturedProjects from "./components/FeaturedProjects";
 import AIChatbot from "./components/AIChatbot";
+import Projects, { ProjectDetailsPage } from "./components/Projects";
 
 
 // Home Page
@@ -21,7 +19,7 @@ const Home = () => (
     <ProfilePage />
     <AboutMe />
     <ExperienceSection />
-    <FeaturedProjects />
+    <Projects/>
     <ActivitiesSection />
     <SkillsSection />
     <GetInTouch />
@@ -36,6 +34,8 @@ const App = () => {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:slug" element={<ProjectDetailsPage />} />
           <Route path="/certificates" element={<CertificatesWithDetail />} />
           <Route path="/certificates/:id" element={<CertificatesWithDetail />} />
         </Routes>

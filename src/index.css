@@ -4,10 +4,17 @@
 html {
   scroll-behavior: smooth;
   color-scheme: light;
+  font-size: 16px;
 }
 
 html.dark {
   color-scheme: dark;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 17px;
+  }
 }
 
 body {
@@ -70,6 +77,72 @@ html.dark body {
   animation: scroll-indicator-down 1.4s ease-in-out infinite;
 }
 
+.neon-scroll-shell {
+  position: relative;
+  display: flex;
+  height: 4.1rem;
+  width: 2.2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1.5px solid rgba(99, 102, 241, 0.42);
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+}
+
+.neon-scroll-wheel {
+  position: absolute;
+  top: 0.58rem;
+  height: 0.9rem;
+  width: 0.34rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.9), rgba(168, 85, 247, 0.82));
+}
+
+.neon-scroll-arrow {
+  margin-top: 0.65rem;
+  font-size: 1rem;
+  color: #6366f1;
+}
+
+.neon-scroll-text {
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  color: rgba(71, 85, 105, 0.9);
+  text-indent: 0.2rem;
+}
+
+html:not(.dark) .neon-scroll-shell {
+  border-color: rgba(99, 102, 241, 0.34);
+  background: rgba(255, 255, 255, 0.46);
+}
+
+html:not(.dark) .neon-scroll-wheel {
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.88), rgba(168, 85, 247, 0.78));
+}
+
+html:not(.dark) .neon-scroll-arrow {
+  color: #6366f1;
+}
+
+html:not(.dark) .neon-scroll-text {
+  color: rgba(15, 23, 42, 0.72);
+}
+
+html.dark .neon-scroll-shell {
+  border-color: rgba(129, 140, 248, 0.34);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+html.dark .neon-scroll-arrow {
+  color: #a5b4fc;
+}
+
+html.dark .neon-scroll-text {
+  color: rgba(255, 255, 255, 0.72);
+}
+
 /* Premium glass shine */
 @keyframes shine {
   0% {
@@ -99,17 +172,4 @@ html.dark body {
 
 .animate-fade-up {
   animation: fade-up 0.8s ease forwards;
-}
-@keyframes shine {
-  0% {
-    transform: translateX(-120%) rotate(12deg);
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(120%) rotate(12deg);
-    opacity: 0;
-  }
 }
