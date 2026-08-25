@@ -1,54 +1,24 @@
 import React from "react";
 import { FaPython, FaReact, FaDatabase, FaTools } from "react-icons/fa";
+import { usePortfolioData } from "../context/PortfolioContext";
 
-const skills = [
-  {
-    category: "Python Full Stack + AI Developer",
-    icon: <FaPython className="h-6 w-6 text-cyan-600 dark:text-cyan-300" />,
-    items: [
-      "Python",
-      "HTML",
-      "CSS",
-      "React.js",
-      "Django",
-      "NumPy",
-      "Pandas",
-      "Matplotlib",
-      "PyTorch",
-      "Node.js",
-      "AWS EC2",
-      "JavaScript",
-    ],
-  },
-  {
-    category: "Full Stack Web Developer (MERN)",
-    icon: <FaReact className="h-6 w-6 text-cyan-600 dark:text-cyan-300" />,
-    items: [
-      "JavaScript ES6",
-      "React.js",
-      "Node.js",
-      "Redux",
-      "Express.js",
-      "Tailwind CSS",
-      "Bootstrap",
-      "HTML",
-      "CSS",
-      "MongoDB",
-    ],
-  },
-  {
-    category: "Backend & Databases",
-    icon: <FaDatabase className="h-6 w-6 text-violet-600 dark:text-violet-300" />,
-    items: ["REST API", "FastAPI", "MongoDB", "MySQL"],
-  },
-  {
-    category: "Tools & Version Control",
-    icon: <FaTools className="h-6 w-6 text-cyan-600 dark:text-cyan-300" />,
-    items: ["Git", "GitHub"],
-  },
-];
+const getIcon = (iconName, iconObj) => {
+  if (iconObj) return iconObj;
+  switch (iconName) {
+    case "FaReact":
+      return <FaReact className="h-6 w-6 text-cyan-600 dark:text-cyan-300" />;
+    case "FaDatabase":
+      return <FaDatabase className="h-6 w-6 text-violet-600 dark:text-violet-300" />;
+    case "FaTools":
+      return <FaTools className="h-6 w-6 text-cyan-600 dark:text-cyan-300" />;
+    default:
+      return <FaPython className="h-6 w-6 text-cyan-600 dark:text-cyan-300" />;
+  }
+};
 
 const SkillsSection = () => {
+  const { skills } = usePortfolioData();
+
   return (
     <section
       className="relative overflow-hidden bg-transparent px-6 py-24 text-slate-900 dark:text-white"
@@ -59,7 +29,7 @@ const SkillsSection = () => {
           <h2 className="text-6xl font-bold text-slate-300 dark:text-white/10">
             05
           </h2>
-          <h3 className="bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-3xl font-bold text-transparent dark:from-violet-300 dark:to-cyan-300 md:text-4xl">
+          <h3 className="theme-gradient-text text-3xl font-bold md:text-4xl">
             Skills & Tools
           </h3>
         </div>
@@ -80,7 +50,7 @@ const SkillsSection = () => {
 
               <div className="relative z-10 mb-4 flex items-center gap-3">
                 <div className="transition-transform duration-300 group-hover:scale-125">
-                  {skill.icon}
+                  {getIcon(skill.iconName, skill.icon)}
                 </div>
                 <h4 className="text-lg font-semibold text-cyan-700 dark:text-cyan-300">
                   {skill.category}
@@ -88,14 +58,15 @@ const SkillsSection = () => {
               </div>
 
               <div className="relative z-10 flex flex-wrap gap-2">
-                {skill.items.map((item, idx) => (
-                  <span
-                    key={idx}
-                    className="rounded-full border border-black/10 bg-white/55 px-3 py-1 text-sm text-slate-700 transition duration-300 hover:scale-105 hover:bg-cyan-500/20 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75"
-                  >
-                    {item}
-                  </span>
-                ))}
+                {Array.isArray(skill.items) &&
+                  skill.items.map((item, idx) => (
+                    <span
+                      key={idx}
+                      className="rounded-full border border-black/10 bg-white/55 px-3 py-1 text-sm text-slate-700 transition duration-300 hover:scale-105 hover:bg-cyan-500/20 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75"
+                    >
+                      {item}
+                    </span>
+                  ))}
               </div>
             </div>
           ))}

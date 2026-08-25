@@ -1,4 +1,11 @@
+import React from "react";
+import { usePortfolioData } from "../context/PortfolioContext";
+
 const GetInTouch = () => {
+  const { siteSettings } = usePortfolioData();
+
+  const emailHref = siteSettings?.email ? `mailto:${siteSettings.email}` : "mailto:nongsaibamtazkhan@gmail.com";
+
   return (
     <section
       id="contact"
@@ -7,31 +14,37 @@ const GetInTouch = () => {
       <div className="relative z-10 mx-auto max-w-3xl">
         <div className="animate-fade-up">
           <h2 className="flex items-center justify-center gap-3 text-4xl font-bold md:text-5xl">
-            <span className="text-slate-300 dark:text-white/10">06</span>
-            <span className="bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-transparent dark:from-violet-300 dark:to-cyan-300">
-              Get In Touch
+            <span className="text-slate-300 dark:text-white/10">
+              {siteSettings?.contactNumber || "06"}
+            </span>
+            <span className="theme-gradient-text">
+              {siteSettings?.contactTitle || "Get In Touch"}
             </span>
           </h2>
 
           <p className="mt-6 text-lg leading-relaxed text-slate-600 dark:text-white/70">
-            I’m actively seeking new opportunities and open to collaborations in{" "}
-            <span className="font-semibold text-cyan-600 dark:text-cyan-300">
-              Full Stack Web Development
-            </span>{" "}
-            and{" "}
-            <span className="font-semibold text-violet-600 dark:text-violet-300">
-              AI / Machine Learning
-            </span>
-            .
+            {siteSettings?.contactSubtitle || (
+              <>
+                I’m actively seeking new opportunities and open to collaborations in{" "}
+                <span className="font-semibold text-cyan-600 dark:text-cyan-300">
+                  Full Stack Web Development
+                </span>{" "}
+                and{" "}
+                <span className="font-semibold text-violet-600 dark:text-violet-300">
+                  AI / Machine Learning
+                </span>
+                .
+              </>
+            )}
           </p>
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row animate-fade-up">
           <a
-            href="mailto:nongsaibamtazkhan@gmail.com"
-            className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-violet-500 px-8 py-3 font-semibold text-white shadow-md transition duration-300 hover:-translate-y-1 hover:scale-105"
+            href={emailHref}
+            className="theme-gradient-bg inline-flex items-center justify-center rounded-full px-8 py-3 font-semibold text-white shadow-md transition duration-300 hover:-translate-y-1 hover:scale-105"
           >
-            Say Hello 👋
+            {siteSettings?.contactBtnText || "Say Hello 👋"}
           </a>
         </div>
 
@@ -44,9 +57,9 @@ const GetInTouch = () => {
           </div>
 
           <div className="relative z-10">
-            <p>Designed & Built by Nongsaibam Tazkhan</p>
+            <p>{siteSettings?.footerText || "Designed & Built by Nongsaibam Tazkhan"}</p>
             <p className="mt-1 text-xs text-slate-400 dark:text-white/40">
-              Crafted with React, Tailwind CSS & Passion ✨
+              {siteSettings?.footerSubtext || "Crafted with React, Tailwind CSS & Passion ✨"}
             </p>
           </div>
         </footer>

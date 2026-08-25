@@ -4,43 +4,23 @@ import {
   FaMicrophone,
   FaRegCalendarAlt
 } from "react-icons/fa";
+import { usePortfolioData } from "../context/PortfolioContext";
 
-const activities = [
-  {
-    title: "Manipur Tourism Website",
-    description:
-      "Developed a responsive tourism platform highlighting destinations and culture of Manipur.",
-    date: "June 2025",
-    tags: ["React", "Tailwind", "Frontend"],
-    icon: <FaCodeBranch />,
-  },
-  {
-    title: "To-Do List Web App",
-    description:
-      "Built a full-stack task management system using React.js, Node.js and MongoDB.",
-    date: "April 2024",
-    tags: ["React", "Node.js", "MongoDB"],
-    icon: <FaCodeBranch />,
-  },
-  {
-    title: "AI Voice Assistant",
-    description:
-      "Multilingual AI assistant supporting English and Meitei Mayek with speech recognition.",
-    date: "2025",
-    tags: ["AI", "Speech"],
-    icon: <FaMicrophone />,
-  },
-  {
-    title: "Web Development Projects",
-    description:
-      "Created multiple responsive websites while learning full-stack development.",
-    date: "2023-2025",
-    tags: ["Projects", "Development"],
-    icon: <FaRegCalendarAlt />,
-  },
-];
+const getIcon = (iconName, iconObj) => {
+  if (iconObj) return iconObj;
+  switch (iconName) {
+    case "FaMicrophone":
+      return <FaMicrophone />;
+    case "FaRegCalendarAlt":
+      return <FaRegCalendarAlt />;
+    default:
+      return <FaCodeBranch />;
+  }
+};
 
 const ActivitiesSection = () => {
+  const { activities } = usePortfolioData();
+
   return (
     <section
       id="activities"
@@ -53,7 +33,7 @@ const ActivitiesSection = () => {
           <h2 className="text-6xl font-bold text-slate-300 dark:text-white/10">
             04
           </h2>
-          <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-transparent dark:from-violet-300 dark:to-cyan-300">
+          <h3 className="theme-gradient-text text-3xl md:text-4xl font-bold">
             Activities & Engagements
           </h3>
         </div>
@@ -78,7 +58,7 @@ const ActivitiesSection = () => {
               {/* Icon + Title */}
               <div className="relative z-10 flex items-center mb-4">
                 <div className="text-cyan-600 text-2xl transition-transform duration-300 group-hover:scale-125 dark:text-cyan-300">
-                  {activity.icon}
+                  {getIcon(activity.iconName, activity.icon)}
                 </div>
 
                 <h4 className="ml-3 text-lg font-semibold text-slate-900 dark:text-white">
@@ -98,14 +78,15 @@ const ActivitiesSection = () => {
 
               {/* Tags */}
               <div className="relative z-10 flex flex-wrap gap-2">
-                {activity.tags.map((tag, i) => (
-                  <span
-                    key={i}
-                    className="rounded-full border border-black/10 bg-white/55 px-3 py-1 text-xs text-slate-700 transition hover:scale-105 hover:bg-cyan-500/20 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                {Array.isArray(activity.tags) &&
+                  activity.tags.map((tag, i) => (
+                    <span
+                      key={i}
+                      className="rounded-full border border-black/10 bg-white/55 px-3 py-1 text-xs text-slate-700 transition hover:scale-105 hover:bg-cyan-500/20 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75"
+                    >
+                      {tag}
+                    </span>
+                  ))}
               </div>
             </div>
           ))}

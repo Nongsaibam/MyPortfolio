@@ -1,5 +1,34 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 @custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --site-font: "Poppins", sans-serif;
+  --color-primary-from: #6d28d9;
+  --color-primary-to: #0284c7;
+
+  --bg-light-from: #ffffff;
+  --bg-light-to: #e2e8f0;
+
+  --bg-dark-from: #030712;
+  --bg-dark-to: #0b1329;
+}
+
+* {
+  font-family: var(--site-font, "Poppins", sans-serif);
+}
+
+.theme-gradient-text {
+  background-image: linear-gradient(135deg, var(--color-primary-from, #6d28d9), var(--color-primary-to, #0284c7));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+
+.theme-gradient-bg {
+  background-image: linear-gradient(135deg, var(--color-primary-from, #6d28d9), var(--color-primary-to, #0284c7));
+}
 
 html {
   scroll-behavior: smooth;
@@ -9,6 +38,7 @@ html {
 
 html.dark {
   color-scheme: dark;
+  color: #ffffff;
 }
 
 @media (min-width: 768px) {
@@ -18,158 +48,93 @@ html.dark {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  @apply text-slate-900 transition-colors duration-500;
-  background:
-    radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.10), transparent 28%),
-    radial-gradient(circle at 85% 18%, rgba(236, 72, 153, 0.08), transparent 30%),
-    radial-gradient(circle at 50% 85%, rgba(59, 130, 246, 0.08), transparent 32%),
-    linear-gradient(135deg, #f8fafc 0%, #eef2ff 45%, #e0f2fe 100%);
+  font-family: var(--site-font, "Poppins", sans-serif);
+  color: #0f172a;
+  background-color: var(--bg-light-from, #ffffff);
+  background-image: linear-gradient(135deg, var(--bg-light-from, #ffffff) 0%, var(--bg-light-to, #e2e8f0) 100%);
   background-attachment: fixed;
   min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 html.dark body {
-  @apply text-slate-100;
-  background:
-    radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.22), transparent 28%),
-    radial-gradient(circle at 85% 18%, rgba(236, 72, 153, 0.18), transparent 30%),
-    radial-gradient(circle at 50% 85%, rgba(59, 130, 246, 0.18), transparent 32%),
-    linear-gradient(135deg, #020617 0%, #081224 45%, #0a1b2f 100%);
+  color: #ffffff !important;
+  background-color: var(--bg-dark-from, #030712);
+  background-image: linear-gradient(135deg, var(--bg-dark-from, #030712) 0%, var(--bg-dark-to, #0b1329) 100%);
   background-attachment: fixed;
+}
+
+/* Ensure all headings, text paragraphs, and list items default to pure white text in dark mode */
+html.dark h1:not(.theme-gradient-text),
+html.dark h2:not(.theme-gradient-text),
+html.dark h3:not(.theme-gradient-text),
+html.dark h4:not(.theme-gradient-text),
+html.dark h5:not(.theme-gradient-text),
+html.dark h6:not(.theme-gradient-text),
+html.dark p:not(.theme-gradient-text),
+html.dark li:not(.theme-gradient-text) {
+  color: #ffffff;
+}
+
+/* Smooth Up-and-Down Float Animations */
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(12px);
+  }
+}
+
+.animate-float-up-down {
+  animation: floatUpDown 2s ease-in-out infinite;
+}
+
+@keyframes scrollWheelMove {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(10px);
+  }
+}
+
+.animate-wheel-move {
+  animation: scrollWheelMove 1.8s ease-in-out infinite;
+}
+
+/* Running Gradient Text Animations */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-text-run {
+  background: linear-gradient(
+    90deg,
+    #38bdf8 0%,
+    #818cf8 20%,
+    #c084fc 40%,
+    #f472b6 60%,
+    #38bdf8 80%,
+    #00f2fe 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  animation: gradientFlow 4s linear infinite;
 }
 
 #root {
   min-height: 100vh;
-}
-
-.surface-noise {
-  background-image: radial-gradient(rgba(15, 23, 42, 0.06) 0.75px, transparent 0.75px);
-  background-size: 18px 18px;
-}
-
-.dark .surface-noise {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 0.75px, transparent 0.75px);
-}
-
-/* Remove scrollbar */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-/* Scroll indicator */
-@keyframes scroll-indicator-down {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  70% {
-    transform: translateY(12px);
-    opacity: 0.7;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.scroll-indicator {
-  animation: scroll-indicator-down 1.4s ease-in-out infinite;
-}
-
-.neon-scroll-shell {
-  position: relative;
-  display: flex;
-  height: 4.1rem;
-  width: 2.2rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  border: 1.5px solid rgba(99, 102, 241, 0.42);
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(10px);
-}
-
-.neon-scroll-wheel {
-  position: absolute;
-  top: 0.58rem;
-  height: 0.9rem;
-  width: 0.34rem;
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(99, 102, 241, 0.9), rgba(168, 85, 247, 0.82));
-}
-
-.neon-scroll-arrow {
-  margin-top: 0.65rem;
-  font-size: 1rem;
-  color: #6366f1;
-}
-
-.neon-scroll-text {
-  font-size: 0.52rem;
-  font-weight: 600;
-  letter-spacing: 0.2rem;
-  color: rgba(71, 85, 105, 0.9);
-  text-indent: 0.2rem;
-}
-
-html:not(.dark) .neon-scroll-shell {
-  border-color: rgba(99, 102, 241, 0.34);
-  background: rgba(255, 255, 255, 0.46);
-}
-
-html:not(.dark) .neon-scroll-wheel {
-  background: linear-gradient(180deg, rgba(99, 102, 241, 0.88), rgba(168, 85, 247, 0.78));
-}
-
-html:not(.dark) .neon-scroll-arrow {
-  color: #6366f1;
-}
-
-html:not(.dark) .neon-scroll-text {
-  color: rgba(15, 23, 42, 0.72);
-}
-
-html.dark .neon-scroll-shell {
-  border-color: rgba(129, 140, 248, 0.34);
-  background: rgba(255, 255, 255, 0.04);
-}
-
-html.dark .neon-scroll-arrow {
-  color: #a5b4fc;
-}
-
-html.dark .neon-scroll-text {
-  color: rgba(255, 255, 255, 0.72);
-}
-
-/* Premium glass shine */
-@keyframes shine {
-  0% {
-    transform: translateX(-120%) rotate(12deg);
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(120%) rotate(12deg);
-    opacity: 0;
-  }
-}
-
-/* Soft fade-up */
-@keyframes fade-up {
-  0% {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-up {
-  animation: fade-up 0.8s ease forwards;
 }

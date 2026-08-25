@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { usePortfolioData } from "../context/PortfolioContext";
 import {
   HiOutlineArrowLeft,
   HiOutlineMagnifyingGlassPlus,
@@ -7,13 +8,24 @@ import {
   HiOutlineXMark,
 } from "react-icons/hi2";
 
+import { resolveImagePath } from "../utils/imageCompressor";
+import SEO from "./SEO";
+
 /* ---------------- AUTO IMPORT IMAGES ---------------- */
 
 const images = import.meta.glob("../assets/CertificateImage/*", { eager: true });
 
 const getImage = (name) => {
+  if (!name) return "";
+  const resolved = resolveImagePath(name);
+  if (resolved && resolved !== name) {
+    return resolved;
+  }
+  if (name.startsWith("http://") || name.startsWith("https://") || name.startsWith("data:")) {
+    return name;
+  }
   const path = `../assets/CertificateImage/${name}`;
-  return images[path]?.default || "";
+  return images[path]?.default || name;
 };
 
 /* ---------------- CERTIFICATE DATA ---------------- */
@@ -65,12 +77,13 @@ const CertificatesWithDetail = () => {
   const { id } = useParams();
   const [activeFilter, setActiveFilter] = useState("All");
   const [zoomImage, setZoomImage] = useState(null);
+  const { certificates } = usePortfolioData();
 
   const filteredCertificates = useMemo(() => {
     return activeFilter === "All"
       ? certificates
       : certificates.filter((cert) => cert.category === activeFilter);
-  }, [activeFilter]);
+  }, [activeFilter, certificates]);
 
   /* ---------------- DETAIL PAGE ---------------- */
 
@@ -100,6 +113,7 @@ const CertificatesWithDetail = () => {
 
     return (
       <section className="relative min-h-screen overflow-hidden bg-transparent px-6 py-10 text-slate-900 dark:text-white md:px-10">
+        <SEO title={`${certificate.title} | Certificate Details`} image={getImage(certificate.image)} />
         <div className="relative z-10 mx-auto max-w-7xl">
           <Link
             to="/certificates"
@@ -240,11 +254,22 @@ const CertificatesWithDetail = () => {
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-transparent px-6 py-10 text-slate-900 dark:text-white md:px-10">
+      <SEO title="Certificates & Achievements | Portfolio" />
       <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="mb-6 flex justify-start animate-fade-up">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/55 px-4.5 py-2.5 text-xs font-bold text-slate-700 backdrop-blur-[20px] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-slate-950 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/80 dark:hover:bg-white/10 dark:hover:text-white"
+          >
+            <HiOutlineArrowLeft className="text-sm text-cyan-400" />
+            Back to Home
+          </Link>
+        </div>
+
         <div className="mx-auto max-w-3xl text-center animate-fade-up">
           <h2 className="text-4xl font-black leading-tight md:text-6xl">
             <span className="text-slate-900 dark:text-white">Certificates &</span>
-            <span className="ml-3 bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-transparent dark:from-violet-300 dark:to-cyan-300">
+            <span className="ml-3 theme-gradient-text">
               Achievements
             </span>
           </h2>
@@ -259,7 +284,7 @@ const CertificatesWithDetail = () => {
                 onClick={() => setActiveFilter(filter)}
                 className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
                   active
-                    ? "bg-gradient-to-r from-cyan-500 to-violet-500 text-white shadow-md"
+                    ? "theme-gradient-bg text-white shadow-md"
                     : "border border-black/10 bg-white/55 text-slate-700 backdrop-blur-[18px] hover:bg-white hover:text-slate-950 dark:border-white/15 dark:bg-white/[0.08] dark:text-white/75 dark:hover:bg-white/10 dark:hover:text-white"
                 }`}
               >
