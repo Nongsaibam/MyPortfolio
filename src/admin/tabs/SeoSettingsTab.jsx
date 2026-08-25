@@ -7,6 +7,7 @@ import {
   HiOutlineMagnifyingGlass,
   HiOutlineShieldCheck,
   HiOutlineCloudArrowUp,
+  HiOutlineSparkles,
 } from "react-icons/hi2";
 import { compressAndConvertToWebP, resolveImagePath } from "../../utils/imageCompressor";
 
@@ -21,11 +22,30 @@ const SeoSettingsTab = () => {
     authorName: currentSeo.authorName || siteSettings.name || "Nongsaibam Tazkhan",
     siteUrl: currentSeo.siteUrl || "https://tazkhan.dev",
     ogImage: currentSeo.ogImage || siteSettings.profileImage || "",
+    faviconImage: siteSettings.faviconImage || currentSeo.faviconImage || "/favicon.png",
     allowIndexing: currentSeo.allowIndexing !== false,
   });
 
   const [savedMsg, setSavedMsg] = useState("");
   const [isCompressing, setIsCompressing] = useState(false);
+
+  const handleFaviconUpload = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      try {
+        setIsCompressing(true);
+        const result = await compressAndConvertToWebP(file, "favicon", 100);
+        setFormData((prev) => ({
+          ...prev,
+          faviconImage: result.path,
+        }));
+      } catch (err) {
+        console.error("Favicon upload error:", err);
+      } finally {
+        setIsCompressing(false);
+      }
+    }
+  };
 
   const handleOgUpload = async (e) => {
     const file = e.target.files[0];
@@ -49,9 +69,10 @@ const SeoSettingsTab = () => {
     e.preventDefault();
     updateSiteSettings({
       ...siteSettings,
+      faviconImage: formData.faviconImage,
       seoSettings: formData,
     });
-    setSavedMsg("SEO Settings & Social Sharing Card updated successfully!");
+    setSavedMsg("SEO Settings & Favicon Icon updated successfully!");
     setTimeout(() => setSavedMsg(""), 3000);
   };
 
@@ -156,6 +177,68 @@ const SeoSettingsTab = () => {
               className="w-full rounded-xl border border-white/10 bg-slate-800/70 p-2.5 text-white outline-none focus:border-cyan-500"
               placeholder="https://tazkhan.dev"
             />
+          </div>
+        </div>
+
+        {/* Browser Tab Favicon Icon Controller */}
+        <div className="rounded-2xl border border-amber-500/30 bg-slate-900/60 p-6 backdrop-blur-md space-y-4">
+          <h3 className="text-sm font-bold text-white border-b border-white/10 pb-2 flex items-center gap-2">
+            <HiOutlineSparkles className="h-4 w-4 text-amber-400" /> Website Favicon Icon Controller
+          </h3>
+
+          {/* Live Mock Browser Tab Preview */}
+          <div className="rounded-xl border border-white/10 bg-slate-950 p-4 space-y-2">
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Live Browser Tab Icon Preview</span>
+            <div className="inline-flex items-center gap-2.5 rounded-t-xl bg-slate-900 border border-b-0 border-white/15 px-4 py-2 shadow-md">
+              <img
+                src={resolveImagePath(formData.faviconImage, "/favicon.png")}
+                alt="Favicon"
+                className="h-4 w-4 rounded-sm object-cover shadow-sm"
+              />
+              <span className="text-xs font-semibold text-slate-200 truncate max-w-[220px]">
+                {formData.metaTitle || "Portfolio - Nongsaibam Tazkhan"}
+              </span>
+              <span className="text-slate-500 hover:text-white cursor-pointer ml-2">×</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            <img
+              src={resolveImagePath(formData.faviconImage, "/favicon.png")}
+              alt="Favicon Large"
+              className="h-16 w-16 rounded-2xl border-2 border-cyan-500/40 bg-slate-950 object-cover shrink-0 shadow-lg p-1"
+            />
+
+            <div className="space-y-3 flex-1 w-full">
+              <div>
+                <label className="mb-1 block font-semibold text-slate-400">Upload New Favicon File (PNG, JPG, WebP, ICO)</label>
+                <div className="flex items-center gap-3">
+                  <label className="inline-flex items-center gap-2 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-4 py-2 text-xs font-semibold text-cyan-300 hover:bg-cyan-500/20 cursor-pointer transition">
+                    <HiOutlineCloudArrowUp className="h-4 w-4" /> Upload Favicon File
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFaviconUpload}
+                      className="hidden"
+                    />
+                  </label>
+                  {isCompressing && (
+                    <span className="text-xs text-cyan-400 font-semibold animate-pulse">Compressing Favicon...</span>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-1 block font-semibold text-slate-400">Or Paste Custom Favicon Path / URL</label>
+                <input
+                  type="text"
+                  value={formData.faviconImage}
+                  onChange={(e) => setFormData({ ...formData, faviconImage: e.target.value })}
+                  className="w-full rounded-xl border border-white/10 bg-slate-800/70 p-2.5 text-white outline-none focus:border-cyan-500 font-mono text-[11px]"
+                  placeholder="/favicon.png or public/storage/TK/favicon/2026-08-25-225325.webp"
+                />
+              </div>
+            </div>
           </div>
         </div>
 

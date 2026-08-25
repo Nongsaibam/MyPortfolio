@@ -91,7 +91,25 @@ const SEO = ({ title, description, keywords, image, url, type = "website" }) => 
     };
 
     jsonLdScript.textContent = JSON.stringify(personSchema);
-  }, [siteTitle, siteDescription, siteKeywords, siteAuthor, siteUrl, siteImage, type, seo.allowIndexing]);
+
+    // 7. Dynamic Favicon Link Tag Update (Real-time Admin Favicon Controller)
+    const rawFavicon = siteSettings?.faviconImage || seo?.faviconImage || "/favicon.png";
+    const siteFavicon = resolveImagePath(rawFavicon, "/favicon.png");
+
+    const updateFaviconLink = (relType) => {
+      let link = document.querySelector(`link[rel="${relType}"]`);
+      if (!link) {
+        link = document.createElement("link");
+        link.setAttribute("rel", relType);
+        document.head.appendChild(link);
+      }
+      link.setAttribute("href", siteFavicon);
+    };
+
+    updateFaviconLink("icon");
+    updateFaviconLink("shortcut icon");
+    updateFaviconLink("apple-touch-icon");
+  }, [siteTitle, siteDescription, siteKeywords, siteAuthor, siteUrl, siteImage, siteSettings?.faviconImage, seo?.faviconImage, type, seo.allowIndexing]);
 
   return null;
 };
