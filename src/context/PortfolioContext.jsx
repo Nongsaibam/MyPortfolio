@@ -11,6 +11,7 @@ import vitalImg from "../assets/ProjectIMG/Vital.png";
 import myTaskImg from "../assets/ProjectIMG/mytask.png";
 import aiImg from "../assets/ProjectIMG/ai.png";
 import settingImg from "../assets/ProjectIMG/setting.png";
+import defaultTkProfileImage from "../assets/1736923031405.jpg";
 
 const initialProjects = [
   {
@@ -262,7 +263,9 @@ const initialSiteSettings = {
     color3: "#c084fc",
     color4: "#f472b6",
   },
-  title: "Python Full Stack + AI Developer",
+  title: "Full Stack Developer, MERN Stack Building Scalable & Modern Web Apps",
+  profileImage: defaultTkProfileImage,
+  profileImagePath: defaultTkProfileImage,
   bio: "Full Stack Developer building scalable and modern applications. I specialize in crafting end-to-end digital products — from intuitive user interfaces to robust backend architectures.",
   primaryBtnText: "Explore Projects",
   resumeLink: "/resume.pdf",
@@ -373,7 +376,12 @@ export const PortfolioProvider = ({ children }) => {
 
   const [siteSettings, setSiteSettings] = useState(() => {
     const saved = localStorage.getItem("portfolio_site_settings");
-    return saved ? { ...initialSiteSettings, ...JSON.parse(saved) } : initialSiteSettings;
+    const parsed = saved ? { ...initialSiteSettings, ...JSON.parse(saved) } : initialSiteSettings;
+    if (!parsed.profileImage || parsed.profileImage.includes("vite.svg") || parsed.profileImage.includes("favicon")) {
+      parsed.profileImage = defaultTkProfileImage;
+      parsed.profileImagePath = defaultTkProfileImage;
+    }
+    return parsed;
   });
 
   // Dynamic CSS variables & font & background theme application

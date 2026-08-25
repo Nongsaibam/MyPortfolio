@@ -110,7 +110,9 @@ export async function compressAndConvertToWebP(file, category = "cerdificate", m
  * Checks local image cache for uploaded files; fallback to URL path.
  */
 export function resolveImagePath(pathStr, fallback = "") {
-  if (!pathStr) return fallback;
+  if (!pathStr || pathStr.includes("vite.svg") || pathStr.includes("favicon")) {
+    return fallback || pathStr;
+  }
 
   // Check local image cache
   try {
