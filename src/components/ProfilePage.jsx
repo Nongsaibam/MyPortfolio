@@ -79,8 +79,13 @@ const ProfilePage = () => {
       {/* Header Navigation */}
       <header className="fixed left-0 right-0 top-0 z-30 border-b border-black/10 bg-white/75 px-4 py-3.5 sm:py-4 backdrop-blur-2xl transition duration-300 md:px-16 dark:border-white/10 dark:bg-slate-950/80">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <Link to="/" className="theme-gradient-text text-2xl font-black tracking-tight md:text-3xl">
-            {siteSettings?.logoText || "TK"}
+          <Link to="/" className="text-2xl font-black tracking-tight md:text-3xl">
+            <span
+              style={customRunningStyle}
+              className={siteSettings?.enableRunningGradientText === false ? "theme-gradient-text" : ""}
+            >
+              {siteSettings?.logoText || "TK"}
+            </span>
           </Link>
 
           <nav className="hidden items-center space-x-10 md:flex">
@@ -150,9 +155,9 @@ const ProfilePage = () => {
       </header>
 
       {/* Main Hero Container */}
-      <main className="mx-auto flex min-h-0 max-w-6xl flex-col-reverse items-center justify-between gap-4 md:gap-10 px-3 sm:px-6 md:px-12 pb-2 md:pb-6 pt-16 md:pt-36 lg:pt-40 md:flex-row">
+      <main className="mx-auto flex min-h-0 max-w-6xl flex-col-reverse items-center justify-between gap-6 sm:gap-10 md:gap-14 lg:gap-20 px-4 sm:px-6 md:px-12 pb-8 pt-36 sm:pt-40 md:pt-48 lg:pt-52 xl:pt-56 md:flex-row">
         {/* Left Column: Headline & Info */}
-        <div className="flex-1 animate-fade-up text-center md:text-left space-y-3 sm:space-y-4">
+        <div className="flex-1 animate-fade-up text-center md:text-left space-y-3 sm:space-y-4 mt-4 sm:mt-6 md:mt-8">
           {/* Ultra-Modern Dynamic Glassmorphic Job Badge */}
           {siteSettings?.heroJobBadge?.showBadge !== false && (
             <div className="inline-flex items-center gap-2.5 rounded-full border border-emerald-500/40 bg-slate-900/80 px-4 py-1.5 text-xs backdrop-blur-xl shadow-lg shadow-emerald-500/10 transition-all duration-500 hover:border-emerald-400 hover:shadow-emerald-500/25 hover:scale-105">

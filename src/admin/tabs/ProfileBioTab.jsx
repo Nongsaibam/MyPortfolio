@@ -16,7 +16,7 @@ const ProfileBioTab = () => {
     profileImage: siteSettings.profileImage || "",
     profileImagePath: siteSettings.profileImagePath || "",
     profileImageSizeKB: siteSettings.profileImageSizeKB || null,
-    favicon: siteSettings.favicon || "/vite.svg",
+    favicon: siteSettings.favicon || "/favicon.svg",
     faviconPath: siteSettings.faviconPath || "",
     faviconSizeKB: siteSettings.faviconSizeKB || null,
     primaryBtnText: siteSettings.primaryBtnText || "Explore Projects",
@@ -129,7 +129,7 @@ const ProfileBioTab = () => {
             <div className="relative shrink-0 flex flex-col items-center gap-1.5">
               <div className="h-28 w-28 rounded-2xl border-2 border-violet-500/50 bg-slate-950/90 p-4 flex items-center justify-center shadow-xl shadow-violet-500/20 transition hover:scale-105">
                 <img
-                  src={resolveImagePath(formData.favicon, "/vite.svg")}
+                  src={resolveImagePath(formData.favicon, "/favicon.svg")}
                   alt="Favicon Preview"
                   className="h-20 w-20 object-contain drop-shadow-md"
                 />
@@ -173,17 +173,17 @@ const ProfileBioTab = () => {
                   value={formData.favicon}
                   onChange={(e) => setFormData({ ...formData, favicon: e.target.value })}
                   className="w-full rounded-xl border border-white/10 bg-slate-800/70 p-2.5 text-white outline-none focus:border-violet-500"
-                  placeholder="e.g. public/storage/TK/favicon/2026-08-25-222600.webp or /vite.svg"
+                  placeholder="e.g. public/storage/TK/favicon/2026-08-25-222600.webp or /favicon.svg"
                 />
               </div>
 
-              {formData.favicon && formData.favicon !== "/vite.svg" && (
+              {formData.favicon && formData.favicon !== "/favicon.svg" && (
                 <button
                   type="button"
-                  onClick={() => setFormData((prev) => ({ ...prev, favicon: "/vite.svg", faviconPath: "", faviconSizeKB: null }))}
+                  onClick={() => setFormData((prev) => ({ ...prev, favicon: "/favicon.svg", faviconPath: "", faviconSizeKB: null }))}
                   className="inline-flex items-center gap-1 text-[11px] text-amber-400/80 hover:text-amber-300 transition"
                 >
-                  <HiOutlineArrowPath className="h-3.5 w-3.5" /> Reset to Default Favicon (/vite.svg)
+                  <HiOutlineArrowPath className="h-3.5 w-3.5" /> Reset to Default Favicon (/favicon.svg)
                 </button>
               )}
             </div>

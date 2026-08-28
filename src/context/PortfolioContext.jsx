@@ -267,6 +267,8 @@ const initialSiteSettings = {
   profileImage: defaultTkProfileImage,
   profileImagePath: defaultTkProfileImage,
   bio: "Full Stack Developer building scalable and modern applications. I specialize in crafting end-to-end digital products — from intuitive user interfaces to robust backend architectures.",
+  favicon: "/favicon.svg",
+  faviconImage: "/favicon.svg",
   primaryBtnText: "Explore Projects",
   resumeLink: "/resume.pdf",
   githubLink: "https://github.com/Nongsaibam",

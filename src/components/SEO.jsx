@@ -93,8 +93,8 @@ const SEO = ({ title, description, keywords, image, url, type = "website" }) => 
     jsonLdScript.textContent = JSON.stringify(personSchema);
 
     // 7. Dynamic Favicon Link Tag Update (Real-time Admin Favicon Controller)
-    const rawFavicon = siteSettings?.faviconImage || seo?.faviconImage || "/favicon.png";
-    const siteFavicon = resolveImagePath(rawFavicon, "/favicon.png");
+    const rawFavicon = siteSettings?.faviconImage || seo?.faviconImage || "/favicon.svg";
+    const siteFavicon = resolveImagePath(rawFavicon, "/favicon.svg");
 
     const updateFaviconLink = (relType) => {
       let link = document.querySelector(`link[rel="${relType}"]`);

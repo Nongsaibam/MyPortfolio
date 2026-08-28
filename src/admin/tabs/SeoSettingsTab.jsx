@@ -22,7 +22,7 @@ const SeoSettingsTab = () => {
     authorName: currentSeo.authorName || siteSettings.name || "Nongsaibam Tazkhan",
     siteUrl: currentSeo.siteUrl || "https://tazkhan.dev",
     ogImage: currentSeo.ogImage || siteSettings.profileImage || "",
-    faviconImage: siteSettings.faviconImage || currentSeo.faviconImage || "/favicon.png",
+    faviconImage: siteSettings.faviconImage || currentSeo.faviconImage || "/favicon.svg",
     allowIndexing: currentSeo.allowIndexing !== false,
   });
 
