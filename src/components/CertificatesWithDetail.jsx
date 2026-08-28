@@ -75,6 +75,59 @@ const certificates = [
 
 const filters = ["All", "Course", "Internship", "Workshop"];
 
+/* ---------------- DIAGONAL SECURITY WATERMARK GRID OVERLAY ---------------- */
+
+const CertificateWatermarkGrid = () => (
+  <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center overflow-hidden p-2 select-none no-screenshot">
+    <div className="flex w-[220%] -rotate-12 flex-col gap-6 opacity-20 dark:opacity-25 transition-opacity">
+      <div className="flex flex-nowrap gap-5 whitespace-nowrap text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.22em] text-slate-900 dark:text-cyan-300">
+        <span>🔒 PRIVATE DOCUMENT</span>
+        <span>•</span>
+        <span>NONGSAIBAM TAZKHAN</span>
+        <span>•</span>
+        <span>SCREENSHOT PROHIBITED</span>
+        <span>•</span>
+        <span>🔒 PRIVATE DOCUMENT</span>
+        <span>•</span>
+        <span>NONGSAIBAM TAZKHAN</span>
+      </div>
+      <div className="flex flex-nowrap gap-5 whitespace-nowrap text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.22em] text-slate-900 dark:text-cyan-300">
+        <span>SCREENSHOT PROHIBITED</span>
+        <span>•</span>
+        <span>🔒 PRIVATE DOCUMENT</span>
+        <span>•</span>
+        <span>NONGSAIBAM TAZKHAN</span>
+        <span>•</span>
+        <span>SCREENSHOT PROHIBITED</span>
+        <span>•</span>
+        <span>🔒 PRIVATE DOCUMENT</span>
+      </div>
+      <div className="flex flex-nowrap gap-5 whitespace-nowrap text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.22em] text-slate-900 dark:text-cyan-300">
+        <span>🔒 PRIVATE DOCUMENT</span>
+        <span>•</span>
+        <span>NONGSAIBAM TAZKHAN</span>
+        <span>•</span>
+        <span>SCREENSHOT PROHIBITED</span>
+        <span>•</span>
+        <span>🔒 PRIVATE DOCUMENT</span>
+        <span>•</span>
+        <span>NONGSAIBAM TAZKHAN</span>
+      </div>
+      <div className="flex flex-nowrap gap-5 whitespace-nowrap text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.22em] text-slate-900 dark:text-cyan-300">
+        <span>SCREENSHOT PROHIBITED</span>
+        <span>•</span>
+        <span>🔒 PRIVATE DOCUMENT</span>
+        <span>•</span>
+        <span>NONGSAIBAM TAZKHAN</span>
+        <span>•</span>
+        <span>SCREENSHOT PROHIBITED</span>
+        <span>•</span>
+        <span>🔒 PRIVATE DOCUMENT</span>
+      </div>
+    </div>
+  </div>
+);
+
 const CertificatesWithDetail = () => {
   const { id } = useParams();
   const [activeFilter, setActiveFilter] = useState("All");
@@ -241,6 +294,7 @@ const CertificatesWithDetail = () => {
                 onContextMenu={(e) => e.preventDefault()}
                 onDragStart={(e) => e.preventDefault()}
               >
+                <CertificateWatermarkGrid />
                 <img
                   src={getImage(certificate.image)}
                   alt={certificate.title}
@@ -323,8 +377,9 @@ const CertificatesWithDetail = () => {
                         <button
                           key={index}
                           onClick={() => setZoomImage(img)}
-                          className="overflow-hidden rounded-[20px] border border-black/10 bg-white/50 backdrop-blur-[18px] transition duration-300 hover:scale-[1.02] hover:bg-white dark:border-white/15 dark:bg-white/[0.07] dark:hover:bg-white/[0.1]"
+                          className="relative overflow-hidden rounded-[20px] border border-black/10 bg-white/50 backdrop-blur-[18px] transition duration-300 hover:scale-[1.02] hover:bg-white dark:border-white/15 dark:bg-white/[0.07] dark:hover:bg-white/[0.1]"
                         >
+                          <CertificateWatermarkGrid />
                           <img
                             src={img}
                             alt={`Certificate Preview ${index + 1}`}
@@ -365,6 +420,7 @@ const CertificatesWithDetail = () => {
                 <HiOutlineXMark className="text-2xl" />
               </button>
               <div className="relative overflow-hidden rounded-[24px]" onContextMenu={(e) => e.preventDefault()}>
+                <CertificateWatermarkGrid />
                 <img
                   src={zoomImage}
                   alt="Zoom Certificate"
@@ -470,6 +526,7 @@ const CertificatesWithDetail = () => {
                     onContextMenu={(e) => e.preventDefault()}
                     onDragStart={(e) => e.preventDefault()}
                   >
+                    <CertificateWatermarkGrid />
                     <img
                       src={getImage(cert.image)}
                       alt={cert.title}
