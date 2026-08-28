@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging Canvas DRM anti-screenshot & anti-video-recording updates...");
+  console.log("Staging exact requested img element updates...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Implement Canvas 2D DRM rendering with anti-video-recording watermark overlay and anti-screenshot protections"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Update certificate img tags to use exact requested draggable={false}, onContextMenu, userSelect, and WebkitUserDrag protection props"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);
