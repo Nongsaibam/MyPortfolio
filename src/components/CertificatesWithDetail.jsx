@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { usePortfolioData } from "../context/PortfolioContext";
 import {
@@ -6,6 +6,8 @@ import {
   HiOutlineMagnifyingGlassPlus,
   HiOutlineSparkles,
   HiOutlineXMark,
+  HiOutlineShieldExclamation,
+  HiOutlineLockClosed,
 } from "react-icons/hi2";
 
 import { resolveImagePath } from "../utils/imageCompressor";
@@ -77,7 +79,54 @@ const CertificatesWithDetail = () => {
   const { id } = useParams();
   const [activeFilter, setActiveFilter] = useState("All");
   const [zoomImage, setZoomImage] = useState(null);
+  const [showSecurityShield, setShowSecurityShield] = useState(false);
   const { certificates } = usePortfolioData();
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // PrintScreen (Key code 44), Ctrl+P, Meta+P, Win/Cmd+Shift+S, F12, Ctrl+Shift+I/S/C
+      if (
+        e.key === "PrintScreen" ||
+        e.keyCode === 44 ||
+        (e.ctrlKey && e.key === "p") ||
+        (e.metaKey && e.key === "p") ||
+        (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "S" || e.key === "s" || e.key === "C" || e.key === "c")) ||
+        (e.metaKey && e.shiftKey && (e.key === "S" || e.key === "s" || e.key === "4" || e.key === "3"))
+      ) {
+        e.preventDefault();
+        e.stopPropagation();
+        setShowSecurityShield(true);
+        setTimeout(() => setShowSecurityShield(false), 3000);
+      }
+    };
+
+    const handleKeyUp = (e) => {
+      if (e.key === "PrintScreen" || e.keyCode === 44) {
+        setShowSecurityShield(true);
+        setTimeout(() => setShowSecurityShield(false), 3000);
+      }
+    };
+
+    const preventContextMenu = (e) => {
+      e.preventDefault();
+    };
+
+    const preventDrag = (e) => {
+      e.preventDefault();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("contextmenu", preventContextMenu);
+    window.addEventListener("dragstart", preventDrag);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+      window.removeEventListener("contextmenu", preventContextMenu);
+      window.removeEventListener("dragstart", preventDrag);
+    };
+  }, []);
 
   const filteredCertificates = useMemo(() => {
     return activeFilter === "All"
@@ -112,7 +161,7 @@ const CertificatesWithDetail = () => {
     ].filter(Boolean);
 
     return (
-      <section className="relative min-h-screen overflow-hidden bg-transparent px-6 py-10 text-slate-900 dark:text-white md:px-10">
+      <section className="relative min-h-screen overflow-hidden bg-transparent px-6 py-10 text-slate-900 dark:text-white md:px-10 select-none">
         <SEO title={`${certificate.title} | Certificate Details`} image={getImage(certificate.image)} />
         <div className="relative z-10 mx-auto max-w-7xl">
           <Link
@@ -132,17 +181,31 @@ const CertificatesWithDetail = () => {
                 <div className="absolute -left-[50%] top-0 h-full w-[200%] rotate-12 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-xl animate-[shine_1.5s_linear]" />
               </div>
 
-              <div className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white/40 dark:border-white/10 dark:bg-white/[0.04]">
+              <div
+                className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white/40 dark:border-white/10 dark:bg-white/[0.04] select-none"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+              >
                 <img
                   src={getImage(certificate.image)}
                   alt={certificate.title}
-                  className="h-[24rem] w-full object-contain md:h-[34rem]"
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
+                  className="h-[24rem] w-full object-contain md:h-[34rem] select-none pointer-events-none"
                 />
+
+                {/* Verified Watermark Badge */}
+                <div className="pointer-events-none absolute bottom-3 left-3 right-3 z-10 flex items-center justify-between rounded-xl border border-white/20 bg-slate-950/75 px-3.5 py-1.5 backdrop-blur-md text-[10px] font-bold text-white/90 shadow-lg select-none">
+                  <span className="flex items-center gap-1.5 text-cyan-400">
+                    <HiOutlineLockClosed className="text-xs text-amber-400" /> Private & Verified
+                  </span>
+                  <span className="tracking-wide text-slate-200">Nongsaibam Tazkhan</span>
+                </div>
               </div>
 
               <button
                 onClick={() => setZoomImage(getImage(certificate.image))}
-                className="absolute right-8 top-8 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/65 px-4 py-2 text-sm text-slate-800 backdrop-blur-xl transition hover:scale-105 hover:bg-white dark:border-white/15 dark:bg-white/[0.08] dark:text-white"
+                className="absolute right-8 top-8 z-20 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/65 px-4 py-2 text-sm text-slate-800 backdrop-blur-xl transition hover:scale-105 hover:bg-white dark:border-white/15 dark:bg-white/[0.08] dark:text-white"
               >
                 <HiOutlineMagnifyingGlassPlus className="text-lg" />
                 Preview
@@ -210,8 +273,10 @@ const CertificatesWithDetail = () => {
                         >
                           <img
                             src={img}
+                            draggable="false"
+                            onContextMenu={(e) => e.preventDefault()}
                             alt={`Certificate Preview ${index + 1}`}
-                            className="h-28 w-full object-cover"
+                            className="h-28 w-full object-cover select-none pointer-events-none"
                           />
                         </button>
                       ))}
@@ -225,7 +290,7 @@ const CertificatesWithDetail = () => {
 
         {zoomImage && (
           <div
-            className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-md"
+            className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-md select-none"
             onClick={() => setZoomImage(null)}
           >
             <div
@@ -234,15 +299,43 @@ const CertificatesWithDetail = () => {
             >
               <button
                 onClick={() => setZoomImage(null)}
-                className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white backdrop-blur-xl transition hover:bg-slate-950/60"
+                className="absolute right-4 top-4 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white backdrop-blur-xl transition hover:bg-slate-950/60"
               >
                 <HiOutlineXMark className="text-2xl" />
               </button>
-              <img
-                src={zoomImage}
-                alt="Zoom Certificate"
-                className="max-h-[86vh] max-w-full rounded-[24px] object-contain"
-              />
+              <div className="relative overflow-hidden rounded-[24px]" onContextMenu={(e) => e.preventDefault()}>
+                <img
+                  src={zoomImage}
+                  alt="Zoom Certificate"
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
+                  className="max-h-[86vh] max-w-full rounded-[24px] object-contain select-none pointer-events-none"
+                />
+                <div className="pointer-events-none absolute bottom-3 left-3 right-3 z-10 flex items-center justify-between rounded-xl border border-white/20 bg-slate-950/80 px-4 py-2 backdrop-blur-md text-xs font-bold text-white shadow-lg select-none">
+                  <span className="flex items-center gap-1.5 text-cyan-400">
+                    <HiOutlineLockClosed className="text-sm text-amber-400" /> Private & Verified Certificate
+                  </span>
+                  <span className="tracking-wide text-slate-200">Nongsaibam Tazkhan</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Screenshot & Copy Protection Security Shield Modal */}
+        {showSecurityShield && (
+          <div className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-slate-950/90 p-6 text-center text-white backdrop-blur-2xl animate-fade-in select-none">
+            <div className="flex h-20 w-20 items-center justify-center rounded-full border border-amber-500/40 bg-amber-500/15 text-amber-400 shadow-2xl shadow-amber-500/30 animate-pulse">
+              <HiOutlineShieldExclamation className="text-5xl" />
+            </div>
+            <h3 className="mt-5 text-2xl font-black tracking-tight text-white sm:text-3xl">
+              Screenshot & Copy Protected
+            </h3>
+            <p className="mt-2 max-w-md text-xs font-medium text-slate-300 sm:text-sm">
+              Certificates and credential documents are private, protected, and copyrighted property of <strong className="text-cyan-400">Nongsaibam Tazkhan</strong>.
+            </p>
+            <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white/80 backdrop-blur-xl">
+              <HiOutlineLockClosed className="text-amber-400" /> Private Security Active
             </div>
           </div>
         )}
@@ -253,7 +346,7 @@ const CertificatesWithDetail = () => {
   /* ---------------- LIST PAGE ---------------- */
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-transparent px-6 py-10 text-slate-900 dark:text-white md:px-10">
+    <section className="relative min-h-screen overflow-hidden bg-transparent px-6 py-10 text-slate-900 dark:text-white md:px-10 select-none">
       <SEO title="Certificates & Achievements | Portfolio" />
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="mb-6 flex justify-start animate-fade-up">
@@ -299,7 +392,7 @@ const CertificatesWithDetail = () => {
             <div
               key={cert.id}
               style={{ animationDelay: `${index * 80}ms` }}
-              className="group relative animate-fade-up"
+              className="group relative animate-fade-up select-none"
             >
               <div className="relative h-full overflow-hidden rounded-[32px] border border-black/10 bg-white/55 p-4 backdrop-blur-[22px] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_18px_50px_rgba(15,23,42,0.12)] dark:border-white/15 dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] dark:hover:shadow-[0_18px_50px_rgba(0,0,0,0.28)]">
                 <div className="pointer-events-none absolute inset-0 rounded-[32px] bg-white/10 dark:bg-white/[0.02]" />
@@ -310,16 +403,30 @@ const CertificatesWithDetail = () => {
                 </div>
 
                 <div className="relative">
-                  <div className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white/40 dark:border-white/10 dark:bg-white/[0.04]">
+                  <div
+                    className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white/40 dark:border-white/10 dark:bg-white/[0.04] select-none"
+                    onContextMenu={(e) => e.preventDefault()}
+                    onDragStart={(e) => e.preventDefault()}
+                  >
                     <img
                       src={getImage(cert.image)}
                       alt={cert.title}
-                      className="h-52 w-full object-cover transition duration-700 group-hover:scale-110"
+                      draggable="false"
+                      onContextMenu={(e) => e.preventDefault()}
+                      className="h-52 w-full object-cover transition duration-700 group-hover:scale-110 select-none pointer-events-none"
                     />
+
+                    {/* Watermark Badge */}
+                    <div className="pointer-events-none absolute bottom-2 left-2 right-2 z-10 flex items-center justify-between rounded-lg border border-white/20 bg-slate-950/75 px-2.5 py-1 backdrop-blur-md text-[9px] font-bold text-white/90 shadow-md select-none">
+                      <span className="flex items-center gap-1 text-cyan-400">
+                        <HiOutlineLockClosed className="text-amber-400" /> Private
+                      </span>
+                      <span className="tracking-wide text-slate-200 truncate">Nongsaibam Tazkhan</span>
+                    </div>
 
                     <button
                       onClick={() => setZoomImage(getImage(cert.image))}
-                      className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white/90 backdrop-blur-xl transition hover:scale-105 hover:bg-slate-950/60"
+                      className="absolute right-3 top-3 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white/90 backdrop-blur-xl transition hover:scale-105 hover:bg-slate-950/60"
                     >
                       <HiOutlineMagnifyingGlassPlus className="text-xl" />
                     </button>
@@ -356,7 +463,7 @@ const CertificatesWithDetail = () => {
 
       {zoomImage && (
         <div
-          className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-md"
+          className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-md select-none"
           onClick={() => setZoomImage(null)}
         >
           <div
@@ -365,15 +472,43 @@ const CertificatesWithDetail = () => {
           >
             <button
               onClick={() => setZoomImage(null)}
-              className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white backdrop-blur-xl transition hover:bg-slate-950/60"
+              className="absolute right-4 top-4 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white backdrop-blur-xl transition hover:bg-slate-950/60"
             >
               <HiOutlineXMark className="text-2xl" />
             </button>
-            <img
-              src={zoomImage}
-              alt="Zoom Certificate"
-              className="max-h-[86vh] max-w-full rounded-[24px] object-contain"
-            />
+            <div className="relative overflow-hidden rounded-[24px]" onContextMenu={(e) => e.preventDefault()}>
+              <img
+                src={zoomImage}
+                alt="Zoom Certificate"
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                className="max-h-[86vh] max-w-full rounded-[24px] object-contain select-none pointer-events-none"
+              />
+              <div className="pointer-events-none absolute bottom-3 left-3 right-3 z-10 flex items-center justify-between rounded-xl border border-white/20 bg-slate-950/80 px-4 py-2 backdrop-blur-md text-xs font-bold text-white shadow-lg select-none">
+                <span className="flex items-center gap-1.5 text-cyan-400">
+                  <HiOutlineLockClosed className="text-sm text-amber-400" /> Private & Verified Certificate
+                </span>
+                <span className="tracking-wide text-slate-200">Nongsaibam Tazkhan</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Screenshot & Copy Protection Security Shield Modal */}
+      {showSecurityShield && (
+        <div className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-slate-950/90 p-6 text-center text-white backdrop-blur-2xl animate-fade-in select-none">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full border border-amber-500/40 bg-amber-500/15 text-amber-400 shadow-2xl shadow-amber-500/30 animate-pulse">
+            <HiOutlineShieldExclamation className="text-5xl" />
+          </div>
+          <h3 className="mt-5 text-2xl font-black tracking-tight text-white sm:text-3xl">
+            Screenshot & Copy Protected
+          </h3>
+          <p className="mt-2 max-w-md text-xs font-medium text-slate-300 sm:text-sm">
+            Certificates and credential documents are private, protected, and copyrighted property of <strong className="text-cyan-400">Nongsaibam Tazkhan</strong>.
+          </p>
+          <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white/80 backdrop-blur-xl">
+            <HiOutlineLockClosed className="text-amber-400" /> Private Security Active
           </div>
         </div>
       )}

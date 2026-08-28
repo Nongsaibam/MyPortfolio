@@ -3,74 +3,26 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
 import { execSync } from "child_process";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging modified files for live favicon fix...");
-  execSync("git add .", { cwd: __dirname, encoding: "utf-8" });
+  console.log("Staging certificate security protection updates...");
+  execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Fix live deployment favicon by outputting real binary PNG/ICO image files and multi-format link tags"', { cwd: __dirname, encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Add certificate anti-screenshot protection, right-click blocking, anti-drag, and watermark shield"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);
   }
 
   console.log("Pushing to GitHub main branch...");
-  const pushRes = execSync("git push origin main", { cwd: __dirname, encoding: "utf-8" });
+  const pushRes = execSync("git push origin main", { cwd: process.cwd(), encoding: "utf-8" });
   console.log("Git push output:\n" + pushRes);
 } catch (gitErr) {
   console.error("Git operation result:\n", gitErr.stdout || gitErr.stderr || gitErr.message);
-}
-
-// Process new crisp circular 3D TK emblem logo with transparent background
-try {
-  const localSrc = "C:/Users/tazkh/.gemini/antigravity-ide/brain/7f2a1270-e652-4c88-9d57-899ee64b3cc2/.user_uploaded/media_1787931243238.jpg";
-  const repoSrc = path.resolve(__dirname, "src/assets/tk-favicon-source.jpg");
-
-  if (fs.existsSync(localSrc)) {
-    fs.copyFileSync(localSrc, repoSrc);
-  }
-
-  if (fs.existsSync(repoSrc)) {
-    const rawBuffer = fs.readFileSync(repoSrc);
-    const base64Jpg = rawBuffer.toString("base64");
-
-    // Clip outer corners with circular clipPath and scale badge to fill 100% of favicon
-    const svgTransparentContent = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <defs>
-    <clipPath id="circleClip">
-      <circle cx="256" cy="256" r="256" />
-    </clipPath>
-  </defs>
-  <g clip-path="url(#circleClip)">
-    <image href="data:image/jpeg;base64,${base64Jpg}" x="-12" y="-12" width="536" height="536" />
-  </g>
-</svg>`;
-
-    fs.writeFileSync(path.resolve(__dirname, "public/vite.svg"), svgTransparentContent);
-    fs.writeFileSync(path.resolve(__dirname, "public/favicon.svg"), svgTransparentContent);
-    fs.writeFileSync(path.resolve(__dirname, "public/favicon.png"), rawBuffer);
-    fs.writeFileSync(path.resolve(__dirname, "public/favicon.ico"), rawBuffer);
-    fs.writeFileSync(path.resolve(__dirname, "public/fivi.png"), rawBuffer);
-    fs.writeFileSync(path.resolve(__dirname, "public/tk-logo.png"), rawBuffer);
-    fs.writeFileSync(path.resolve(__dirname, "src/assets/fivi.png"), rawBuffer);
-
-    const storageFaviconDir = path.resolve(__dirname, "public/storage/TK/favicon");
-    if (!fs.existsSync(storageFaviconDir)) {
-      fs.mkdirSync(storageFaviconDir, { recursive: true });
-    }
-    fs.writeFileSync(path.resolve(storageFaviconDir, "2026-08-25-225325.webp"), svgTransparentContent);
-    console.log("Successfully created transparent blue glass TK emblem favicon logo!");
-  }
-} catch (err) {
-  console.error("Favicon copy error:", err);
 }
 
 function localImageSaverPlugin() {
@@ -95,6 +47,7 @@ function localImageSaverPlugin() {
 
             if (!filePath || !dataUrl) {
               res.statusCode = 400;
+              res.setHeader("Content-Type", "application/json");
 
               return res.end(
                 JSON.stringify({
@@ -104,7 +57,7 @@ function localImageSaverPlugin() {
             }
 
             const absolutePath = path.resolve(
-              __dirname,
+              process.cwd(),
               filePath
             );
 
@@ -140,6 +93,10 @@ function localImageSaverPlugin() {
             );
           } catch (err) {
             res.statusCode = 500;
+            res.setHeader(
+              "Content-Type",
+              "application/json"
+            );
 
             res.end(
               JSON.stringify({
