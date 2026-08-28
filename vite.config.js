@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging clear certificate preview button updates...");
+  console.log("Staging mobile image rendering fixes...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Enhance certificate preview buttons with high-contrast bg-slate-950/90, bright cyan-400 borders, bold text labels, and cyan glowing shadows for crystal-clear visibility"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Fix mobile view profile image and certificate rendering with resolveImagePath Data URL handling and onError image fallbacks"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);

@@ -114,6 +114,11 @@ export function resolveImagePath(pathStr, fallback = "") {
     return fallback || pathStr;
   }
 
+  // If it's already a base64 Data URL or HTTP URL, return as-is
+  if (pathStr.startsWith("data:image/") || pathStr.startsWith("http://") || pathStr.startsWith("https://")) {
+    return pathStr;
+  }
+
   // Check local image cache
   try {
     const cache = JSON.parse(localStorage.getItem("portfolio_image_cache") || "{}");

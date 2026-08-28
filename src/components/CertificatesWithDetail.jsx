@@ -300,6 +300,10 @@ const CertificatesWithDetail = () => {
                   alt={certificate.title}
                   draggable={false}
                   onContextMenu={(e) => e.preventDefault()}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    if (allImages.length > 0) e.target.src = allImages[0];
+                  }}
                   style={{
                     userSelect: "none",
                     WebkitUserDrag: "none",
@@ -532,6 +536,9 @@ const CertificatesWithDetail = () => {
                       alt={cert.title}
                       draggable={false}
                       onContextMenu={(e) => e.preventDefault()}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                      }}
                       style={{
                         userSelect: "none",
                         WebkitUserDrag: "none",

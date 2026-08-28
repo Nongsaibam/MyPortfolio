@@ -271,6 +271,10 @@ const ProfilePage = () => {
                 <img
                   src={resolveImagePath(siteSettings?.profileImage, tkImage)}
                   alt={siteSettings?.name || "Tazkhan"}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = tkImage;
+                  }}
                   className="h-48 w-48 rounded-full object-contain shadow-2xl transition duration-500 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80 group-hover:scale-105"
                 />
 
