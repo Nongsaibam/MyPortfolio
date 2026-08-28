@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging bouncing mouse capsule button updates...");
+  console.log("Staging clear certificate preview button updates...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Add animate-bounce to entire mouse capsule scroll indicator so it floats up and down continuously"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Enhance certificate preview buttons with high-contrast bg-slate-950/90, bright cyan-400 borders, bold text labels, and cyan glowing shadows for crystal-clear visibility"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);

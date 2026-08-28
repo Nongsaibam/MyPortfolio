@@ -313,10 +313,10 @@ const CertificatesWithDetail = () => {
 
               <button
                 onClick={() => setZoomImage(getImage(certificate.image))}
-                className="absolute right-8 top-8 z-20 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/65 px-4 py-2 text-sm text-slate-800 backdrop-blur-xl transition hover:scale-105 hover:bg-white dark:border-white/15 dark:bg-white/[0.08] dark:text-white"
+                className="absolute right-4 top-4 sm:right-6 sm:top-6 z-20 inline-flex items-center gap-2 rounded-full border-2 border-cyan-400/80 bg-slate-950/90 px-5 py-2.5 text-xs sm:text-sm font-extrabold text-white backdrop-blur-2xl shadow-xl shadow-cyan-500/30 transition duration-300 hover:scale-105 hover:bg-cyan-500 hover:text-slate-950 hover:border-cyan-300 active:scale-95 cursor-pointer"
               >
-                <HiOutlineMagnifyingGlassPlus className="text-lg" />
-                Preview
+                <HiOutlineMagnifyingGlassPlus className="text-base sm:text-lg text-cyan-400" />
+                Preview Certificate
               </button>
             </div>
 
@@ -547,9 +547,10 @@ const CertificatesWithDetail = () => {
                         e.stopPropagation();
                         setZoomImage(getImage(cert.image));
                       }}
-                      className="absolute right-3 top-3 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/50 text-white/90 backdrop-blur-xl transition hover:scale-105 hover:bg-slate-950/70"
+                      className="absolute right-3 top-3 z-20 inline-flex items-center gap-1.5 rounded-full border-2 border-cyan-400/80 bg-slate-950/90 px-3.5 py-1.5 text-xs font-extrabold text-white backdrop-blur-2xl shadow-lg shadow-cyan-500/30 transition duration-300 hover:scale-105 hover:bg-cyan-500 hover:text-slate-950 active:scale-95 cursor-pointer"
                     >
-                      <HiOutlineMagnifyingGlassPlus className="text-xl" />
+                      <HiOutlineMagnifyingGlassPlus className="text-sm text-cyan-400" />
+                      Preview
                     </button>
                   </div>
 
