@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging certificate security protection updates...");
+  console.log("Staging certificate anti-screenshot updates...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Add certificate anti-screenshot protection, right-click blocking, anti-drag, and watermark shield"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Keep clean certificate look, remove visible text watermark, retain anti-screenshot & right-click protection"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);

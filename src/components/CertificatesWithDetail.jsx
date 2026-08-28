@@ -193,14 +193,6 @@ const CertificatesWithDetail = () => {
                   onContextMenu={(e) => e.preventDefault()}
                   className="h-[24rem] w-full object-contain md:h-[34rem] select-none pointer-events-none"
                 />
-
-                {/* Verified Watermark Badge */}
-                <div className="pointer-events-none absolute bottom-3 left-3 right-3 z-10 flex items-center justify-between rounded-xl border border-white/20 bg-slate-950/75 px-3.5 py-1.5 backdrop-blur-md text-[10px] font-bold text-white/90 shadow-lg select-none">
-                  <span className="flex items-center gap-1.5 text-cyan-400">
-                    <HiOutlineLockClosed className="text-xs text-amber-400" /> Private & Verified
-                  </span>
-                  <span className="tracking-wide text-slate-200">Nongsaibam Tazkhan</span>
-                </div>
               </div>
 
               <button
@@ -311,12 +303,6 @@ const CertificatesWithDetail = () => {
                   onContextMenu={(e) => e.preventDefault()}
                   className="max-h-[86vh] max-w-full rounded-[24px] object-contain select-none pointer-events-none"
                 />
-                <div className="pointer-events-none absolute bottom-3 left-3 right-3 z-10 flex items-center justify-between rounded-xl border border-white/20 bg-slate-950/80 px-4 py-2 backdrop-blur-md text-xs font-bold text-white shadow-lg select-none">
-                  <span className="flex items-center gap-1.5 text-cyan-400">
-                    <HiOutlineLockClosed className="text-sm text-amber-400" /> Private & Verified Certificate
-                  </span>
-                  <span className="tracking-wide text-slate-200">Nongsaibam Tazkhan</span>
-                </div>
               </div>
             </div>
           </div>
@@ -416,14 +402,6 @@ const CertificatesWithDetail = () => {
                       className="h-52 w-full object-cover transition duration-700 group-hover:scale-110 select-none pointer-events-none"
                     />
 
-                    {/* Watermark Badge */}
-                    <div className="pointer-events-none absolute bottom-2 left-2 right-2 z-10 flex items-center justify-between rounded-lg border border-white/20 bg-slate-950/75 px-2.5 py-1 backdrop-blur-md text-[9px] font-bold text-white/90 shadow-md select-none">
-                      <span className="flex items-center gap-1 text-cyan-400">
-                        <HiOutlineLockClosed className="text-amber-400" /> Private
-                      </span>
-                      <span className="tracking-wide text-slate-200 truncate">Nongsaibam Tazkhan</span>
-                    </div>
-
                     <button
                       onClick={() => setZoomImage(getImage(cert.image))}
                       className="absolute right-3 top-3 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/40 text-white/90 backdrop-blur-xl transition hover:scale-105 hover:bg-slate-950/60"
@@ -484,12 +462,6 @@ const CertificatesWithDetail = () => {
                 onContextMenu={(e) => e.preventDefault()}
                 className="max-h-[86vh] max-w-full rounded-[24px] object-contain select-none pointer-events-none"
               />
-              <div className="pointer-events-none absolute bottom-3 left-3 right-3 z-10 flex items-center justify-between rounded-xl border border-white/20 bg-slate-950/80 px-4 py-2 backdrop-blur-md text-xs font-bold text-white shadow-lg select-none">
-                <span className="flex items-center gap-1.5 text-cyan-400">
-                  <HiOutlineLockClosed className="text-sm text-amber-400" /> Private & Verified Certificate
-                </span>
-                <span className="tracking-wide text-slate-200">Nongsaibam Tazkhan</span>
-              </div>
             </div>
           </div>
         </div>
