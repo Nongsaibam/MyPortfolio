@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging profile anti-screenshot security updates...");
+  console.log("Staging 3D holographic profile avatar updates...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Add profile avatar anti-screenshot protections, diagonal security watermark grid, right-click blocking, and window blur obscure listeners"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Transform profile avatar into an interactive 3D Holographic sphere with tilt perspective, floating neon rings, and 3D status badges"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);

@@ -18,96 +18,29 @@ import tkImage from "../assets/1736923031405.jpg";
 import { resolveImagePath } from "../utils/imageCompressor";
 import SEO from "./SEO";
 
-/* ---------------- DIAGONAL SECURITY WATERMARK GRID OVERLAY FOR PROFILE ---------------- */
-
-const ProfileWatermarkGrid = () => (
-  <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center overflow-hidden rounded-full p-2 select-none no-screenshot">
-    <div className="flex w-[220%] -rotate-12 flex-col gap-4 opacity-25 dark:opacity-30 transition-opacity">
-      <div className="flex flex-nowrap gap-4 whitespace-nowrap text-[8px] sm:text-[9px] font-extrabold uppercase tracking-[0.2em] text-slate-900 dark:text-cyan-300">
-        <span>🔒 PRIVATE PROFILE</span>
-        <span>•</span>
-        <span>TAZKHAN</span>
-        <span>•</span>
-        <span>DO NOT SCREENSHOT</span>
-      </div>
-      <div className="flex flex-nowrap gap-4 whitespace-nowrap text-[8px] sm:text-[9px] font-extrabold uppercase tracking-[0.2em] text-slate-900 dark:text-cyan-300">
-        <span>SCREENSHOT PROHIBITED</span>
-        <span>•</span>
-        <span>🔒 PRIVATE PROFILE</span>
-        <span>•</span>
-        <span>TAZKHAN</span>
-      </div>
-      <div className="flex flex-nowrap gap-4 whitespace-nowrap text-[8px] sm:text-[9px] font-extrabold uppercase tracking-[0.2em] text-slate-900 dark:text-cyan-300">
-        <span>🔒 PRIVATE PROFILE</span>
-        <span>•</span>
-        <span>TAZKHAN</span>
-        <span>•</span>
-        <span>DO NOT SCREENSHOT</span>
-      </div>
-    </div>
-  </div>
-);
-
 const ProfilePage = () => {
   const { isDarkMode, toggleTheme } = useTheme();
   const { siteSettings } = usePortfolioData();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isAvatarTouched, setIsAvatarTouched] = React.useState(false);
-  const [isScreenObscured, setIsScreenObscured] = React.useState(false);
+  const [tilt, setTilt] = React.useState({ x: 0, y: 0 });
   const navItems = ["About", "Experience", "Projects", "Skills"];
 
-  React.useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (
-        e.key === "PrintScreen" ||
-        e.keyCode === 44 ||
-        (e.ctrlKey && (e.key === "p" || e.key === "P" || e.key === "s" || e.key === "S")) ||
-        (e.metaKey && (e.key === "p" || e.key === "P" || e.key === "s" || e.key === "S")) ||
-        (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "S" || e.key === "s" || e.key === "C" || e.key === "c")) ||
-        (e.metaKey && e.shiftKey && (e.key === "S" || e.key === "s" || e.key === "4" || e.key === "3"))
-      ) {
-        e.preventDefault();
-        e.stopPropagation();
-        setIsScreenObscured(true);
-        setTimeout(() => setIsScreenObscured(false), 3500);
-      }
-    };
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
 
-    const handleVisibilityChange = () => {
-      if (document.hidden || document.visibilityState === "hidden") {
-        setIsScreenObscured(true);
-      } else {
-        setTimeout(() => setIsScreenObscured(false), 1500);
-      }
-    };
+    const rotX = -(y / (rect.height / 2)) * 18;
+    const rotY = (x / (rect.width / 2)) * 18;
 
-    const handleWindowBlur = () => {
-      setIsScreenObscured(true);
-      setTimeout(() => setIsScreenObscured(false), 1500);
-    };
+    setTilt({ x: rotX, y: rotY });
+  };
 
-    const preventContextMenu = (e) => {
-      e.preventDefault();
-    };
-
-    const preventDrag = (e) => {
-      e.preventDefault();
-    };
-
-    window.addEventListener("keydown", handleKeyDown, true);
-    window.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("blur", handleWindowBlur);
-    window.addEventListener("contextmenu", preventContextMenu);
-    window.addEventListener("dragstart", preventDrag);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown, true);
-      window.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("blur", handleWindowBlur);
-      window.removeEventListener("contextmenu", preventContextMenu);
-      window.removeEventListener("dragstart", preventDrag);
-    };
-  }, []);
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
 
   const handleAvatarTouch = () => {
     setIsAvatarTouched(true);
@@ -301,34 +234,84 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* Right Column: Profile Image & Socials */}
+        {/* Right Column: 3D Holographic Profile Avatar */}
         <div className="group animate-fade-up text-center shrink-0" style={{ animationDelay: "120ms" }}>
           <div
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            onTouchMove={(e) => {
+              if (e.touches && e.touches[0]) {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.touches[0].clientX - rect.left - rect.width / 2;
+                const y = e.touches[0].clientY - rect.top - rect.height / 2;
+                setTilt({ x: -(y / (rect.height / 2)) * 15, y: (x / (rect.width / 2)) * 15 });
+              }
+            }}
+            onTouchEnd={handleMouseLeave}
             onClick={handleAvatarTouch}
-            onTouchStart={handleAvatarTouch}
-            onContextMenu={(e) => e.preventDefault()}
-            onDragStart={(e) => e.preventDefault()}
-            className={`relative overflow-hidden rounded-full p-1.5 sm:p-2 border-2 transition-all duration-500 cursor-pointer backdrop-blur-2xl shadow-2xl select-none ${
-              isAvatarTouched
-                ? "scale-105 border-cyan-400 shadow-cyan-500/50 ring-4 ring-cyan-500/30"
-                : "border-cyan-500/40 bg-slate-900/40 hover:scale-105 hover:border-cyan-400 hover:shadow-cyan-500/40 active:scale-95 active:border-cyan-400 dark:bg-white/[0.05]"
-            }`}
+            style={{
+              perspective: "1200px",
+            }}
+            className="relative cursor-pointer select-none p-4"
           >
-            <ProfileWatermarkGrid />
-            <img
-              src={resolveImagePath(siteSettings?.profileImage, tkImage)}
-              alt={siteSettings?.name || "Tazkhan"}
-              draggable={false}
-              onContextMenu={(e) => e.preventDefault()}
+            {/* 3D Perspective Card Container */}
+            <div
               style={{
-                userSelect: "none",
-                WebkitUserDrag: "none",
-                filter: isScreenObscured ? "blur(80px) brightness(0)" : "none",
-                opacity: isScreenObscured ? 0 : 1,
-                transition: "all 0.1s linear"
+                transform: `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.02, 1.02, 1.02)`,
+                transition: "transform 0.15s ease-out",
+                transformStyle: "preserve-3d",
               }}
-              className="certificate h-44 w-44 rounded-full object-cover shadow-2xl transition duration-500 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80 group-hover:scale-105 select-none pointer-events-none no-screenshot"
-            />
+              className={`relative flex items-center justify-center rounded-full p-3 sm:p-4 border-2 backdrop-blur-2xl transition-all duration-500 shadow-[0_25px_60px_rgba(0,242,254,0.18)] ${
+                isAvatarTouched
+                  ? "border-cyan-400 shadow-cyan-500/60 ring-4 ring-cyan-500/40"
+                  : "border-cyan-500/40 bg-slate-900/60 dark:bg-slate-950/70 hover:border-cyan-400 hover:shadow-cyan-500/40"
+              }`}
+            >
+              {/* 3D Ambient Glowing Neon Backdrop Aura Ring */}
+              <div
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-40 blur-2xl animate-pulse"
+                style={{ transform: "translateZ(-20px)" }}
+              />
+
+              {/* 3D Orbiting Outer Neon Border Ring */}
+              <div
+                className="absolute -inset-1 rounded-full border border-cyan-400/40 bg-gradient-to-tr from-cyan-500/20 via-transparent to-pink-500/20 shadow-[inset_0_0_20px_rgba(56,189,248,0.3)] animate-spin-slow"
+                style={{ transform: "translateZ(10px)", animationDuration: "14s" }}
+              />
+
+              {/* Profile Image with 3D Depth & Specular Reflection */}
+              <div
+                className="relative overflow-hidden rounded-full border-4 border-white/20 shadow-2xl"
+                style={{ transform: "translateZ(25px)" }}
+              >
+                <img
+                  src={resolveImagePath(siteSettings?.profileImage, tkImage)}
+                  alt={siteSettings?.name || "Tazkhan"}
+                  className="h-44 w-44 rounded-full object-cover transition duration-500 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80 group-hover:scale-105"
+                />
+
+                {/* Glossy Reflection Overlay */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-60" />
+              </div>
+
+              {/* 3D Floating Holographic Badge 1 (Top Right) */}
+              <div
+                className="absolute -right-2 top-4 flex items-center gap-1.5 rounded-full border border-cyan-400/50 bg-slate-950/85 px-3 py-1.5 text-[10px] sm:text-xs font-bold text-cyan-300 backdrop-blur-xl shadow-xl shadow-cyan-500/20 transition duration-300 hover:scale-110"
+                style={{ transform: "translateZ(45px)" }}
+              >
+                <HiOutlineSparkles className="text-amber-400 animate-spin" />
+                <span>Full Stack MERN</span>
+              </div>
+
+              {/* 3D Floating Holographic Badge 2 (Bottom Left) */}
+              <div
+                className="absolute -left-2 bottom-4 flex items-center gap-1.5 rounded-full border border-purple-400/50 bg-slate-950/85 px-3 py-1.5 text-[10px] sm:text-xs font-bold text-purple-300 backdrop-blur-xl shadow-xl shadow-purple-500/20 transition duration-300 hover:scale-110"
+                style={{ transform: "translateZ(50px)" }}
+              >
+                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+                <span>100% Scalable Code</span>
+              </div>
+            </div>
           </div>
 
           <div className="mt-3 sm:mt-6 flex justify-center gap-4 sm:gap-6 text-lg sm:text-2xl text-slate-600 dark:text-slate-300">
