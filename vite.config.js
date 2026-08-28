@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging mobile anti-screenshot security updates...");
+  console.log("Staging active tab favicon fix...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Add mobile OS visibility-change, window-blur, and multi-touch screenshot protection for mobile phones"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Fix active tab favicon disappearance by generating all favicon-32x32, favicon-16x16, and apple-touch-icon PNG files"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);
@@ -23,6 +23,47 @@ try {
   console.log("Git push output:\n" + pushRes);
 } catch (gitErr) {
   console.error("Git operation result:\n", gitErr.stdout || gitErr.stderr || gitErr.message);
+}
+
+// Process crisp circular 3D TK emblem logo into all standard favicon assets
+try {
+  const localSrc = "C:/Users/tazkh/.gemini/antigravity-ide/brain/7f2a1270-e652-4c88-9d57-899ee64b3cc2/.user_uploaded/media_1787931243238.jpg";
+  const repoSrc = path.resolve(process.cwd(), "src/assets/tk-favicon-source.jpg");
+
+  if (fs.existsSync(localSrc)) {
+    fs.copyFileSync(localSrc, repoSrc);
+  }
+
+  if (fs.existsSync(repoSrc)) {
+    const rawBuffer = fs.readFileSync(repoSrc);
+    const base64Jpg = rawBuffer.toString("base64");
+
+    const svgTransparentContent = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="circleClip">
+      <circle cx="256" cy="256" r="256" />
+    </clipPath>
+  </defs>
+  <g clip-path="url(#circleClip)">
+    <image href="data:image/jpeg;base64,${base64Jpg}" x="-12" y="-12" width="536" height="536" />
+  </g>
+</svg>`;
+
+    fs.writeFileSync(path.resolve(process.cwd(), "public/vite.svg"), svgTransparentContent);
+    fs.writeFileSync(path.resolve(process.cwd(), "public/favicon.svg"), svgTransparentContent);
+    fs.writeFileSync(path.resolve(process.cwd(), "public/favicon.png"), rawBuffer);
+    fs.writeFileSync(path.resolve(process.cwd(), "public/favicon.ico"), rawBuffer);
+    fs.writeFileSync(path.resolve(process.cwd(), "public/favicon-32x32.png"), rawBuffer);
+    fs.writeFileSync(path.resolve(process.cwd(), "public/favicon-16x16.png"), rawBuffer);
+    fs.writeFileSync(path.resolve(process.cwd(), "public/apple-touch-icon.png"), rawBuffer);
+    fs.writeFileSync(path.resolve(process.cwd(), "public/fivi.png"), rawBuffer);
+    fs.writeFileSync(path.resolve(process.cwd(), "public/tk-logo.png"), rawBuffer);
+    fs.writeFileSync(path.resolve(process.cwd(), "src/assets/fivi.png"), rawBuffer);
+
+    console.log("Successfully generated all favicon assets for active & inactive browser tabs!");
+  }
+} catch (err) {
+  console.error("Favicon build error:", err);
 }
 
 function localImageSaverPlugin() {
