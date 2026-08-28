@@ -313,20 +313,15 @@ const ProfilePage = () => {
         </div>
       </main>
 
-      {/* Ultra-Sleek Glassmorphic Scroll Down Indicator */}
+      {/* Ultra-Sleek Glassmorphic Scroll Indicator */}
       <div className="relative z-10 pb-8 pt-4 flex justify-center">
         <button
           type="button"
           onClick={handleScrollToAbout}
-          className="group inline-flex flex-col items-center gap-2 rounded-full border border-black/10 bg-white/60 px-5 py-2.5 backdrop-blur-2xl shadow-lg transition-all duration-500 hover:scale-110 hover:border-cyan-400 hover:shadow-cyan-500/25 active:scale-95 dark:border-white/15 dark:bg-white/[0.08]"
+          className="group flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white/60 backdrop-blur-2xl shadow-lg transition-all duration-500 hover:scale-125 hover:border-cyan-400 hover:shadow-cyan-500/25 active:scale-95 dark:border-white/15 dark:bg-white/[0.08]"
           aria-label="Scroll Down to About Me section"
         >
-          <span className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-700 transition group-hover:text-cyan-500 dark:text-slate-300 dark:group-hover:text-cyan-400">
-            Scroll Down
-          </span>
-          <div className="flex h-5 w-5 items-center justify-center rounded-full bg-cyan-500/20 text-cyan-400 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300 animate-bounce">
-            <HiOutlineArrowDown className="h-3.5 w-3.5" />
-          </div>
+          <HiOutlineArrowDown className="h-5 w-5 text-cyan-400 group-hover:text-cyan-300 transition-colors animate-bounce" />
         </button>
       </div>
     </section>
