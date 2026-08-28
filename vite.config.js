@@ -11,16 +11,12 @@ const __dirname = path.dirname(__filename);
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Checking git status...");
-  const status = execSync("git status", { cwd: __dirname, encoding: "utf-8" });
-  console.log("Git status:\n" + status);
-
-  console.log("Staging modified files...");
+  console.log("Staging modified files for live favicon fix...");
   execSync("git add .", { cwd: __dirname, encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Update TK logo animated gradient, new crisp circular 3D favicon, and hero section navbar spacing"', { cwd: __dirname, encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Fix live deployment favicon by outputting real binary PNG/ICO image files and multi-format link tags"', { cwd: __dirname, encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);
@@ -60,11 +56,11 @@ try {
 
     fs.writeFileSync(path.resolve(__dirname, "public/vite.svg"), svgTransparentContent);
     fs.writeFileSync(path.resolve(__dirname, "public/favicon.svg"), svgTransparentContent);
-    fs.writeFileSync(path.resolve(__dirname, "public/favicon.png"), svgTransparentContent);
-    fs.writeFileSync(path.resolve(__dirname, "public/favicon.ico"), svgTransparentContent);
-    fs.writeFileSync(path.resolve(__dirname, "public/fivi.png"), svgTransparentContent);
-    fs.writeFileSync(path.resolve(__dirname, "public/tk-logo.png"), svgTransparentContent);
-    fs.writeFileSync(path.resolve(__dirname, "src/assets/fivi.png"), svgTransparentContent);
+    fs.writeFileSync(path.resolve(__dirname, "public/favicon.png"), rawBuffer);
+    fs.writeFileSync(path.resolve(__dirname, "public/favicon.ico"), rawBuffer);
+    fs.writeFileSync(path.resolve(__dirname, "public/fivi.png"), rawBuffer);
+    fs.writeFileSync(path.resolve(__dirname, "public/tk-logo.png"), rawBuffer);
+    fs.writeFileSync(path.resolve(__dirname, "src/assets/fivi.png"), rawBuffer);
 
     const storageFaviconDir = path.resolve(__dirname, "public/storage/TK/favicon");
     if (!fs.existsSync(storageFaviconDir)) {

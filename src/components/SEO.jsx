@@ -93,22 +93,25 @@ const SEO = ({ title, description, keywords, image, url, type = "website" }) => 
     jsonLdScript.textContent = JSON.stringify(personSchema);
 
     // 7. Dynamic Favicon Link Tag Update (Real-time Admin Favicon Controller)
-    const rawFavicon = siteSettings?.faviconImage || seo?.faviconImage || "/favicon.svg";
-    const siteFavicon = resolveImagePath(rawFavicon, "/favicon.svg");
+    const rawFavicon = siteSettings?.faviconImage || seo?.faviconImage || "/favicon.png";
+    const siteFavicon = resolveImagePath(rawFavicon, "/favicon.png");
 
-    const updateFaviconLink = (relType) => {
+    const updateFaviconLink = (relType, typeAttr = "") => {
       let link = document.querySelector(`link[rel="${relType}"]`);
       if (!link) {
         link = document.createElement("link");
         link.setAttribute("rel", relType);
         document.head.appendChild(link);
       }
+      if (typeAttr) {
+        link.setAttribute("type", typeAttr);
+      }
       link.setAttribute("href", siteFavicon);
     };
 
-    updateFaviconLink("icon");
-    updateFaviconLink("shortcut icon");
-    updateFaviconLink("apple-touch-icon");
+    updateFaviconLink("icon", siteFavicon.endsWith(".svg") ? "image/svg+xml" : "image/png");
+    updateFaviconLink("shortcut icon", "image/x-icon");
+    updateFaviconLink("apple-touch-icon", "image/png");
   }, [siteTitle, siteDescription, siteKeywords, siteAuthor, siteUrl, siteImage, siteSettings?.faviconImage, seo?.faviconImage, type, seo.allowIndexing]);
 
   return null;
