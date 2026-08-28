@@ -235,64 +235,67 @@ const ProfilePage = () => {
         </div>
 
         {/* Right Column: 3D Holographic Profile Avatar */}
-        <div
-          className="group relative animate-fade-up text-center shrink-0"
-          style={{ animationDelay: "120ms", perspective: "1000px" }}
-          onMouseMove={handleMouseMove}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          onClick={handleAvatarTouch}
-          onTouchStart={handleAvatarTouch}
-        >
-          {/* 3D Glowing Backdrop Aura */}
-          <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-pink-500 opacity-30 blur-2xl transition-all duration-700 group-hover:opacity-75 group-hover:blur-3xl animate-pulse" />
-
-          {/* 3D Main Outer Sphere Ring Container */}
+        <div className="relative animate-fade-up text-center shrink-0" style={{ animationDelay: "120ms" }}>
+          {/* 3D Interactive Profile Avatar Container (Hover & Tilt trigger ONLY when pointer touches photo) */}
           <div
-            style={{
-              transform: isHovered
-                ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.05, 1.05, 1.05)`
-                : "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)",
-              transition: isHovered ? "transform 0.1s ease-out" : "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)",
-              transformStyle: "preserve-3d",
-            }}
-            className={`relative rounded-full p-2.5 sm:p-3 border-2 transition-all duration-500 cursor-pointer backdrop-blur-3xl shadow-[0_20px_60px_rgba(6,182,212,0.3)] ${
-              isAvatarTouched
-                ? "border-cyan-400 ring-4 ring-cyan-500/40 shadow-cyan-500/60"
-                : "border-cyan-500/40 bg-slate-900/60 hover:border-cyan-400 dark:bg-white/[0.06]"
-            }`}
+            className="group relative inline-block cursor-pointer"
+            style={{ perspective: "1000px" }}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onClick={handleAvatarTouch}
+            onTouchStart={handleAvatarTouch}
           >
-            {/* 3D Orbiting Glowing Rings */}
-            <div className="absolute -inset-1.5 rounded-full border border-cyan-400/40 animate-[spin_10s_linear_infinite] pointer-events-none" />
-            <div className="absolute -inset-3.5 rounded-full border border-indigo-500/30 animate-[spin_15s_linear_infinite_reverse] pointer-events-none" />
+            {/* 3D Glowing Backdrop Aura */}
+            <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-pink-500 opacity-20 blur-2xl transition-all duration-700 group-hover:opacity-75 group-hover:blur-3xl animate-pulse" />
 
-            {/* Profile Image with 3D Depth */}
-            <div className="relative overflow-hidden rounded-full transform-gpu" style={{ transform: "translateZ(30px)" }}>
-              <img
-                src={resolveImagePath(siteSettings?.profileImage, tkImage)}
-                alt={siteSettings?.name || "Tazkhan"}
-                className="h-48 w-48 rounded-full object-cover shadow-2xl transition duration-500 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80 group-hover:scale-105"
-              />
-
-              {/* 3D Specular Lighting Glare Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
-            </div>
-
-            {/* Floating 3D Badge 1: Top Right */}
+            {/* 3D Main Outer Sphere Ring Container */}
             <div
-              className="absolute -right-2 top-4 z-20 hidden sm:flex items-center gap-1.5 rounded-full border border-cyan-400/40 bg-slate-950/85 px-3 py-1 text-[11px] font-bold text-cyan-300 backdrop-blur-xl shadow-xl transition-transform duration-500"
-              style={{ transform: isHovered ? "translateZ(60px) translateY(-5px)" : "translateZ(40px)" }}
+              style={{
+                transform: isHovered
+                  ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.05, 1.05, 1.05)`
+                  : "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)",
+                transition: isHovered ? "transform 0.1s ease-out" : "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)",
+                transformStyle: "preserve-3d",
+              }}
+              className={`relative rounded-full p-2.5 sm:p-3 border-2 transition-all duration-500 cursor-pointer backdrop-blur-3xl shadow-[0_20px_60px_rgba(6,182,212,0.3)] ${
+                isAvatarTouched
+                  ? "border-cyan-400 ring-4 ring-cyan-500/40 shadow-cyan-500/60"
+                  : "border-cyan-500/40 bg-slate-900/60 hover:border-cyan-400 dark:bg-white/[0.06]"
+              }`}
             >
-              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
-              ⚡ MERN Stack
-            </div>
+              {/* 3D Orbiting Glowing Rings */}
+              <div className="absolute -inset-1.5 rounded-full border border-cyan-400/40 animate-[spin_10s_linear_infinite] pointer-events-none" />
+              <div className="absolute -inset-3.5 rounded-full border border-indigo-500/30 animate-[spin_15s_linear_infinite_reverse] pointer-events-none" />
 
-            {/* Floating 3D Badge 2: Bottom Left */}
-            <div
-              className="absolute -left-3 bottom-6 z-20 hidden sm:flex items-center gap-1.5 rounded-full border border-violet-400/40 bg-slate-950/85 px-3 py-1 text-[11px] font-bold text-violet-300 backdrop-blur-xl shadow-xl transition-transform duration-500"
-              style={{ transform: isHovered ? "translateZ(60px) translateY(5px)" : "translateZ(40px)" }}
-            >
-              🚀 Full Stack Dev
+              {/* Profile Image with 3D Depth */}
+              <div className="relative overflow-hidden rounded-full transform-gpu" style={{ transform: "translateZ(30px)" }}>
+                <img
+                  src={resolveImagePath(siteSettings?.profileImage, tkImage)}
+                  alt={siteSettings?.name || "Tazkhan"}
+                  className="h-48 w-48 rounded-full object-cover shadow-2xl transition duration-500 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80 group-hover:scale-105"
+                />
+
+                {/* 3D Specular Lighting Glare Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
+              </div>
+
+              {/* Floating 3D Badge 1: Top Right */}
+              <div
+                className="absolute -right-2 top-4 z-20 hidden sm:flex items-center gap-1.5 rounded-full border border-cyan-400/40 bg-slate-950/85 px-3 py-1 text-[11px] font-bold text-cyan-300 backdrop-blur-xl shadow-xl transition-transform duration-500"
+                style={{ transform: isHovered ? "translateZ(60px) translateY(-5px)" : "translateZ(40px)" }}
+              >
+                <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
+                ⚡ MERN Stack
+              </div>
+
+              {/* Floating 3D Badge 2: Bottom Left */}
+              <div
+                className="absolute -left-3 bottom-6 z-20 hidden sm:flex items-center gap-1.5 rounded-full border border-violet-400/40 bg-slate-950/85 px-3 py-1 text-[11px] font-bold text-violet-300 backdrop-blur-xl shadow-xl transition-transform duration-500"
+                style={{ transform: isHovered ? "translateZ(60px) translateY(5px)" : "translateZ(40px)" }}
+              >
+                🚀 Full Stack Dev
+              </div>
             </div>
           </div>
 
