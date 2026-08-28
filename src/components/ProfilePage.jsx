@@ -81,44 +81,56 @@ const ProfilePage = () => {
     <section className="relative min-h-screen overflow-hidden bg-transparent text-slate-900 dark:text-white transition-colors duration-500">
       <SEO />
 
-      {/* Floating Glassmorphic Header */}
-      <header className="fixed top-4 sm:top-6 inset-x-0 z-50 mx-auto max-w-5xl px-4 sm:px-6">
-        <div className="flex items-center justify-between rounded-full border border-black/10 bg-white/60 p-2 sm:p-2.5 backdrop-blur-2xl shadow-xl dark:border-white/15 dark:bg-white/[0.08]">
-          <Link to="/" className="flex items-center gap-2 pl-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-violet-600 text-xs font-black text-white shadow-md">
-              TK
-            </div>
-            <span className="font-extrabold tracking-tight text-slate-900 dark:text-white text-sm sm:text-base">
-              {siteSettings?.name || "Tazkhan"}
+      {/* Sleek Ultra-Modern Top Navbar (Exact Match to Design) */}
+      <header className="fixed top-0 inset-x-0 z-50 w-full border-b border-black/10 bg-white/75 px-4 sm:px-8 py-3.5 backdrop-blur-2xl transition-all duration-300 dark:border-white/10 dark:bg-[#040817]/85">
+        <div className="mx-auto flex max-w-7xl items-center justify-between">
+          {/* Left: Bold Dual-Tone Gradient TK Logo */}
+          <Link to="/" className="flex items-center gap-1 text-2xl sm:text-3xl font-black tracking-tight select-none">
+            <span className="bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-sm">
+              T
+            </span>
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-sm">
+              K
             </span>
           </Link>
 
-          {/* Desktop Nav Items */}
-          <nav className="hidden md:flex items-center gap-1 rounded-full bg-black/5 p-1 dark:bg-white/5">
+          {/* Center: Clean Spaced Navigation Links */}
+          <nav className="hidden md:flex items-center gap-8 lg:gap-12">
             {navItems.map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="rounded-full px-4 py-1.5 text-xs font-bold text-slate-700 transition hover:bg-white hover:text-slate-950 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white"
+                className="text-sm font-extrabold tracking-wide text-slate-800 transition duration-300 hover:text-cyan-500 dark:text-slate-100 dark:hover:text-cyan-400"
               >
                 {item}
               </a>
             ))}
             <Link
               to="/certificates"
-              className="rounded-full px-4 py-1.5 text-xs font-bold text-slate-700 transition hover:bg-white hover:text-slate-950 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white"
+              className="text-sm font-extrabold tracking-wide text-slate-800 transition duration-300 hover:text-cyan-500 dark:text-slate-100 dark:hover:text-cyan-400"
             >
               Certifications
             </Link>
           </nav>
 
-          <div className="flex items-center gap-2 pr-1">
+          {/* Right: Theme Toggle Pill Button (Icon + Label) & Mobile Hamburger */}
+          <div className="flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 bg-white/80 text-slate-700 backdrop-blur-xl transition hover:scale-105 dark:border-white/15 dark:bg-white/10 dark:text-amber-400"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-700/50 bg-slate-900/80 px-4 py-1.5 text-xs font-bold text-white shadow-md backdrop-blur-xl transition-all duration-300 hover:scale-105 hover:border-cyan-400 hover:shadow-cyan-500/20 active:scale-95 dark:border-white/20 dark:bg-white/[0.08]"
               aria-label="Toggle Theme"
             >
-              {isDarkMode ? <HiMiniSun className="text-lg" /> : <HiMiniMoon className="text-lg" />}
+              {isDarkMode ? (
+                <>
+                  <HiMiniSun className="text-amber-400 text-sm" />
+                  <span>Light</span>
+                </>
+              ) : (
+                <>
+                  <HiMiniMoon className="text-indigo-400 text-sm" />
+                  <span>Dark</span>
+                </>
+              )}
             </button>
 
             <button
@@ -133,14 +145,14 @@ const ProfilePage = () => {
 
         {/* Mobile Dropdown Menu */}
         {isMobileMenuOpen && (
-          <div className="mt-2 rounded-3xl border border-black/10 bg-white/90 p-4 backdrop-blur-2xl shadow-2xl md:hidden dark:border-white/15 dark:bg-slate-900/90">
+          <div className="mt-3 mx-auto max-w-7xl rounded-2xl border border-black/10 bg-white/95 p-4 backdrop-blur-2xl shadow-2xl md:hidden dark:border-white/15 dark:bg-slate-950/95">
             <nav className="flex flex-col gap-2">
               {navItems.map((item) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="rounded-2xl px-4 py-2 text-sm font-bold text-slate-800 transition hover:bg-black/5 dark:text-slate-200 dark:hover:bg-white/10"
+                  className="rounded-xl px-4 py-2 text-sm font-bold text-slate-800 transition hover:bg-black/5 dark:text-slate-200 dark:hover:bg-white/10"
                 >
                   {item}
                 </a>
@@ -148,7 +160,7 @@ const ProfilePage = () => {
               <Link
                 to="/certificates"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="rounded-2xl px-4 py-2 text-sm font-bold text-slate-800 transition hover:bg-black/5 dark:text-slate-200 dark:hover:bg-white/10"
+                className="rounded-xl px-4 py-2 text-sm font-bold text-slate-800 transition hover:bg-black/5 dark:text-slate-200 dark:hover:bg-white/10"
               >
                 Certifications
               </Link>
