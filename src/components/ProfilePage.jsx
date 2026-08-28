@@ -313,18 +313,22 @@ const ProfilePage = () => {
         </div>
       </main>
 
-      {/* Bottom Scroll Down Indicator */}
-      <button
-        type="button"
-        onClick={handleScrollToAbout}
-        className="relative z-10 mx-auto flex flex-col items-center justify-center py-2 md:py-6 no-underline cursor-pointer border-none bg-transparent outline-none select-none touch-manipulation animate-float-up-down"
-        aria-label="Scroll Down to About Me section"
-      >
-        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-1">
-          Scroll Down
-        </span>
-        <HiOutlineArrowDown className="h-4 w-4 text-cyan-400" />
-      </button>
+      {/* Ultra-Sleek Glassmorphic Scroll Down Indicator */}
+      <div className="relative z-10 pb-8 pt-4 flex justify-center">
+        <button
+          type="button"
+          onClick={handleScrollToAbout}
+          className="group inline-flex flex-col items-center gap-2 rounded-full border border-black/10 bg-white/60 px-5 py-2.5 backdrop-blur-2xl shadow-lg transition-all duration-500 hover:scale-110 hover:border-cyan-400 hover:shadow-cyan-500/25 active:scale-95 dark:border-white/15 dark:bg-white/[0.08]"
+          aria-label="Scroll Down to About Me section"
+        >
+          <span className="text-[11px] font-black uppercase tracking-[0.25em] text-slate-700 transition group-hover:text-cyan-500 dark:text-slate-300 dark:group-hover:text-cyan-400">
+            Scroll Down
+          </span>
+          <div className="flex h-5 w-5 items-center justify-center rounded-full bg-cyan-500/20 text-cyan-400 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300 animate-bounce">
+            <HiOutlineArrowDown className="h-3.5 w-3.5" />
+          </div>
+        </button>
+      </div>
     </section>
   );
 };
