@@ -163,3 +163,22 @@ html.dark li:not(.theme-gradient-text) {
   -webkit-user-drag: none;
   pointer-events: none;
 }
+
+@keyframes scrollWheel {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(12px);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-scroll-wheel {
+  animation: scrollWheel 1.6s infinite ease-in-out;
+}

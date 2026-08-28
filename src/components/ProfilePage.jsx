@@ -313,19 +313,21 @@ const ProfilePage = () => {
         </div>
       </main>
 
-      {/* 3D Vertical Capsule Mouse Scroll Indicator (Exact Match to Design) */}
-      <div className="relative z-10 pb-8 pt-4 flex justify-center">
+      {/* 3D Vertical Capsule Mouse Scroll Indicator (Bigger & Animated) */}
+      <div className="relative z-10 pb-10 pt-6 flex justify-center">
         <button
           type="button"
           onClick={handleScrollToAbout}
-          className="group relative flex h-14 w-7 flex-col items-center justify-between rounded-full border-2 border-indigo-500/50 bg-[#444a57] p-1.5 shadow-lg shadow-indigo-500/20 backdrop-blur-xl transition-all duration-300 hover:scale-110 hover:border-cyan-400 hover:shadow-cyan-500/40 active:scale-95 cursor-pointer select-none"
+          className="group relative flex h-16 w-8 flex-col items-center justify-between rounded-full border-[2.5px] border-indigo-500/60 bg-[#444a57] p-2 shadow-xl shadow-indigo-500/25 backdrop-blur-xl transition-all duration-300 hover:scale-110 hover:border-cyan-400 hover:shadow-cyan-500/50 active:scale-95 cursor-pointer select-none"
           aria-label="Scroll Down to About Me section"
         >
-          {/* Top Animated Cyan Scroll Wheel Bar */}
-          <span className="h-3 w-1 rounded-full bg-cyan-400 animate-pulse mt-0.5 shadow-sm shadow-cyan-400/50" />
+          {/* Top Animated Cyan Scroll Wheel Bar with Smooth Sliding Animation */}
+          <div className="relative h-6 w-full flex justify-center">
+            <span className="h-3.5 w-1.5 rounded-full bg-cyan-400 animate-scroll-wheel shadow-md shadow-cyan-400/60" />
+          </div>
 
-          {/* Bottom Cyan Arrow */}
-          <HiOutlineArrowDown className="h-3.5 w-3.5 text-cyan-400 group-hover:text-cyan-300 transition-colors animate-bounce mb-0.5" />
+          {/* Bottom Cyan Bouncing Arrow */}
+          <HiOutlineArrowDown className="h-4 w-4 text-cyan-400 group-hover:text-cyan-300 transition-colors animate-bounce mb-0.5" />
         </button>
       </div>
     </section>
