@@ -14,6 +14,7 @@ import {
 import { useTheme } from "../context/ThemeContext";
 import { usePortfolioData } from "../context/PortfolioContext";
 import tkImage from "../assets/1736923031405.jpg";
+import profile3dImage from "../assets/profile-3d.jpg";
 
 import { resolveImagePath } from "../utils/imageCompressor";
 import SEO from "./SEO";
@@ -257,59 +258,56 @@ const ProfilePage = () => {
             {/* 3D Perspective Card Container */}
             <div
               style={{
-                transform: `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.02, 1.02, 1.02)`,
+                transform: `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.03, 1.03, 1.03)`,
                 transition: "transform 0.15s ease-out",
                 transformStyle: "preserve-3d",
               }}
-              className={`relative flex items-center justify-center rounded-full p-3 sm:p-4 border-2 backdrop-blur-2xl transition-all duration-500 shadow-[0_25px_60px_rgba(0,242,254,0.18)] ${
+              className={`relative flex items-center justify-center rounded-[40px] p-2 sm:p-4 transition-all duration-500 ${
                 isAvatarTouched
-                  ? "border-cyan-400 shadow-cyan-500/60 ring-4 ring-cyan-500/40"
-                  : "border-cyan-500/40 bg-slate-900/60 dark:bg-slate-950/70 hover:border-cyan-400 hover:shadow-cyan-500/40"
+                  ? "scale-105"
+                  : ""
               }`}
             >
-              {/* 3D Ambient Glowing Neon Backdrop Aura Ring */}
+              {/* 3D Ambient Glowing Blue Backdrop Aura */}
               <div
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-40 blur-2xl animate-pulse"
-                style={{ transform: "translateZ(-20px)" }}
+                className="absolute inset-4 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 opacity-45 blur-3xl animate-pulse"
+                style={{ transform: "translateZ(-30px)" }}
               />
 
-              {/* 3D Orbiting Outer Neon Border Ring */}
+              {/* 3D Orbiting Outer Blue Neon Ring */}
               <div
-                className="absolute -inset-1 rounded-full border border-cyan-400/40 bg-gradient-to-tr from-cyan-500/20 via-transparent to-pink-500/20 shadow-[inset_0_0_20px_rgba(56,189,248,0.3)] animate-spin-slow"
-                style={{ transform: "translateZ(10px)", animationDuration: "14s" }}
+                className="absolute inset-0 rounded-full border-2 border-cyan-400/40 bg-gradient-to-tr from-cyan-500/10 via-transparent to-blue-600/20 shadow-[0_0_30px_rgba(56,189,248,0.3)] animate-spin-slow"
+                style={{ transform: "translateZ(10px)", animationDuration: "16s" }}
               />
 
-              {/* Profile Image with 3D Depth & Specular Reflection */}
+              {/* 3D Developer Avatar Image Asset */}
               <div
-                className="relative overflow-hidden rounded-full border-4 border-white/20 shadow-2xl"
-                style={{ transform: "translateZ(25px)" }}
+                className="relative overflow-hidden rounded-[32px] p-1"
+                style={{ transform: "translateZ(35px)" }}
               >
                 <img
-                  src={resolveImagePath(siteSettings?.profileImage, tkImage)}
+                  src={resolveImagePath(siteSettings?.profileImage, profile3dImage)}
                   alt={siteSettings?.name || "Tazkhan"}
-                  className="h-44 w-44 rounded-full object-cover transition duration-500 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80 group-hover:scale-105"
+                  className="h-56 w-56 object-contain drop-shadow-[0_20px_40px_rgba(0,120,255,0.4)] transition duration-500 sm:h-80 sm:w-80 md:h-96 md:w-96 lg:h-[26rem] lg:w-[26rem] group-hover:scale-105"
                 />
-
-                {/* Glossy Reflection Overlay */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-60" />
               </div>
 
               {/* 3D Floating Holographic Badge 1 (Top Right) */}
               <div
-                className="absolute -right-2 top-4 flex items-center gap-1.5 rounded-full border border-cyan-400/50 bg-slate-950/85 px-3 py-1.5 text-[10px] sm:text-xs font-bold text-cyan-300 backdrop-blur-xl shadow-xl shadow-cyan-500/20 transition duration-300 hover:scale-110"
-                style={{ transform: "translateZ(45px)" }}
+                className="absolute right-0 top-6 flex items-center gap-1.5 rounded-full border border-cyan-400/50 bg-slate-950/85 px-3.5 py-1.5 text-[10px] sm:text-xs font-bold text-cyan-300 backdrop-blur-xl shadow-xl shadow-cyan-500/25 transition duration-300 hover:scale-110"
+                style={{ transform: "translateZ(55px)" }}
               >
                 <HiOutlineSparkles className="text-amber-400 animate-spin" />
-                <span>Full Stack MERN</span>
+                <span>Full Stack Developer</span>
               </div>
 
               {/* 3D Floating Holographic Badge 2 (Bottom Left) */}
               <div
-                className="absolute -left-2 bottom-4 flex items-center gap-1.5 rounded-full border border-purple-400/50 bg-slate-950/85 px-3 py-1.5 text-[10px] sm:text-xs font-bold text-purple-300 backdrop-blur-xl shadow-xl shadow-purple-500/20 transition duration-300 hover:scale-110"
-                style={{ transform: "translateZ(50px)" }}
+                className="absolute left-0 bottom-6 flex items-center gap-1.5 rounded-full border border-blue-400/50 bg-slate-950/85 px-3.5 py-1.5 text-[10px] sm:text-xs font-bold text-blue-300 backdrop-blur-xl shadow-xl shadow-blue-500/25 transition duration-300 hover:scale-110"
+                style={{ transform: "translateZ(60px)" }}
               >
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>100% Scalable Code</span>
+                <span>React • Node • MERN</span>
               </div>
             </div>
           </div>
