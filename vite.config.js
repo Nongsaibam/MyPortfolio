@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging clean vite.config.js fix...");
+  console.log("Staging restored ProfilePage.jsx...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Remove missing sharp dependency and use native Node fs module in vite.config.js"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Restore complete working ProfilePage.jsx to fix blank page error"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);
