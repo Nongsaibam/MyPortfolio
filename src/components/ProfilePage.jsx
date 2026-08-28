@@ -313,12 +313,12 @@ const ProfilePage = () => {
         </div>
       </main>
 
-      {/* 3D Vertical Capsule Mouse Scroll Indicator (Exact Pixel-Perfect Match) */}
+      {/* 3D Vertical Capsule Mouse Scroll Indicator (Floats Up & Down) */}
       <div className="relative z-10 pb-10 pt-6 flex justify-center">
         <button
           type="button"
           onClick={handleScrollToAbout}
-          className="group relative flex h-16 w-8 flex-col items-center justify-between rounded-full border-2 border-indigo-400/90 bg-[#485061] p-2 shadow-[0_0_20px_rgba(99,102,241,0.5)] transition-all duration-300 hover:scale-110 hover:border-cyan-400 hover:shadow-[0_0_25px_rgba(34,211,238,0.7)] active:scale-95 cursor-pointer select-none"
+          className="group relative flex h-16 w-8 flex-col items-center justify-between rounded-full border-2 border-indigo-400/90 bg-[#485061] p-2 shadow-[0_0_20px_rgba(99,102,241,0.5)] transition-all duration-300 hover:scale-110 hover:border-cyan-400 hover:shadow-[0_0_25px_rgba(34,211,238,0.7)] active:scale-95 cursor-pointer select-none animate-bounce"
           aria-label="Scroll Down to About Me section"
         >
           {/* Top Glowing Cyan Wheel Bar */}
@@ -327,7 +327,7 @@ const ProfilePage = () => {
           </div>
 
           {/* Bottom Glowing Cyan Arrow */}
-          <HiOutlineArrowDown className="h-4 w-4 text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.9)] group-hover:text-cyan-300 transition-colors animate-bounce mb-1" />
+          <HiOutlineArrowDown className="h-4 w-4 text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.9)] group-hover:text-cyan-300 transition-colors mb-1" />
         </button>
       </div>
     </section>

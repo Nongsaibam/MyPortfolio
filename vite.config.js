@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging pixel-perfect mouse scroll indicator updates...");
+  console.log("Staging bouncing mouse capsule button updates...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Update mouse scroll indicator to exact pixel-perfect match with indigo outer glow ring, bg-[#485061], glowing cyan scroll wheel, and bouncing arrow"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Add animate-bounce to entire mouse capsule scroll indicator so it floats up and down continuously"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);
