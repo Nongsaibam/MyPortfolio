@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging 3D avatar artwork & stage updates...");
+  console.log("Staging floating 3D tech icons around profile avatar...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Update profile image with high-tech 3D avatar podium artwork and 3D interactive stage setup"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Add floating 3D React, Code, JS, and Terminal Window icons surrounding the profile avatar with 3D tilt perspective depth"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);
@@ -25,21 +25,46 @@ try {
   console.error("Git operation result:\n", gitErr.stdout || gitErr.stderr || gitErr.message);
 }
 
-// Copy new user 3D profile avatar asset
+// Copy user 3D profile composite & 3D floating icons
 try {
-  const uploadedPath = "C:\\Users\\tazkh\\.gemini\\antigravity-ide\\brain\\7f2a1270-e652-4c88-9d57-899ee64b3cc2\\.user_uploaded\\media_1787933250851.png";
-  if (fs.existsSync(uploadedPath)) {
-    const targetAsset = path.resolve(process.cwd(), "src/assets/profile-3d-avatar.png");
-    const targetPublic = path.resolve(process.cwd(), "public/profile-3d-avatar.png");
-    const targetDefaultJpg = path.resolve(process.cwd(), "src/assets/1736923031405.jpg");
-    
-    fs.copyFileSync(uploadedPath, targetAsset);
-    fs.copyFileSync(uploadedPath, targetPublic);
-    fs.copyFileSync(uploadedPath, targetDefaultJpg);
-    console.log("Successfully copied 3D Profile Avatar asset!");
+  const baseUserDir = "C:\\Users\\tazkh\\.gemini\\antigravity-ide\\brain\\7f2a1270-e652-4c88-9d57-899ee64b3cc2\\.user_uploaded";
+
+  const findExt = (name) => {
+    if (fs.existsSync(path.join(baseUserDir, name + ".png"))) return path.join(baseUserDir, name + ".png");
+    if (fs.existsSync(path.join(baseUserDir, name + ".jpg"))) return path.join(baseUserDir, name + ".jpg");
+    return null;
+  };
+
+  const full3D = findExt("media_1787935408226");
+  const iconReact = findExt("media_1787935402497");
+  const iconCode = findExt("media_1787935404112");
+  const iconJs = findExt("media_1787935405400");
+  const iconWindow = findExt("media_1787935406798");
+
+  if (full3D) {
+    fs.copyFileSync(full3D, path.resolve(process.cwd(), "src/assets/profile-3d-avatar.png"));
+    fs.copyFileSync(full3D, path.resolve(process.cwd(), "public/profile-3d-avatar.png"));
+    fs.copyFileSync(full3D, path.resolve(process.cwd(), "src/assets/1736923031405.jpg"));
+    console.log("Successfully copied 3D Profile Avatar!");
+  }
+  if (iconReact) {
+    fs.copyFileSync(iconReact, path.resolve(process.cwd(), "src/assets/icon-react-3d.png"));
+    fs.copyFileSync(iconReact, path.resolve(process.cwd(), "public/icon-react-3d.png"));
+  }
+  if (iconCode) {
+    fs.copyFileSync(iconCode, path.resolve(process.cwd(), "src/assets/icon-code-3d.png"));
+    fs.copyFileSync(iconCode, path.resolve(process.cwd(), "public/icon-code-3d.png"));
+  }
+  if (iconJs) {
+    fs.copyFileSync(iconJs, path.resolve(process.cwd(), "src/assets/icon-js-3d.png"));
+    fs.copyFileSync(iconJs, path.resolve(process.cwd(), "public/icon-js-3d.png"));
+  }
+  if (iconWindow) {
+    fs.copyFileSync(iconWindow, path.resolve(process.cwd(), "src/assets/icon-window-3d.png"));
+    fs.copyFileSync(iconWindow, path.resolve(process.cwd(), "public/icon-window-3d.png"));
   }
 } catch (err) {
-  console.error("Asset copy error:", err.message);
+  console.error("3D Assets Copy Error:", err.message);
 }
 
 // Process crisp circular 3D TK emblem logo into all standard favicon assets

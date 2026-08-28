@@ -17,6 +17,10 @@ import tkImage from "../assets/1736923031405.jpg";
 
 import { resolveImagePath } from "../utils/imageCompressor";
 import SEO from "./SEO";
+import iconReact3D from "../assets/icon-react-3d.png";
+import iconCode3D from "../assets/icon-code-3d.png";
+import iconJs3D from "../assets/icon-js-3d.png";
+import iconWindow3D from "../assets/icon-window-3d.png";
 
 const ProfilePage = () => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -234,7 +238,7 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* Right Column: 3D Rendered Profile Avatar Stage */}
+        {/* Right Column: 3D Holographic Profile Avatar */}
         <div className="group animate-fade-up text-center shrink-0" style={{ animationDelay: "120ms" }}>
           <div
             onMouseMove={handleMouseMove}
@@ -252,46 +256,108 @@ const ProfilePage = () => {
             style={{
               perspective: "1200px",
             }}
-            className="relative cursor-pointer select-none p-2 sm:p-4"
+            className="relative cursor-pointer select-none p-4"
           >
-            {/* 3D Interactive Card Stage Container */}
+            {/* 3D Perspective Card Container */}
             <div
               style={{
-                transform: `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.03, 1.03, 1.03)`,
+                transform: `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.02, 1.02, 1.02)`,
                 transition: "transform 0.15s ease-out",
                 transformStyle: "preserve-3d",
               }}
-              className="relative flex flex-col items-center justify-center rounded-[36px] p-2 transition-all duration-500"
+              className={`relative flex items-center justify-center rounded-full p-3 sm:p-4 border-2 backdrop-blur-2xl transition-all duration-500 shadow-[0_25px_60px_rgba(0,242,254,0.18)] ${
+                isAvatarTouched
+                  ? "border-cyan-400 shadow-cyan-500/60 ring-4 ring-cyan-500/40"
+                  : "border-cyan-500/40 bg-slate-900/60 dark:bg-slate-950/70 hover:border-cyan-400 hover:shadow-cyan-500/40"
+              }`}
             >
-              {/* Ambient Glowing 3D Neon Backlight */}
+              {/* 3D Ambient Glowing Neon Backdrop Aura Ring */}
               <div
-                className="absolute inset-4 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 opacity-40 blur-3xl animate-pulse"
-                style={{ transform: "translateZ(-30px)" }}
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-40 blur-2xl animate-pulse"
+                style={{ transform: "translateZ(-20px)" }}
               />
 
-              {/* 3D Floating Avatar Artwork */}
+              {/* 3D Orbiting Outer Neon Border Ring */}
               <div
-                className="relative overflow-visible filter drop-shadow-[0_20px_50px_rgba(56,189,248,0.35)] transition duration-500 group-hover:scale-[1.03]"
-                style={{ transform: "translateZ(20px)" }}
+                className="absolute -inset-1 rounded-full border border-cyan-400/40 bg-gradient-to-tr from-cyan-500/20 via-transparent to-pink-500/20 shadow-[inset_0_0_20px_rgba(56,189,248,0.3)] animate-spin-slow"
+                style={{ transform: "translateZ(10px)", animationDuration: "14s" }}
+              />
+
+              {/* Profile Image with 3D Depth & Specular Reflection */}
+              <div
+                className="relative overflow-hidden rounded-full border-4 border-white/20 shadow-2xl"
+                style={{ transform: "translateZ(25px)" }}
               >
                 <img
                   src={resolveImagePath(siteSettings?.profileImage, tkImage)}
                   alt={siteSettings?.name || "Tazkhan"}
-                  className="h-64 w-auto max-w-[280px] object-contain sm:h-80 sm:max-w-sm md:h-96 md:max-w-md lg:h-[26rem] lg:max-w-lg select-none"
+                  className="h-44 w-44 rounded-full object-cover transition duration-500 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80 group-hover:scale-105"
+                />
+
+                {/* Glossy Reflection Overlay */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-60" />
+              </div>
+
+              {/* 3D Floating Tech Icon 1: Code Window Tile (Top Left) */}
+              <div
+                className="absolute -left-8 -top-6 sm:-left-14 sm:-top-10 z-30 transition-transform duration-300 hover:scale-125 pointer-events-none"
+                style={{ transform: "translateZ(70px)" }}
+              >
+                <img
+                  src={iconWindow3D}
+                  alt="3D Code Window"
+                  className="h-16 w-16 sm:h-24 sm:w-24 md:h-28 md:w-28 object-contain drop-shadow-[0_15px_25px_rgba(168,85,247,0.4)] animate-pulse"
                 />
               </div>
 
-              {/* 3D Floating Status Badges */}
+              {/* 3D Floating Tech Icon 2: Code Brackets Tile (Top Right) */}
               <div
-                className="absolute right-0 top-6 flex items-center gap-1.5 rounded-full border border-cyan-400/50 bg-slate-950/85 px-3 py-1.5 text-[10px] sm:text-xs font-bold text-cyan-300 backdrop-blur-xl shadow-xl shadow-cyan-500/20 transition duration-300 hover:scale-110"
+                className="absolute -right-6 top-8 sm:-right-12 sm:top-12 z-30 transition-transform duration-300 hover:scale-125 pointer-events-none"
+                style={{ transform: "translateZ(85px)" }}
+              >
+                <img
+                  src={iconCode3D}
+                  alt="3D Code Tile"
+                  className="h-14 w-14 sm:h-20 sm:w-20 md:h-24 md:w-24 object-contain drop-shadow-[0_15px_25px_rgba(99,102,241,0.4)]"
+                />
+              </div>
+
+              {/* 3D Floating Tech Icon 3: React Atom Tile (Bottom Left) */}
+              <div
+                className="absolute -left-6 bottom-8 sm:-left-12 sm:bottom-12 z-30 transition-transform duration-300 hover:scale-125 pointer-events-none"
+                style={{ transform: "translateZ(80px)" }}
+              >
+                <img
+                  src={iconReact3D}
+                  alt="3D React Tile"
+                  className="h-14 w-14 sm:h-20 sm:w-20 md:h-24 md:w-24 object-contain drop-shadow-[0_15px_25px_rgba(56,189,248,0.4)]"
+                />
+              </div>
+
+              {/* 3D Floating Tech Icon 4: JavaScript Hex Tile (Bottom Right) */}
+              <div
+                className="absolute -right-6 -bottom-4 sm:-right-12 sm:-bottom-6 z-30 transition-transform duration-300 hover:scale-125 pointer-events-none"
+                style={{ transform: "translateZ(90px)" }}
+              >
+                <img
+                  src={iconJs3D}
+                  alt="3D JS Tile"
+                  className="h-14 w-14 sm:h-20 sm:w-20 md:h-24 md:w-24 object-contain drop-shadow-[0_15px_25px_rgba(34,197,94,0.4)]"
+                />
+              </div>
+
+              {/* 3D Floating Holographic Badge 1 (Top Right) */}
+              <div
+                className="absolute -right-2 top-2 flex items-center gap-1.5 rounded-full border border-cyan-400/50 bg-slate-950/85 px-3 py-1.5 text-[10px] sm:text-xs font-bold text-cyan-300 backdrop-blur-xl shadow-xl shadow-cyan-500/20 transition duration-300 hover:scale-110"
                 style={{ transform: "translateZ(45px)" }}
               >
                 <HiOutlineSparkles className="text-amber-400 animate-spin" />
                 <span>Full Stack MERN</span>
               </div>
 
+              {/* 3D Floating Holographic Badge 2 (Bottom Left) */}
               <div
-                className="absolute left-0 bottom-8 flex items-center gap-1.5 rounded-full border border-blue-400/50 bg-slate-950/85 px-3 py-1.5 text-[10px] sm:text-xs font-bold text-blue-300 backdrop-blur-xl shadow-xl shadow-blue-500/20 transition duration-300 hover:scale-110"
+                className="absolute -left-2 bottom-2 flex items-center gap-1.5 rounded-full border border-purple-400/50 bg-slate-950/85 px-3 py-1.5 text-[10px] sm:text-xs font-bold text-purple-300 backdrop-blur-xl shadow-xl shadow-purple-500/20 transition duration-300 hover:scale-110"
                 style={{ transform: "translateZ(50px)" }}
               >
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
