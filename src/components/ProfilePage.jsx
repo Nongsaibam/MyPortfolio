@@ -313,15 +313,19 @@ const ProfilePage = () => {
         </div>
       </main>
 
-      {/* Ultra-Sleek Glassmorphic Scroll Indicator */}
+      {/* 3D Vertical Capsule Mouse Scroll Indicator (Exact Match to Design) */}
       <div className="relative z-10 pb-8 pt-4 flex justify-center">
         <button
           type="button"
           onClick={handleScrollToAbout}
-          className="group flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white/60 backdrop-blur-2xl shadow-lg transition-all duration-500 hover:scale-125 hover:border-cyan-400 hover:shadow-cyan-500/25 active:scale-95 dark:border-white/15 dark:bg-white/[0.08]"
+          className="group relative flex h-14 w-7 flex-col items-center justify-between rounded-full border-2 border-indigo-500/50 bg-[#444a57] p-1.5 shadow-lg shadow-indigo-500/20 backdrop-blur-xl transition-all duration-300 hover:scale-110 hover:border-cyan-400 hover:shadow-cyan-500/40 active:scale-95 cursor-pointer select-none"
           aria-label="Scroll Down to About Me section"
         >
-          <HiOutlineArrowDown className="h-5 w-5 text-cyan-400 group-hover:text-cyan-300 transition-colors animate-bounce" />
+          {/* Top Animated Cyan Scroll Wheel Bar */}
+          <span className="h-3 w-1 rounded-full bg-cyan-400 animate-pulse mt-0.5 shadow-sm shadow-cyan-400/50" />
+
+          {/* Bottom Cyan Arrow */}
+          <HiOutlineArrowDown className="h-3.5 w-3.5 text-cyan-400 group-hover:text-cyan-300 transition-colors animate-bounce mb-0.5" />
         </button>
       </div>
     </section>
