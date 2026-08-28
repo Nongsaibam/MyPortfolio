@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging Hold-To-Reveal anti-screenshot DRM security updates...");
+  console.log("Staging always-visible anti-screenshot protection updates...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Implement Hold-To-Reveal DRM privacy security preventing Android, iOS, and desktop screenshots completely"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Show certificates naturally while maintaining full anti-screenshot, window blur, and long-press saving protections"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);

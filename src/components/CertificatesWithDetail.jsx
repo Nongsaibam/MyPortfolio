@@ -237,13 +237,9 @@ const CertificatesWithDetail = () => {
               </div>
 
               <div
-                onMouseDown={() => setIsDetailRevealed(true)}
-                onMouseUp={() => setIsDetailRevealed(false)}
-                onMouseLeave={() => setIsDetailRevealed(false)}
-                onTouchStart={() => setIsDetailRevealed(true)}
-                onTouchEnd={() => setIsDetailRevealed(false)}
-                onTouchCancel={() => setIsDetailRevealed(false)}
-                className="relative overflow-hidden rounded-[24px] border border-black/10 bg-slate-950 p-1 text-center select-none cursor-pointer transition-all duration-300"
+                className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white/40 dark:border-white/10 dark:bg-white/[0.04] select-none"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
               >
                 <img
                   src={getImage(certificate.image)}
@@ -251,26 +247,12 @@ const CertificatesWithDetail = () => {
                   draggable="false"
                   onContextMenu={(e) => e.preventDefault()}
                   style={{
-                    filter: (isDetailRevealed && !isScreenObscured) ? "none" : "blur(80px) brightness(0)",
-                    opacity: (isDetailRevealed && !isScreenObscured) ? 1 : 0,
-                    transition: "all 0.12s ease-out"
+                    filter: isScreenObscured ? "blur(80px) brightness(0)" : "none",
+                    opacity: isScreenObscured ? 0 : 1,
+                    transition: "all 0.1s linear"
                   }}
                   className="h-[24rem] w-full object-contain md:h-[34rem] select-none pointer-events-none no-screenshot"
                 />
-
-                {(!isDetailRevealed || isScreenObscured) && (
-                  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-slate-950/90 p-6 text-white backdrop-blur-2xl pointer-events-none select-none">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full border border-cyan-500/40 bg-cyan-500/10 text-cyan-400 shadow-2xl animate-pulse">
-                      <HiOutlineLockClosed className="text-3xl text-amber-400" />
-                    </div>
-                    <p className="mt-4 text-base font-extrabold text-white tracking-wide">
-                      Press & Hold to Reveal Certificate
-                    </p>
-                    <p className="mt-1 text-xs text-slate-400">
-                      Anti-Screenshot DRM Active • Release to Obscure
-                    </p>
-                  </div>
-                )}
               </div>
 
               <button
@@ -374,41 +356,19 @@ const CertificatesWithDetail = () => {
               >
                 <HiOutlineXMark className="text-2xl" />
               </button>
-              <div
-                onMouseDown={() => setIsZoomRevealed(true)}
-                onMouseUp={() => setIsZoomRevealed(false)}
-                onMouseLeave={() => setIsZoomRevealed(false)}
-                onTouchStart={() => setIsZoomRevealed(true)}
-                onTouchEnd={() => setIsZoomRevealed(false)}
-                onTouchCancel={() => setIsZoomRevealed(false)}
-                className="relative overflow-hidden rounded-[24px] bg-slate-950 select-none cursor-pointer"
-              >
+              <div className="relative overflow-hidden rounded-[24px]" onContextMenu={(e) => e.preventDefault()}>
                 <img
                   src={zoomImage}
                   alt="Zoom Certificate"
                   draggable="false"
                   onContextMenu={(e) => e.preventDefault()}
                   style={{
-                    filter: (isZoomRevealed && !isScreenObscured) ? "none" : "blur(80px) brightness(0)",
-                    opacity: (isZoomRevealed && !isScreenObscured) ? 1 : 0,
-                    transition: "all 0.12s ease-out"
+                    filter: isScreenObscured ? "blur(80px) brightness(0)" : "none",
+                    opacity: isScreenObscured ? 0 : 1,
+                    transition: "all 0.1s linear"
                   }}
                   className="max-h-[86vh] max-w-full rounded-[24px] object-contain select-none pointer-events-none no-screenshot"
                 />
-
-                {(!isZoomRevealed || isScreenObscured) && (
-                  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-slate-950/90 p-6 text-white backdrop-blur-2xl pointer-events-none select-none">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full border border-cyan-500/40 bg-cyan-500/10 text-cyan-400 shadow-xl animate-pulse">
-                      <HiOutlineLockClosed className="text-3xl text-amber-400" />
-                    </div>
-                    <p className="mt-4 text-base font-extrabold text-white tracking-wide">
-                      Press & Hold to Reveal Certificate
-                    </p>
-                    <p className="mt-1 text-xs text-slate-400">
-                      Release to Obscure • Screenshot Protected
-                    </p>
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -496,13 +456,9 @@ const CertificatesWithDetail = () => {
 
                 <div className="relative">
                   <div
-                    onMouseDown={() => setRevealedCertId(cert.id)}
-                    onMouseUp={() => setRevealedCertId(null)}
-                    onMouseLeave={() => setRevealedCertId(null)}
-                    onTouchStart={() => setRevealedCertId(cert.id)}
-                    onTouchEnd={() => setRevealedCertId(null)}
-                    onTouchCancel={() => setRevealedCertId(null)}
-                    className="relative overflow-hidden rounded-[24px] border border-black/10 bg-slate-950 select-none cursor-pointer transition-all duration-300"
+                    className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white/40 dark:border-white/10 dark:bg-white/[0.04] select-none"
+                    onContextMenu={(e) => e.preventDefault()}
+                    onDragStart={(e) => e.preventDefault()}
                   >
                     <img
                       src={getImage(cert.image)}
@@ -510,26 +466,12 @@ const CertificatesWithDetail = () => {
                       draggable="false"
                       onContextMenu={(e) => e.preventDefault()}
                       style={{
-                        filter: (revealedCertId === cert.id && !isScreenObscured) ? "none" : "blur(80px) brightness(0)",
-                        opacity: (revealedCertId === cert.id && !isScreenObscured) ? 1 : 0,
-                        transition: "all 0.12s ease-out"
+                        filter: isScreenObscured ? "blur(80px) brightness(0)" : "none",
+                        opacity: isScreenObscured ? 0 : 1,
+                        transition: "all 0.1s linear"
                       }}
                       className="h-52 w-full object-cover transition duration-700 group-hover:scale-110 select-none pointer-events-none no-screenshot"
                     />
-
-                    {(revealedCertId !== cert.id || isScreenObscured) && (
-                      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-slate-950/90 p-4 text-white backdrop-blur-2xl pointer-events-none select-none">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-cyan-500/40 bg-cyan-500/10 text-cyan-400 shadow-lg animate-pulse">
-                          <HiOutlineLockClosed className="text-xl text-amber-400" />
-                        </div>
-                        <p className="mt-2 text-xs font-bold text-white tracking-wide">
-                          Press & Hold to Reveal
-                        </p>
-                        <p className="mt-0.5 text-[10px] text-slate-400">
-                          Anti-Screenshot Protected
-                        </p>
-                      </div>
-                    )}
 
                     <button
                       onClick={(e) => {
