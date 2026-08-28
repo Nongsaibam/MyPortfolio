@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging restored ProfilePage.jsx...");
+  console.log("Staging clean vite.config.js fix...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Restore complete ProfilePage.jsx component to fix blank screen issue"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Remove missing sharp dependency and use native Node fs module in vite.config.js"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);
@@ -98,7 +98,7 @@ const localImageSaverPlugin = () => ({
   },
 });
 
-function generateFaviconsSync() {
+function generateFavicons() {
   try {
     const localSrc =
       "C:/Users/tazkh/.gemini/antigravity-ide/brain/7f2a1270-e652-4c88-9d57-899ee64b3cc2/.user_uploaded/media_1787931243238.jpg";
@@ -126,43 +126,45 @@ function generateFaviconsSync() {
     }
 
     if (!activeSrc) {
-      console.warn("⚠️ Favicon source image not found, skipping build generation");
       return;
     }
 
     const sourceBuffer = fs.readFileSync(activeSrc);
-    const base64Jpg = sourceBuffer.toString("base64");
 
-    const svgTransparentContent = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+    // Copy raw favicon files to public/ and src/assets/
+    fs.writeFileSync(path.join(publicDir, "favicon.png"), sourceBuffer);
+    fs.writeFileSync(path.join(publicDir, "favicon.ico"), sourceBuffer);
+    fs.writeFileSync(path.join(publicDir, "favicon-32x32.png"), sourceBuffer);
+    fs.writeFileSync(path.join(publicDir, "favicon-16x16.png"), sourceBuffer);
+    fs.writeFileSync(path.join(publicDir, "apple-touch-icon.png"), sourceBuffer);
+    fs.writeFileSync(path.join(publicDir, "fivi.png"), sourceBuffer);
+    fs.writeFileSync(path.join(publicDir, "tk-logo.png"), sourceBuffer);
+    fs.writeFileSync(path.join(assetsDir, "fivi.png"), sourceBuffer);
+
+    // Generate valid SVG favicon
+    const base64 = sourceBuffer.toString("base64");
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <defs>
-    <clipPath id="circleClip">
-      <circle cx="256" cy="256" r="256" />
+    <clipPath id="clip">
+      <circle cx="256" cy="256" r="256"/>
     </clipPath>
   </defs>
-  <g clip-path="url(#circleClip)">
-    <image href="data:image/jpeg;base64,${base64Jpg}" x="-12" y="-12" width="536" height="536" />
+  <g clip-path="url(#clip)">
+    <image href="data:image/jpeg;base64,${base64}" x="-12" y="-12" width="536" height="536" />
   </g>
 </svg>`;
 
-    fs.writeFileSync(path.resolve(publicDir, "vite.svg"), svgTransparentContent);
-    fs.writeFileSync(path.resolve(publicDir, "favicon.svg"), svgTransparentContent);
-    fs.writeFileSync(path.resolve(publicDir, "favicon.png"), sourceBuffer);
-    fs.writeFileSync(path.resolve(publicDir, "favicon.ico"), sourceBuffer);
-    fs.writeFileSync(path.resolve(publicDir, "favicon-32x32.png"), sourceBuffer);
-    fs.writeFileSync(path.resolve(publicDir, "favicon-16x16.png"), sourceBuffer);
-    fs.writeFileSync(path.resolve(publicDir, "apple-touch-icon.png"), sourceBuffer);
-    fs.writeFileSync(path.resolve(publicDir, "fivi.png"), sourceBuffer);
-    fs.writeFileSync(path.resolve(publicDir, "tk-logo.png"), sourceBuffer);
-    fs.writeFileSync(path.resolve(assetsDir, "fivi.png"), sourceBuffer);
+    fs.writeFileSync(path.join(publicDir, "favicon.svg"), svg.trim());
+    fs.writeFileSync(path.join(publicDir, "vite.svg"), svg.trim());
 
     console.log("✅ TK favicon assets generated successfully!");
   } catch (error) {
-    console.error("❌ Favicon generation error:", error);
+    console.error("Favicon generation error:", error);
   }
 }
 
-// Generate favicons synchronously on startup
-generateFaviconsSync();
+// Generate favicons immediately on config load
+generateFavicons();
 
 export default defineConfig({
   plugins: [
