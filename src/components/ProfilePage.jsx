@@ -14,10 +14,6 @@ import {
 import { useTheme } from "../context/ThemeContext";
 import { usePortfolioData } from "../context/PortfolioContext";
 import tkImage from "../assets/1736923031405.jpg";
-import react3dIcon from "../assets/3d-react-icon.png";
-import code3dIcon from "../assets/3d-code-icon.png";
-import js3dIcon from "../assets/3d-js-icon.png";
-import window3dIcon from "../assets/3d-window-icon.png";
 
 import { resolveImagePath } from "../utils/imageCompressor";
 import SEO from "./SEO";
@@ -28,21 +24,21 @@ const ProfilePage = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isAvatarTouched, setIsAvatarTouched] = React.useState(false);
   const [tilt, setTilt] = React.useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = React.useState(false);
   const navItems = ["About", "Experience", "Projects", "Skills"];
 
   const handleMouseMove = (e) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
+    const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
-
-    const rotX = -(y / (rect.height / 2)) * 18;
+    const rotX = (-y / (rect.height / 2)) * 18;
     const rotY = (x / (rect.width / 2)) * 18;
-
     setTilt({ x: rotX, y: rotY });
   };
 
+  const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => {
+    setIsHovered(false);
     setTilt({ x: 0, y: 0 });
   };
 
@@ -239,120 +235,72 @@ const ProfilePage = () => {
         </div>
 
         {/* Right Column: 3D Holographic Profile Avatar */}
-        <div className="group animate-fade-up text-center shrink-0" style={{ animationDelay: "120ms" }}>
+        <div
+          className="group relative animate-fade-up text-center shrink-0"
+          style={{ animationDelay: "120ms", perspective: "1000px" }}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onClick={handleAvatarTouch}
+          onTouchStart={handleAvatarTouch}
+        >
+          {/* 3D Glowing Backdrop Aura */}
+          <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-pink-500 opacity-30 blur-2xl transition-all duration-700 group-hover:opacity-75 group-hover:blur-3xl animate-pulse" />
+
+          {/* 3D Main Outer Sphere Ring Container */}
           <div
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            onTouchMove={(e) => {
-              if (e.touches && e.touches[0]) {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const x = e.touches[0].clientX - rect.left - rect.width / 2;
-                const y = e.touches[0].clientY - rect.top - rect.height / 2;
-                setTilt({ x: -(y / (rect.height / 2)) * 15, y: (x / (rect.width / 2)) * 15 });
-              }
-            }}
-            onTouchEnd={handleMouseLeave}
-            onClick={handleAvatarTouch}
             style={{
-              perspective: "1200px",
+              transform: isHovered
+                ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.05, 1.05, 1.05)`
+                : "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)",
+              transition: isHovered ? "transform 0.1s ease-out" : "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)",
+              transformStyle: "preserve-3d",
             }}
-            className="relative cursor-pointer select-none p-4"
+            className={`relative rounded-full p-2.5 sm:p-3 border-2 transition-all duration-500 cursor-pointer backdrop-blur-3xl shadow-[0_20px_60px_rgba(6,182,212,0.3)] ${
+              isAvatarTouched
+                ? "border-cyan-400 ring-4 ring-cyan-500/40 shadow-cyan-500/60"
+                : "border-cyan-500/40 bg-slate-900/60 hover:border-cyan-400 dark:bg-white/[0.06]"
+            }`}
           >
-            {/* 3D Perspective Card Container */}
+            {/* 3D Orbiting Glowing Rings */}
+            <div className="absolute -inset-1.5 rounded-full border border-cyan-400/40 animate-[spin_10s_linear_infinite] pointer-events-none" />
+            <div className="absolute -inset-3.5 rounded-full border border-indigo-500/30 animate-[spin_15s_linear_infinite_reverse] pointer-events-none" />
+
+            {/* Profile Image with 3D Depth */}
+            <div className="relative overflow-hidden rounded-full transform-gpu" style={{ transform: "translateZ(30px)" }}>
+              <img
+                src={resolveImagePath(siteSettings?.profileImage, tkImage)}
+                alt={siteSettings?.name || "Tazkhan"}
+                className="h-48 w-48 rounded-full object-cover shadow-2xl transition duration-500 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80 group-hover:scale-105"
+              />
+
+              {/* 3D Specular Lighting Glare Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
+            </div>
+
+            {/* Floating 3D Badge 1: Top Right */}
             <div
-              style={{
-                transform: `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.02, 1.02, 1.02)`,
-                transition: "transform 0.15s ease-out",
-                transformStyle: "preserve-3d",
-              }}
-              className={`relative flex items-center justify-center rounded-full p-3 sm:p-4 border-2 backdrop-blur-2xl transition-all duration-500 shadow-[0_25px_60px_rgba(0,242,254,0.18)] ${
-                isAvatarTouched
-                  ? "border-cyan-400 shadow-cyan-500/60 ring-4 ring-cyan-500/40"
-                  : "border-cyan-500/40 bg-slate-900/60 dark:bg-slate-950/70 hover:border-cyan-400 hover:shadow-cyan-500/40"
-              }`}
+              className="absolute -right-2 top-4 z-20 hidden sm:flex items-center gap-1.5 rounded-full border border-cyan-400/40 bg-slate-950/85 px-3 py-1 text-[11px] font-bold text-cyan-300 backdrop-blur-xl shadow-xl transition-transform duration-500"
+              style={{ transform: isHovered ? "translateZ(60px) translateY(-5px)" : "translateZ(40px)" }}
             >
-              {/* 3D Ambient Glowing Neon Backdrop Aura Ring */}
-              <div
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-40 blur-2xl animate-pulse"
-                style={{ transform: "translateZ(-20px)" }}
-              />
+              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
+              ⚡ MERN Stack
+            </div>
 
-              {/* 3D Orbiting Outer Neon Border Ring */}
-              <div
-                className="absolute -inset-1 rounded-full border border-cyan-400/40 bg-gradient-to-tr from-cyan-500/20 via-transparent to-pink-500/20 shadow-[inset_0_0_20px_rgba(56,189,248,0.3)] animate-spin-slow"
-                style={{ transform: "translateZ(10px)", animationDuration: "14s" }}
-              />
-
-              {/* Profile Image with 3D Depth & Specular Reflection */}
-              <div
-                className="relative overflow-hidden rounded-full border-4 border-white/20 shadow-2xl"
-                style={{ transform: "translateZ(25px)" }}
-              >
-                <img
-                  src={resolveImagePath(siteSettings?.profileImage, tkImage)}
-                  alt={siteSettings?.name || "Tazkhan"}
-                  className="h-44 w-44 rounded-full object-cover transition duration-500 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80 group-hover:scale-105"
-                />
-
-                {/* Glossy Reflection Overlay */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-60" />
-              </div>
-
-              {/* 3D Floating Tech Icon 1 (Top-Left: React Atom 3D) */}
-              <div
-                className="absolute -left-5 -top-4 sm:-left-8 sm:-top-6 z-30 rounded-2xl border border-cyan-400/40 bg-slate-950/80 p-2 sm:p-3 backdrop-blur-2xl shadow-[0_15px_35px_rgba(0,242,254,0.3)] transition-all duration-300 hover:scale-125 hover:border-cyan-300 animate-[bounce_4s_infinite_ease-in-out]"
-                style={{ transform: "translateZ(65px)" }}
-              >
-                <img
-                  src={react3dIcon}
-                  alt="3D React Icon"
-                  className="h-8 w-8 sm:h-12 sm:w-12 object-contain drop-shadow-[0_0_12px_rgba(56,189,248,0.8)]"
-                />
-              </div>
-
-              {/* 3D Floating Tech Icon 2 (Top-Right: Code Window IDE 3D) */}
-              <div
-                className="absolute -right-5 -top-4 sm:-right-8 sm:-top-6 z-30 rounded-2xl border border-purple-400/40 bg-slate-950/80 p-2 sm:p-3 backdrop-blur-2xl shadow-[0_15px_35px_rgba(168,85,247,0.3)] transition-all duration-300 hover:scale-125 hover:border-purple-300 animate-[pulse_3s_infinite_ease-in-out]"
-                style={{ transform: "translateZ(55px)" }}
-              >
-                <img
-                  src={window3dIcon}
-                  alt="3D IDE Window Icon"
-                  className="h-8 w-8 sm:h-12 sm:w-12 object-contain drop-shadow-[0_0_12px_rgba(168,85,247,0.8)]"
-                />
-              </div>
-
-              {/* 3D Floating Tech Icon 3 (Bottom-Left: Code </> 3D) */}
-              <div
-                className="absolute -left-5 -bottom-4 sm:-left-8 sm:-bottom-6 z-30 rounded-2xl border border-indigo-400/40 bg-slate-950/80 p-2 sm:p-3 backdrop-blur-2xl shadow-[0_15px_35px_rgba(129,140,248,0.3)] transition-all duration-300 hover:scale-125 hover:border-indigo-300 animate-[bounce_3.5s_infinite_ease-in-out]"
-                style={{ transform: "translateZ(60px)" }}
-              >
-                <img
-                  src={code3dIcon}
-                  alt="3D Code Icon"
-                  className="h-8 w-8 sm:h-12 sm:w-12 object-contain drop-shadow-[0_0_12px_rgba(129,140,248,0.8)]"
-                />
-              </div>
-
-              {/* 3D Floating Tech Icon 4 (Bottom-Right: JavaScript Hex 3D) */}
-              <div
-                className="absolute -right-5 -bottom-4 sm:-right-8 sm:-bottom-6 z-30 rounded-2xl border border-emerald-400/40 bg-slate-950/80 p-2 sm:p-3 backdrop-blur-2xl shadow-[0_15px_35px_rgba(16,185,129,0.3)] transition-all duration-300 hover:scale-125 hover:border-emerald-300 animate-[pulse_4s_infinite_ease-in-out]"
-                style={{ transform: "translateZ(70px)" }}
-              >
-                <img
-                  src={js3dIcon}
-                  alt="3D JS Icon"
-                  className="h-8 w-8 sm:h-12 sm:w-12 object-contain drop-shadow-[0_0_12px_rgba(16,185,129,0.8)]"
-                />
-              </div>
+            {/* Floating 3D Badge 2: Bottom Left */}
+            <div
+              className="absolute -left-3 bottom-6 z-20 hidden sm:flex items-center gap-1.5 rounded-full border border-violet-400/40 bg-slate-950/85 px-3 py-1 text-[11px] font-bold text-violet-300 backdrop-blur-xl shadow-xl transition-transform duration-500"
+              style={{ transform: isHovered ? "translateZ(60px) translateY(5px)" : "translateZ(40px)" }}
+            >
+              🚀 Full Stack Dev
             </div>
           </div>
 
-          <div className="mt-3 sm:mt-6 flex justify-center gap-4 sm:gap-6 text-lg sm:text-2xl text-slate-600 dark:text-slate-300">
+          <div className="mt-4 sm:mt-7 flex justify-center gap-4 sm:gap-6 text-lg sm:text-2xl text-slate-600 dark:text-slate-300">
             {socialLinks.map(({ icon, href }, i) => (
               <a
                 key={i}
-                className="rounded-full p-1 transition duration-300 hover:scale-125 active:scale-125 hover:text-cyan-500 active:text-cyan-400 dark:hover:text-cyan-400"
+                className="rounded-full p-2 transition-all duration-300 hover:scale-125 hover:text-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 active:scale-110 dark:hover:text-cyan-400 bg-white/40 dark:bg-white/[0.05] border border-black/5 dark:border-white/10"
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"

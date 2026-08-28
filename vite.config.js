@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging 4 floating 3D tech badge icons around profile avatar...");
+  console.log("Staging 3D profile avatar updates...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Add 4 floating 3D tech badge icons (React, Code IDE, Code Tags, JS Hexagon) orbiting around 3D profile avatar"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Add 3D Holographic Parallax Avatar frame with interactive mouse tilt, orbiting glow rings, and floating tech badges"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);
@@ -23,27 +23,6 @@ try {
   console.log("Git push output:\n" + pushRes);
 } catch (gitErr) {
   console.error("Git operation result:\n", gitErr.stdout || gitErr.stderr || gitErr.message);
-}
-
-// Copy user's 4 3D tech badge icons for floating profile effects
-try {
-  const mediaMap = [
-    { src: "media_1787935408643.png", name: "3d-react-icon.png" },
-    { src: "media_1787935419999.png", name: "3d-code-icon.png" },
-    { src: "media_1787935431613.png", name: "3d-js-icon.png" },
-    { src: "media_1787935443213.png", name: "3d-window-icon.png" }
-  ];
-
-  mediaMap.forEach(({ src, name }) => {
-    const uploadedPath = path.resolve("C:/Users/tazkh/.gemini/antigravity-ide/brain/7f2a1270-e652-4c88-9d57-899ee64b3cc2/.user_uploaded", src);
-    if (fs.existsSync(uploadedPath)) {
-      fs.copyFileSync(uploadedPath, path.resolve(process.cwd(), "src/assets", name));
-      fs.copyFileSync(uploadedPath, path.resolve(process.cwd(), "public", name));
-      console.log(`Copied ${name} successfully!`);
-    }
-  });
-} catch (err) {
-  console.error("Tech badge copy error:", err.message);
 }
 
 // Process crisp circular 3D TK emblem logo into all standard favicon assets
