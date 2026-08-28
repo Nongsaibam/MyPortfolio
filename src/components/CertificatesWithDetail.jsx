@@ -80,30 +80,76 @@ const CertificatesWithDetail = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const [zoomImage, setZoomImage] = useState(null);
   const [showSecurityShield, setShowSecurityShield] = useState(false);
+  const [isScreenObscured, setIsScreenObscured] = useState(false);
   const { certificates } = usePortfolioData();
 
   useEffect(() => {
+    // 1. Keyboard Anti-Screenshot & Inspector Shortcut Listener
     const handleKeyDown = (e) => {
-      // PrintScreen (Key code 44), Ctrl+P, Meta+P, Win/Cmd+Shift+S, F12, Ctrl+Shift+I/S/C
       if (
         e.key === "PrintScreen" ||
         e.keyCode === 44 ||
-        (e.ctrlKey && e.key === "p") ||
-        (e.metaKey && e.key === "p") ||
+        (e.ctrlKey && (e.key === "p" || e.key === "P" || e.key === "s" || e.key === "S")) ||
+        (e.metaKey && (e.key === "p" || e.key === "P" || e.key === "s" || e.key === "S")) ||
         (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "S" || e.key === "s" || e.key === "C" || e.key === "c")) ||
         (e.metaKey && e.shiftKey && (e.key === "S" || e.key === "s" || e.key === "4" || e.key === "3"))
       ) {
         e.preventDefault();
         e.stopPropagation();
+        setIsScreenObscured(true);
         setShowSecurityShield(true);
-        setTimeout(() => setShowSecurityShield(false), 3000);
+        setTimeout(() => {
+          setIsScreenObscured(false);
+          setShowSecurityShield(false);
+        }, 3500);
       }
     };
 
     const handleKeyUp = (e) => {
       if (e.key === "PrintScreen" || e.keyCode === 44) {
+        setIsScreenObscured(true);
         setShowSecurityShield(true);
-        setTimeout(() => setShowSecurityShield(false), 3000);
+        setTimeout(() => {
+          setIsScreenObscured(false);
+          setShowSecurityShield(false);
+        }, 3500);
+      }
+    };
+
+    // 2. Mobile Phone OS Screenshot Protection (Visibility & Window Blur Listener)
+    // Mobile OS screenshot gestures trigger immediate tab blur / visibility state change
+    const handleVisibilityChange = () => {
+      if (document.hidden || document.visibilityState === "hidden") {
+        setIsScreenObscured(true);
+        setShowSecurityShield(true);
+      } else {
+        setTimeout(() => {
+          setIsScreenObscured(false);
+          setShowSecurityShield(false);
+        }, 1500);
+      }
+    };
+
+    const handleWindowBlur = () => {
+      setIsScreenObscured(true);
+      setShowSecurityShield(true);
+      setTimeout(() => {
+        setIsScreenObscured(false);
+        setShowSecurityShield(false);
+      }, 1500);
+    };
+
+    // 3. Mobile Multi-Touch & Swipe Screenshot Protection
+    const handleTouchStart = (e) => {
+      if (e.touches && e.touches.length >= 2) {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsScreenObscured(true);
+        setShowSecurityShield(true);
+        setTimeout(() => {
+          setIsScreenObscured(false);
+          setShowSecurityShield(false);
+        }, 2000);
       }
     };
 
@@ -115,14 +161,20 @@ const CertificatesWithDetail = () => {
       e.preventDefault();
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("keydown", handleKeyDown, true);
+    window.addEventListener("keyup", handleKeyUp, true);
+    window.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("blur", handleWindowBlur);
+    window.addEventListener("touchstart", handleTouchStart, { passive: false });
     window.addEventListener("contextmenu", preventContextMenu);
     window.addEventListener("dragstart", preventDrag);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
+      window.removeEventListener("keydown", handleKeyDown, true);
+      window.removeEventListener("keyup", handleKeyUp, true);
+      window.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("blur", handleWindowBlur);
+      window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("contextmenu", preventContextMenu);
       window.removeEventListener("dragstart", preventDrag);
     };
@@ -191,7 +243,8 @@ const CertificatesWithDetail = () => {
                   alt={certificate.title}
                   draggable="false"
                   onContextMenu={(e) => e.preventDefault()}
-                  className="h-[24rem] w-full object-contain md:h-[34rem] select-none pointer-events-none"
+                  style={{ filter: isScreenObscured ? 'blur(60px) brightness(0)' : 'none', opacity: isScreenObscured ? 0 : 1, transition: 'all 0.1s linear' }}
+                  className="h-[24rem] w-full object-contain md:h-[34rem] select-none pointer-events-none no-screenshot"
                 />
               </div>
 
@@ -267,8 +320,9 @@ const CertificatesWithDetail = () => {
                             src={img}
                             draggable="false"
                             onContextMenu={(e) => e.preventDefault()}
+                            style={{ filter: isScreenObscured ? 'blur(60px) brightness(0)' : 'none', opacity: isScreenObscured ? 0 : 1, transition: 'all 0.1s linear' }}
                             alt={`Certificate Preview ${index + 1}`}
-                            className="h-28 w-full object-cover select-none pointer-events-none"
+                            className="h-28 w-full object-cover select-none pointer-events-none no-screenshot"
                           />
                         </button>
                       ))}
@@ -301,7 +355,8 @@ const CertificatesWithDetail = () => {
                   alt="Zoom Certificate"
                   draggable="false"
                   onContextMenu={(e) => e.preventDefault()}
-                  className="max-h-[86vh] max-w-full rounded-[24px] object-contain select-none pointer-events-none"
+                  style={{ filter: isScreenObscured ? 'blur(60px) brightness(0)' : 'none', opacity: isScreenObscured ? 0 : 1, transition: 'all 0.1s linear' }}
+                  className="max-h-[86vh] max-w-full rounded-[24px] object-contain select-none pointer-events-none no-screenshot"
                 />
               </div>
             </div>
@@ -399,7 +454,8 @@ const CertificatesWithDetail = () => {
                       alt={cert.title}
                       draggable="false"
                       onContextMenu={(e) => e.preventDefault()}
-                      className="h-52 w-full object-cover transition duration-700 group-hover:scale-110 select-none pointer-events-none"
+                      style={{ filter: isScreenObscured ? 'blur(60px) brightness(0)' : 'none', opacity: isScreenObscured ? 0 : 1, transition: 'all 0.1s linear' }}
+                      className="h-52 w-full object-cover transition duration-700 group-hover:scale-110 select-none pointer-events-none no-screenshot"
                     />
 
                     <button
