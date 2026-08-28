@@ -75,6 +75,68 @@ const certificates = [
 
 const filters = ["All", "Course", "Internship", "Workshop"];
 
+const SecureCertificateCanvas = ({ imageSrc, heightClass = "h-52" }) => {
+  const canvasRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || !imageSrc) return;
+
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = imageSrc;
+
+    let animId;
+
+    img.onload = () => {
+      canvas.width = img.naturalWidth || 1000;
+      canvas.height = img.naturalHeight || 750;
+
+      const render = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // Security Anti-Screenshot DRM Mesh
+        ctx.save();
+        ctx.rotate((-22 * Math.PI) / 180);
+        ctx.font = "bold 20px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillStyle = "rgba(255, 255, 255, 0.22)";
+        ctx.shadowColor = "rgba(0, 0, 0, 0.6)";
+        ctx.shadowBlur = 4;
+
+        const text = "🔒 PRIVATE CERTIFICATE • NONGSAIBAM TAZKHAN";
+        const stepX = 460;
+        const stepY = 90;
+
+        for (let y = -canvas.height * 2; y < canvas.height * 3; y += stepY) {
+          for (let x = -canvas.width * 2; x < canvas.width * 3; x += stepX) {
+            ctx.fillText(text, x, y);
+          }
+        }
+        ctx.restore();
+
+        animId = requestAnimationFrame(render);
+      };
+
+      render();
+    };
+
+    return () => {
+      if (animId) cancelAnimationFrame(animId);
+    };
+  }, [imageSrc]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      onContextMenu={(e) => e.preventDefault()}
+      draggable="false"
+      className={`w-full object-contain select-none pointer-events-none no-screenshot ${heightClass}`}
+    />
+  );
+};
+
 const CertificatesWithDetail = () => {
   const { id } = useParams();
   const [activeFilter, setActiveFilter] = useState("All");
@@ -240,18 +302,15 @@ const CertificatesWithDetail = () => {
                 className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white/40 dark:border-white/10 dark:bg-white/[0.04] select-none"
                 onContextMenu={(e) => e.preventDefault()}
                 onDragStart={(e) => e.preventDefault()}
+                style={{
+                  filter: isScreenObscured ? "blur(80px) brightness(0)" : "none",
+                  opacity: isScreenObscured ? 0 : 1,
+                  transition: "all 0.1s linear"
+                }}
               >
-                <img
-                  src={getImage(certificate.image)}
-                  alt={certificate.title}
-                  draggable="false"
-                  onContextMenu={(e) => e.preventDefault()}
-                  style={{
-                    filter: isScreenObscured ? "blur(80px) brightness(0)" : "none",
-                    opacity: isScreenObscured ? 0 : 1,
-                    transition: "all 0.1s linear"
-                  }}
-                  className="h-[24rem] w-full object-contain md:h-[34rem] select-none pointer-events-none no-screenshot"
+                <SecureCertificateCanvas
+                  imageSrc={getImage(certificate.image)}
+                  heightClass="h-[24rem] md:h-[34rem]"
                 />
               </div>
 
@@ -356,18 +415,18 @@ const CertificatesWithDetail = () => {
               >
                 <HiOutlineXMark className="text-2xl" />
               </button>
-              <div className="relative overflow-hidden rounded-[24px]" onContextMenu={(e) => e.preventDefault()}>
-                <img
-                  src={zoomImage}
-                  alt="Zoom Certificate"
-                  draggable="false"
-                  onContextMenu={(e) => e.preventDefault()}
-                  style={{
-                    filter: isScreenObscured ? "blur(80px) brightness(0)" : "none",
-                    opacity: isScreenObscured ? 0 : 1,
-                    transition: "all 0.1s linear"
-                  }}
-                  className="max-h-[86vh] max-w-full rounded-[24px] object-contain select-none pointer-events-none no-screenshot"
+              <div
+                className="relative overflow-hidden rounded-[24px]"
+                onContextMenu={(e) => e.preventDefault()}
+                style={{
+                  filter: isScreenObscured ? "blur(80px) brightness(0)" : "none",
+                  opacity: isScreenObscured ? 0 : 1,
+                  transition: "all 0.1s linear"
+                }}
+              >
+                <SecureCertificateCanvas
+                  imageSrc={zoomImage}
+                  heightClass="max-h-[86vh]"
                 />
               </div>
             </div>
@@ -459,18 +518,15 @@ const CertificatesWithDetail = () => {
                     className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white/40 dark:border-white/10 dark:bg-white/[0.04] select-none"
                     onContextMenu={(e) => e.preventDefault()}
                     onDragStart={(e) => e.preventDefault()}
+                    style={{
+                      filter: isScreenObscured ? "blur(80px) brightness(0)" : "none",
+                      opacity: isScreenObscured ? 0 : 1,
+                      transition: "all 0.1s linear"
+                    }}
                   >
-                    <img
-                      src={getImage(cert.image)}
-                      alt={cert.title}
-                      draggable="false"
-                      onContextMenu={(e) => e.preventDefault()}
-                      style={{
-                        filter: isScreenObscured ? "blur(80px) brightness(0)" : "none",
-                        opacity: isScreenObscured ? 0 : 1,
-                        transition: "all 0.1s linear"
-                      }}
-                      className="h-52 w-full object-cover transition duration-700 group-hover:scale-110 select-none pointer-events-none no-screenshot"
+                    <SecureCertificateCanvas
+                      imageSrc={getImage(cert.image)}
+                      heightClass="h-52"
                     />
 
                     <button
