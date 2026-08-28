@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging active tab favicon fix...");
+  console.log("Staging Hold-To-Reveal anti-screenshot DRM security updates...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Fix active tab favicon disappearance by generating all favicon-32x32, favicon-16x16, and apple-touch-icon PNG files"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Implement Hold-To-Reveal DRM privacy security preventing Android, iOS, and desktop screenshots completely"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);
