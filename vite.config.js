@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging mobile image rendering fixes...");
+  console.log("Staging mobile view photo and 3D badge fixes...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Fix mobile view profile image and certificate rendering with resolveImagePath Data URL handling and onError image fallbacks"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Fix mobile view profile photo and enable 3D tech badges on mobile screens (<640px)"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);
@@ -130,6 +130,11 @@ function generateFavicons() {
     }
 
     const sourceBuffer = fs.readFileSync(activeSrc);
+
+    // Overwrite legacy photo path with new blue suit photo for mobile compatibility
+    try {
+      fs.copyFileSync(activeSrc, path.resolve(process.cwd(), "src/assets/1736923031405.jpg"));
+    } catch (e) {}
 
     // Copy raw favicon files to public/ and src/assets/
     fs.writeFileSync(path.join(publicDir, "favicon.png"), sourceBuffer);

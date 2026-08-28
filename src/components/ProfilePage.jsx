@@ -13,7 +13,7 @@ import {
 } from "react-icons/hi2";
 import { useTheme } from "../context/ThemeContext";
 import { usePortfolioData } from "../context/PortfolioContext";
-import tkImage from "../assets/1736923031405.jpg";
+import tkImage from "../assets/tk-favicon-source.jpg";
 
 import { resolveImagePath } from "../utils/imageCompressor";
 import SEO from "./SEO";
@@ -284,16 +284,16 @@ const ProfilePage = () => {
 
               {/* Floating 3D Badge 1: Top Right */}
               <div
-                className="absolute -right-2 top-4 z-20 hidden sm:flex items-center gap-1.5 rounded-full border border-cyan-400/40 bg-slate-950/85 px-3 py-1 text-[11px] font-bold text-cyan-300 backdrop-blur-xl shadow-xl transition-transform duration-500"
+                className="absolute -right-2 top-2 sm:top-4 z-20 flex items-center gap-1.5 rounded-full border border-cyan-400/40 bg-slate-950/85 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-[11px] font-bold text-cyan-300 backdrop-blur-xl shadow-xl transition-transform duration-500"
                 style={{ transform: isHovered ? "translateZ(60px) translateY(-5px)" : "translateZ(40px)" }}
               >
-                <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
+                <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-cyan-400 animate-ping" />
                 ⚡ MERN Stack
               </div>
 
               {/* Floating 3D Badge 2: Bottom Left */}
               <div
-                className="absolute -left-3 bottom-6 z-20 hidden sm:flex items-center gap-1.5 rounded-full border border-violet-400/40 bg-slate-950/85 px-3 py-1 text-[11px] font-bold text-violet-300 backdrop-blur-xl shadow-xl transition-transform duration-500"
+                className="absolute -left-2 bottom-4 sm:bottom-6 z-20 flex items-center gap-1.5 rounded-full border border-violet-400/40 bg-slate-950/85 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-[11px] font-bold text-violet-300 backdrop-blur-xl shadow-xl transition-transform duration-500"
                 style={{ transform: isHovered ? "translateZ(60px) translateY(5px)" : "translateZ(40px)" }}
               >
                 🚀 Full Stack Dev
