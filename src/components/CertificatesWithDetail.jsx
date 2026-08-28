@@ -75,80 +75,69 @@ const certificates = [
 
 const filters = ["All", "Course", "Internship", "Workshop"];
 
-const SecureLensCertificate = ({ imageSrc, heightClass = "h-52" }) => {
-  const containerRef = React.useRef(null);
-  const [lens, setLens] = React.useState({ x: 50, y: 50, active: false });
+/* ---------------- SECURE DRM CANVAS VIEWER (ANTI-SCREENSHOT & ANTI-VIDEO-RECORDING) ---------------- */
 
-  const handleMove = (e) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    const x = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
-    const y = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
-    setLens({ x, y, active: true });
-  };
+const SecureCanvasViewer = ({ imageSrc, altText, className, style, isObscured }) => {
+  const canvasRef = React.useRef(null);
+  const [loaded, setLoaded] = useState(false);
 
-  const handleLeave = () => {
-    setLens((prev) => ({ ...prev, active: false }));
-  };
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || !imageSrc) return;
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = imageSrc;
+
+    img.onload = () => {
+      canvas.width = img.naturalWidth || 1000;
+      canvas.height = img.naturalHeight || 750;
+      setLoaded(true);
+
+      const draw = () => {
+        if (isObscured) {
+          ctx.fillStyle = "#030712";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          return;
+        }
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // Anti-recording & Anti-piracy dynamic watermark pattern
+        ctx.save();
+        ctx.fillStyle = "rgba(255, 255, 255, 0.09)";
+        ctx.font = "bold 16px sans-serif";
+        ctx.rotate(-Math.PI / 9);
+        const stepX = 260;
+        const stepY = 140;
+        for (let x = -canvas.width; x < canvas.width * 2; x += stepX) {
+          for (let y = -canvas.height; y < canvas.height * 2; y += stepY) {
+            ctx.fillText("PROTECTED • NONGSAIBAM TAZKHAN", x, y);
+          }
+        }
+        ctx.restore();
+      };
+
+      draw();
+    };
+  }, [imageSrc, isObscured]);
 
   return (
-    <div
-      ref={containerRef}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-      onTouchStart={handleMove}
-      onTouchMove={handleMove}
-      onTouchEnd={handleLeave}
-      onTouchCancel={handleLeave}
-      onContextMenu={(e) => e.preventDefault()}
-      className={`relative overflow-hidden rounded-[24px] bg-slate-950 select-none cursor-crosshair no-screenshot ${heightClass}`}
-    >
-      <img
-        src={imageSrc}
-        alt="Certificate"
-        draggable="false"
+    <div className="relative flex items-center justify-center w-full h-full overflow-hidden select-none no-screenshot" onContextMenu={(e) => e.preventDefault()}>
+      <canvas
+        ref={canvasRef}
         style={{
-          filter: lens.active ? "blur(30px) brightness(0.2)" : "blur(60px) brightness(0)",
-          opacity: lens.active ? 0.35 : 0,
-          transition: "all 0.15s ease"
+          filter: isObscured ? "blur(80px) brightness(0)" : "none",
+          opacity: isObscured ? 0 : 1,
+          transition: "all 0.1s linear",
+          ...style
         }}
-        className="h-full w-full object-contain pointer-events-none select-none"
+        className={`${className} max-w-full max-h-full object-contain pointer-events-none select-none no-screenshot`}
       />
-
-      {lens.active && (
-        <div
-          className="absolute pointer-events-none rounded-full border-2 border-cyan-400/90 shadow-[0_0_50px_rgba(6,182,212,0.8)] overflow-hidden transition-transform duration-75"
-          style={{
-            width: "160px",
-            height: "160px",
-            left: `${lens.x}%`,
-            top: `${lens.y}%`,
-            transform: "translate(-50%, -50%)",
-            backgroundImage: `url(${imageSrc})`,
-            backgroundPosition: `${lens.x}% ${lens.y}%`,
-            backgroundSize: `${containerRef.current?.offsetWidth || 600}px ${containerRef.current?.offsetHeight || 400}px`,
-            backgroundRepeat: "no-repeat"
-          }}
-        >
-          <div className="absolute inset-0 flex items-end justify-center pb-1 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent text-[9px] font-bold text-cyan-300">
-            🔒 Private & Verified
-          </div>
-        </div>
-      )}
-
-      {!lens.active && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/95 p-6 text-center text-white backdrop-blur-3xl pointer-events-none">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full border border-cyan-500/40 bg-cyan-500/10 text-cyan-400 shadow-2xl animate-pulse">
-            <HiOutlineLockClosed className="text-2xl text-amber-400" />
-          </div>
-          <p className="mt-3 text-sm font-extrabold text-white tracking-wide">
-            DRM Privacy Lens Active
-          </p>
-          <p className="mt-1 text-[11px] text-slate-400">
-            Touch or move cursor to inspect certificate
-          </p>
+      {!loaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-slate-950/20 text-xs font-semibold text-slate-400 backdrop-blur-sm">
+          Loading Protected Certificate...
         </div>
       )}
     </div>
@@ -320,15 +309,12 @@ const CertificatesWithDetail = () => {
                 className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white/40 dark:border-white/10 dark:bg-white/[0.04] select-none"
                 onContextMenu={(e) => e.preventDefault()}
                 onDragStart={(e) => e.preventDefault()}
-                style={{
-                  filter: isScreenObscured ? "blur(80px) brightness(0)" : "none",
-                  opacity: isScreenObscured ? 0 : 1,
-                  transition: "all 0.1s linear"
-                }}
               >
-                <SecureLensCertificate
+                <SecureCanvasViewer
                   imageSrc={getImage(certificate.image)}
-                  heightClass="h-[24rem] md:h-[34rem]"
+                  altText={certificate.title}
+                  isObscured={isScreenObscured}
+                  className="h-[24rem] w-full md:h-[34rem]"
                 />
               </div>
 
@@ -400,13 +386,11 @@ const CertificatesWithDetail = () => {
                           onClick={() => setZoomImage(img)}
                           className="overflow-hidden rounded-[20px] border border-black/10 bg-white/50 backdrop-blur-[18px] transition duration-300 hover:scale-[1.02] hover:bg-white dark:border-white/15 dark:bg-white/[0.07] dark:hover:bg-white/[0.1]"
                         >
-                          <img
-                            src={img}
-                            draggable="false"
-                            onContextMenu={(e) => e.preventDefault()}
-                            style={{ filter: isScreenObscured ? 'blur(60px) brightness(0)' : 'none', opacity: isScreenObscured ? 0 : 1, transition: 'all 0.1s linear' }}
-                            alt={`Certificate Preview ${index + 1}`}
-                            className="h-28 w-full object-cover select-none pointer-events-none no-screenshot"
+                          <SecureCanvasViewer
+                            imageSrc={img}
+                            altText={`Certificate Preview ${index + 1}`}
+                            isObscured={isScreenObscured}
+                            className="h-28 w-full"
                           />
                         </button>
                       ))}
@@ -433,18 +417,12 @@ const CertificatesWithDetail = () => {
               >
                 <HiOutlineXMark className="text-2xl" />
               </button>
-              <div
-                className="relative overflow-hidden rounded-[24px]"
-                onContextMenu={(e) => e.preventDefault()}
-                style={{
-                  filter: isScreenObscured ? "blur(80px) brightness(0)" : "none",
-                  opacity: isScreenObscured ? 0 : 1,
-                  transition: "all 0.1s linear"
-                }}
-              >
-                <SecureLensCertificate
+              <div className="relative overflow-hidden rounded-[24px]" onContextMenu={(e) => e.preventDefault()}>
+                <SecureCanvasViewer
                   imageSrc={zoomImage}
-                  heightClass="max-h-[86vh]"
+                  altText="Zoom Certificate"
+                  isObscured={isScreenObscured}
+                  className="max-h-[86vh] max-w-full"
                 />
               </div>
             </div>
@@ -536,15 +514,12 @@ const CertificatesWithDetail = () => {
                     className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white/40 dark:border-white/10 dark:bg-white/[0.04] select-none"
                     onContextMenu={(e) => e.preventDefault()}
                     onDragStart={(e) => e.preventDefault()}
-                    style={{
-                      filter: isScreenObscured ? "blur(80px) brightness(0)" : "none",
-                      opacity: isScreenObscured ? 0 : 1,
-                      transition: "all 0.1s linear"
-                    }}
                   >
-                    <SecureLensCertificate
+                    <SecureCanvasViewer
                       imageSrc={getImage(cert.image)}
-                      heightClass="h-52"
+                      altText={cert.title}
+                      isObscured={isScreenObscured}
+                      className="h-52 w-full transition duration-700 group-hover:scale-110"
                     />
 
                     <button
