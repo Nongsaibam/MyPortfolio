@@ -267,11 +267,11 @@ const ProfilePage = () => {
               <div className="absolute -inset-3.5 rounded-full border border-indigo-500/30 animate-[spin_15s_linear_infinite_reverse] pointer-events-none" />
 
               {/* Profile Image with 3D Depth */}
-              <div className="relative overflow-hidden rounded-full transform-gpu" style={{ transform: "translateZ(30px)" }}>
+              <div className="relative overflow-hidden rounded-full transform-gpu p-1" style={{ transform: "translateZ(30px)" }}>
                 <img
                   src={resolveImagePath(siteSettings?.profileImage, tkImage)}
                   alt={siteSettings?.name || "Tazkhan"}
-                  className="h-48 w-48 rounded-full object-cover shadow-2xl transition duration-500 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80 group-hover:scale-105"
+                  className="h-48 w-48 rounded-full object-contain shadow-2xl transition duration-500 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80 group-hover:scale-105"
                 />
 
                 {/* 3D Specular Lighting Glare Overlay */}
