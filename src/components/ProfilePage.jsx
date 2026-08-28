@@ -14,13 +14,13 @@ import {
 import { useTheme } from "../context/ThemeContext";
 import { usePortfolioData } from "../context/PortfolioContext";
 import tkImage from "../assets/1736923031405.jpg";
+import react3dIcon from "../assets/3d-react-icon.png";
+import code3dIcon from "../assets/3d-code-icon.png";
+import js3dIcon from "../assets/3d-js-icon.png";
+import window3dIcon from "../assets/3d-window-icon.png";
 
 import { resolveImagePath } from "../utils/imageCompressor";
 import SEO from "./SEO";
-import iconReact3D from "../assets/icon-react-3d.png";
-import iconCode3D from "../assets/icon-code-3d.png";
-import iconJs3D from "../assets/icon-js-3d.png";
-import iconWindow3D from "../assets/icon-window-3d.png";
 
 const ProfilePage = () => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -298,70 +298,52 @@ const ProfilePage = () => {
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-60" />
               </div>
 
-              {/* 3D Floating Tech Icon 1: Code Window Tile (Top Left) */}
+              {/* 3D Floating Tech Icon 1 (Top-Left: React Atom 3D) */}
               <div
-                className="absolute -left-8 -top-6 sm:-left-14 sm:-top-10 z-30 transition-transform duration-300 hover:scale-125 pointer-events-none"
+                className="absolute -left-5 -top-4 sm:-left-8 sm:-top-6 z-30 rounded-2xl border border-cyan-400/40 bg-slate-950/80 p-2 sm:p-3 backdrop-blur-2xl shadow-[0_15px_35px_rgba(0,242,254,0.3)] transition-all duration-300 hover:scale-125 hover:border-cyan-300 animate-[bounce_4s_infinite_ease-in-out]"
+                style={{ transform: "translateZ(65px)" }}
+              >
+                <img
+                  src={react3dIcon}
+                  alt="3D React Icon"
+                  className="h-8 w-8 sm:h-12 sm:w-12 object-contain drop-shadow-[0_0_12px_rgba(56,189,248,0.8)]"
+                />
+              </div>
+
+              {/* 3D Floating Tech Icon 2 (Top-Right: Code Window IDE 3D) */}
+              <div
+                className="absolute -right-5 -top-4 sm:-right-8 sm:-top-6 z-30 rounded-2xl border border-purple-400/40 bg-slate-950/80 p-2 sm:p-3 backdrop-blur-2xl shadow-[0_15px_35px_rgba(168,85,247,0.3)] transition-all duration-300 hover:scale-125 hover:border-purple-300 animate-[pulse_3s_infinite_ease-in-out]"
+                style={{ transform: "translateZ(55px)" }}
+              >
+                <img
+                  src={window3dIcon}
+                  alt="3D IDE Window Icon"
+                  className="h-8 w-8 sm:h-12 sm:w-12 object-contain drop-shadow-[0_0_12px_rgba(168,85,247,0.8)]"
+                />
+              </div>
+
+              {/* 3D Floating Tech Icon 3 (Bottom-Left: Code </> 3D) */}
+              <div
+                className="absolute -left-5 -bottom-4 sm:-left-8 sm:-bottom-6 z-30 rounded-2xl border border-indigo-400/40 bg-slate-950/80 p-2 sm:p-3 backdrop-blur-2xl shadow-[0_15px_35px_rgba(129,140,248,0.3)] transition-all duration-300 hover:scale-125 hover:border-indigo-300 animate-[bounce_3.5s_infinite_ease-in-out]"
+                style={{ transform: "translateZ(60px)" }}
+              >
+                <img
+                  src={code3dIcon}
+                  alt="3D Code Icon"
+                  className="h-8 w-8 sm:h-12 sm:w-12 object-contain drop-shadow-[0_0_12px_rgba(129,140,248,0.8)]"
+                />
+              </div>
+
+              {/* 3D Floating Tech Icon 4 (Bottom-Right: JavaScript Hex 3D) */}
+              <div
+                className="absolute -right-5 -bottom-4 sm:-right-8 sm:-bottom-6 z-30 rounded-2xl border border-emerald-400/40 bg-slate-950/80 p-2 sm:p-3 backdrop-blur-2xl shadow-[0_15px_35px_rgba(16,185,129,0.3)] transition-all duration-300 hover:scale-125 hover:border-emerald-300 animate-[pulse_4s_infinite_ease-in-out]"
                 style={{ transform: "translateZ(70px)" }}
               >
                 <img
-                  src={iconWindow3D}
-                  alt="3D Code Window"
-                  className="h-16 w-16 sm:h-24 sm:w-24 md:h-28 md:w-28 object-contain drop-shadow-[0_15px_25px_rgba(168,85,247,0.4)] animate-pulse"
+                  src={js3dIcon}
+                  alt="3D JS Icon"
+                  className="h-8 w-8 sm:h-12 sm:w-12 object-contain drop-shadow-[0_0_12px_rgba(16,185,129,0.8)]"
                 />
-              </div>
-
-              {/* 3D Floating Tech Icon 2: Code Brackets Tile (Top Right) */}
-              <div
-                className="absolute -right-6 top-8 sm:-right-12 sm:top-12 z-30 transition-transform duration-300 hover:scale-125 pointer-events-none"
-                style={{ transform: "translateZ(85px)" }}
-              >
-                <img
-                  src={iconCode3D}
-                  alt="3D Code Tile"
-                  className="h-14 w-14 sm:h-20 sm:w-20 md:h-24 md:w-24 object-contain drop-shadow-[0_15px_25px_rgba(99,102,241,0.4)]"
-                />
-              </div>
-
-              {/* 3D Floating Tech Icon 3: React Atom Tile (Bottom Left) */}
-              <div
-                className="absolute -left-6 bottom-8 sm:-left-12 sm:bottom-12 z-30 transition-transform duration-300 hover:scale-125 pointer-events-none"
-                style={{ transform: "translateZ(80px)" }}
-              >
-                <img
-                  src={iconReact3D}
-                  alt="3D React Tile"
-                  className="h-14 w-14 sm:h-20 sm:w-20 md:h-24 md:w-24 object-contain drop-shadow-[0_15px_25px_rgba(56,189,248,0.4)]"
-                />
-              </div>
-
-              {/* 3D Floating Tech Icon 4: JavaScript Hex Tile (Bottom Right) */}
-              <div
-                className="absolute -right-6 -bottom-4 sm:-right-12 sm:-bottom-6 z-30 transition-transform duration-300 hover:scale-125 pointer-events-none"
-                style={{ transform: "translateZ(90px)" }}
-              >
-                <img
-                  src={iconJs3D}
-                  alt="3D JS Tile"
-                  className="h-14 w-14 sm:h-20 sm:w-20 md:h-24 md:w-24 object-contain drop-shadow-[0_15px_25px_rgba(34,197,94,0.4)]"
-                />
-              </div>
-
-              {/* 3D Floating Holographic Badge 1 (Top Right) */}
-              <div
-                className="absolute -right-2 top-2 flex items-center gap-1.5 rounded-full border border-cyan-400/50 bg-slate-950/85 px-3 py-1.5 text-[10px] sm:text-xs font-bold text-cyan-300 backdrop-blur-xl shadow-xl shadow-cyan-500/20 transition duration-300 hover:scale-110"
-                style={{ transform: "translateZ(45px)" }}
-              >
-                <HiOutlineSparkles className="text-amber-400 animate-spin" />
-                <span>Full Stack MERN</span>
-              </div>
-
-              {/* 3D Floating Holographic Badge 2 (Bottom Left) */}
-              <div
-                className="absolute -left-2 bottom-2 flex items-center gap-1.5 rounded-full border border-purple-400/50 bg-slate-950/85 px-3 py-1.5 text-[10px] sm:text-xs font-bold text-purple-300 backdrop-blur-xl shadow-xl shadow-purple-500/20 transition duration-300 hover:scale-110"
-                style={{ transform: "translateZ(50px)" }}
-              >
-                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>100% Scalable Code</span>
               </div>
             </div>
           </div>
