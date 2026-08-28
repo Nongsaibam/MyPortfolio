@@ -81,11 +81,11 @@ const ProfilePage = () => {
     <section className="relative min-h-screen overflow-hidden bg-transparent text-slate-900 dark:text-white transition-colors duration-500">
       <SEO />
 
-      {/* Sleek Ultra-Modern Top Navbar (Exact Match to Design) */}
-      <header className="fixed top-0 inset-x-0 z-50 w-full border-b border-black/10 bg-white/75 px-4 sm:px-8 py-3.5 backdrop-blur-2xl transition-all duration-300 dark:border-white/10 dark:bg-[#040817]/85">
+      {/* Sleek Ultra-Modern Top Navbar (Enlarged) */}
+      <header className="fixed top-0 inset-x-0 z-50 w-full border-b border-black/10 bg-white/80 px-5 sm:px-10 py-4 sm:py-5 backdrop-blur-2xl transition-all duration-300 dark:border-white/10 dark:bg-[#040817]/90 shadow-lg">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
           {/* Left: Bold Dual-Tone Gradient TK Logo */}
-          <Link to="/" className="flex items-center gap-1 text-2xl sm:text-3xl font-black tracking-tight select-none">
+          <Link to="/" className="flex items-center gap-1 text-3xl sm:text-4xl font-black tracking-tight select-none transition hover:scale-105">
             <span className="bg-gradient-to-r from-pink-500 via-purple-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-sm">
               T
             </span>
@@ -95,39 +95,39 @@ const ProfilePage = () => {
           </Link>
 
           {/* Center: Clean Spaced Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-12">
+          <nav className="hidden md:flex items-center gap-10 lg:gap-14">
             {navItems.map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="text-sm font-extrabold tracking-wide text-slate-800 transition duration-300 hover:text-cyan-500 dark:text-slate-100 dark:hover:text-cyan-400"
+                className="text-base font-black tracking-wide text-slate-800 transition duration-300 hover:text-cyan-500 hover:scale-105 dark:text-slate-100 dark:hover:text-cyan-400"
               >
                 {item}
               </a>
             ))}
             <Link
               to="/certificates"
-              className="text-sm font-extrabold tracking-wide text-slate-800 transition duration-300 hover:text-cyan-500 dark:text-slate-100 dark:hover:text-cyan-400"
+              className="text-base font-black tracking-wide text-slate-800 transition duration-300 hover:text-cyan-500 hover:scale-105 dark:text-slate-100 dark:hover:text-cyan-400"
             >
               Certifications
             </Link>
           </nav>
 
           {/* Right: Theme Toggle Pill Button (Icon + Label) & Mobile Hamburger */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <button
               onClick={toggleTheme}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-700/50 bg-slate-900/80 px-4 py-1.5 text-xs font-bold text-white shadow-md backdrop-blur-xl transition-all duration-300 hover:scale-105 hover:border-cyan-400 hover:shadow-cyan-500/20 active:scale-95 dark:border-white/20 dark:bg-white/[0.08]"
+              className="inline-flex items-center gap-2.5 rounded-full border border-slate-700/50 bg-slate-900/90 px-5 py-2.5 text-sm font-bold text-white shadow-lg backdrop-blur-xl transition-all duration-300 hover:scale-105 hover:border-cyan-400 hover:shadow-cyan-500/25 active:scale-95 dark:border-white/25 dark:bg-white/[0.12]"
               aria-label="Toggle Theme"
             >
               {isDarkMode ? (
                 <>
-                  <HiMiniSun className="text-amber-400 text-sm" />
+                  <HiMiniSun className="text-amber-400 text-base" />
                   <span>Light</span>
                 </>
               ) : (
                 <>
-                  <HiMiniMoon className="text-indigo-400 text-sm" />
+                  <HiMiniMoon className="text-indigo-400 text-base" />
                   <span>Dark</span>
                 </>
               )}
@@ -135,10 +135,10 @@ const ProfilePage = () => {
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 bg-white/80 text-slate-700 backdrop-blur-xl transition md:hidden dark:border-white/15 dark:bg-white/10 dark:text-white"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white/80 text-slate-700 backdrop-blur-xl transition md:hidden dark:border-white/15 dark:bg-white/10 dark:text-white"
               aria-label="Toggle Menu"
             >
-              {isMobileMenuOpen ? <HiOutlineXMark className="text-lg" /> : <HiOutlineBars3 className="text-lg" />}
+              {isMobileMenuOpen ? <HiOutlineXMark className="text-xl" /> : <HiOutlineBars3 className="text-xl" />}
             </button>
           </div>
         </div>
