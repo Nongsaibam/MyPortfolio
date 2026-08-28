@@ -156,3 +156,10 @@ html.dark li:not(.theme-gradient-text) {
   user-select: none !important;
   -webkit-user-drag: none !important;
 }
+
+.certificate {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}

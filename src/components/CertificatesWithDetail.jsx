@@ -253,7 +253,7 @@ const CertificatesWithDetail = () => {
                     opacity: isScreenObscured ? 0 : 1,
                     transition: "all 0.1s linear"
                   }}
-                  className="h-[24rem] w-full object-contain md:h-[34rem] select-none pointer-events-none no-screenshot"
+                  className="certificate h-[24rem] w-full object-contain md:h-[34rem] select-none pointer-events-none no-screenshot"
                 />
               </div>
 
@@ -337,7 +337,7 @@ const CertificatesWithDetail = () => {
                               opacity: isScreenObscured ? 0 : 1,
                               transition: "all 0.1s linear"
                             }}
-                            className="h-28 w-full object-cover select-none pointer-events-none no-screenshot"
+                            className="certificate h-28 w-full object-cover select-none pointer-events-none no-screenshot"
                           />
                         </button>
                       ))}
@@ -377,7 +377,7 @@ const CertificatesWithDetail = () => {
                     opacity: isScreenObscured ? 0 : 1,
                     transition: "all 0.1s linear"
                   }}
-                  className="max-h-[86vh] max-w-full rounded-[24px] object-contain select-none pointer-events-none no-screenshot"
+                  className="certificate max-h-[86vh] max-w-full rounded-[24px] object-contain select-none pointer-events-none no-screenshot"
                 />
               </div>
             </div>
@@ -482,7 +482,7 @@ const CertificatesWithDetail = () => {
                         opacity: isScreenObscured ? 0 : 1,
                         transition: "all 0.1s linear"
                       }}
-                      className="h-52 w-full object-cover transition duration-700 group-hover:scale-110 select-none pointer-events-none no-screenshot"
+                      className="certificate h-52 w-full object-cover transition duration-700 group-hover:scale-110 select-none pointer-events-none no-screenshot"
                     />
 
                     <button
