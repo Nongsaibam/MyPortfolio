@@ -14,7 +14,6 @@ import {
 import { useTheme } from "../context/ThemeContext";
 import { usePortfolioData } from "../context/PortfolioContext";
 import tkImage from "../assets/1736923031405.jpg";
-import profile3dImage from "../assets/profile-3d.jpg";
 
 import { resolveImagePath } from "../utils/imageCompressor";
 import SEO from "./SEO";
@@ -235,7 +234,7 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* Right Column: 3D Holographic Profile Avatar */}
+        {/* Right Column: 3D Rendered Profile Avatar Stage */}
         <div className="group animate-fade-up text-center shrink-0" style={{ animationDelay: "120ms" }}>
           <div
             onMouseMove={handleMouseMove}
@@ -253,61 +252,50 @@ const ProfilePage = () => {
             style={{
               perspective: "1200px",
             }}
-            className="relative cursor-pointer select-none p-4"
+            className="relative cursor-pointer select-none p-2 sm:p-4"
           >
-            {/* 3D Perspective Card Container */}
+            {/* 3D Interactive Card Stage Container */}
             <div
               style={{
                 transform: `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.03, 1.03, 1.03)`,
                 transition: "transform 0.15s ease-out",
                 transformStyle: "preserve-3d",
               }}
-              className={`relative flex items-center justify-center rounded-[40px] p-2 sm:p-4 transition-all duration-500 ${
-                isAvatarTouched
-                  ? "scale-105"
-                  : ""
-              }`}
+              className="relative flex flex-col items-center justify-center rounded-[36px] p-2 transition-all duration-500"
             >
-              {/* 3D Ambient Glowing Blue Backdrop Aura */}
+              {/* Ambient Glowing 3D Neon Backlight */}
               <div
-                className="absolute inset-4 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 opacity-45 blur-3xl animate-pulse"
+                className="absolute inset-4 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 opacity-40 blur-3xl animate-pulse"
                 style={{ transform: "translateZ(-30px)" }}
               />
 
-              {/* 3D Orbiting Outer Blue Neon Ring */}
+              {/* 3D Floating Avatar Artwork */}
               <div
-                className="absolute inset-0 rounded-full border-2 border-cyan-400/40 bg-gradient-to-tr from-cyan-500/10 via-transparent to-blue-600/20 shadow-[0_0_30px_rgba(56,189,248,0.3)] animate-spin-slow"
-                style={{ transform: "translateZ(10px)", animationDuration: "16s" }}
-              />
-
-              {/* 3D Developer Avatar Image Asset */}
-              <div
-                className="relative overflow-hidden rounded-[32px] p-1"
-                style={{ transform: "translateZ(35px)" }}
+                className="relative overflow-visible filter drop-shadow-[0_20px_50px_rgba(56,189,248,0.35)] transition duration-500 group-hover:scale-[1.03]"
+                style={{ transform: "translateZ(20px)" }}
               >
                 <img
-                  src={resolveImagePath(siteSettings?.profileImage, profile3dImage)}
+                  src={resolveImagePath(siteSettings?.profileImage, tkImage)}
                   alt={siteSettings?.name || "Tazkhan"}
-                  className="h-56 w-56 object-contain drop-shadow-[0_20px_40px_rgba(0,120,255,0.4)] transition duration-500 sm:h-80 sm:w-80 md:h-96 md:w-96 lg:h-[26rem] lg:w-[26rem] group-hover:scale-105"
+                  className="h-64 w-auto max-w-[280px] object-contain sm:h-80 sm:max-w-sm md:h-96 md:max-w-md lg:h-[26rem] lg:max-w-lg select-none"
                 />
               </div>
 
-              {/* 3D Floating Holographic Badge 1 (Top Right) */}
+              {/* 3D Floating Status Badges */}
               <div
-                className="absolute right-0 top-6 flex items-center gap-1.5 rounded-full border border-cyan-400/50 bg-slate-950/85 px-3.5 py-1.5 text-[10px] sm:text-xs font-bold text-cyan-300 backdrop-blur-xl shadow-xl shadow-cyan-500/25 transition duration-300 hover:scale-110"
-                style={{ transform: "translateZ(55px)" }}
+                className="absolute right-0 top-6 flex items-center gap-1.5 rounded-full border border-cyan-400/50 bg-slate-950/85 px-3 py-1.5 text-[10px] sm:text-xs font-bold text-cyan-300 backdrop-blur-xl shadow-xl shadow-cyan-500/20 transition duration-300 hover:scale-110"
+                style={{ transform: "translateZ(45px)" }}
               >
                 <HiOutlineSparkles className="text-amber-400 animate-spin" />
-                <span>Full Stack Developer</span>
+                <span>Full Stack MERN</span>
               </div>
 
-              {/* 3D Floating Holographic Badge 2 (Bottom Left) */}
               <div
-                className="absolute left-0 bottom-6 flex items-center gap-1.5 rounded-full border border-blue-400/50 bg-slate-950/85 px-3.5 py-1.5 text-[10px] sm:text-xs font-bold text-blue-300 backdrop-blur-xl shadow-xl shadow-blue-500/25 transition duration-300 hover:scale-110"
-                style={{ transform: "translateZ(60px)" }}
+                className="absolute left-0 bottom-8 flex items-center gap-1.5 rounded-full border border-blue-400/50 bg-slate-950/85 px-3 py-1.5 text-[10px] sm:text-xs font-bold text-blue-300 backdrop-blur-xl shadow-xl shadow-blue-500/20 transition duration-300 hover:scale-110"
+                style={{ transform: "translateZ(50px)" }}
               >
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>React • Node • MERN</span>
+                <span>100% Scalable Code</span>
               </div>
             </div>
           </div>

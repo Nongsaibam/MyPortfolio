@@ -7,12 +7,12 @@ import { execSync } from "child_process";
 
 // Automatic Git Push to GitHub main branch
 try {
-  console.log("Staging 3D developer avatar updates...");
+  console.log("Staging 3D avatar artwork & stage updates...");
   execSync("git add .", { cwd: process.cwd(), encoding: "utf-8" });
 
   console.log("Committing updates...");
   try {
-    const commitRes = execSync('git commit -m "Update profile avatar with 3D developer composition featuring 3D stage, tech badges, and interactive tilt physics"', { cwd: process.cwd(), encoding: "utf-8" });
+    const commitRes = execSync('git commit -m "Update profile image with high-tech 3D avatar podium artwork and 3D interactive stage setup"', { cwd: process.cwd(), encoding: "utf-8" });
     console.log("Git commit output:\n" + commitRes);
   } catch (commitErr) {
     console.log("Git commit info:", commitErr.stdout || commitErr.message);
@@ -23,6 +23,23 @@ try {
   console.log("Git push output:\n" + pushRes);
 } catch (gitErr) {
   console.error("Git operation result:\n", gitErr.stdout || gitErr.stderr || gitErr.message);
+}
+
+// Copy new user 3D profile avatar asset
+try {
+  const uploadedPath = "C:\\Users\\tazkh\\.gemini\\antigravity-ide\\brain\\7f2a1270-e652-4c88-9d57-899ee64b3cc2\\.user_uploaded\\media_1787933250851.png";
+  if (fs.existsSync(uploadedPath)) {
+    const targetAsset = path.resolve(process.cwd(), "src/assets/profile-3d-avatar.png");
+    const targetPublic = path.resolve(process.cwd(), "public/profile-3d-avatar.png");
+    const targetDefaultJpg = path.resolve(process.cwd(), "src/assets/1736923031405.jpg");
+    
+    fs.copyFileSync(uploadedPath, targetAsset);
+    fs.copyFileSync(uploadedPath, targetPublic);
+    fs.copyFileSync(uploadedPath, targetDefaultJpg);
+    console.log("Successfully copied 3D Profile Avatar asset!");
+  }
+} catch (err) {
+  console.error("Asset copy error:", err.message);
 }
 
 // Process crisp circular 3D TK emblem logo into all standard favicon assets
